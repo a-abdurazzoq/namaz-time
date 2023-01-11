@@ -1,0 +1,21 @@
+{
+  "name": "namaz-time",
+  "version": "1.0.0",
+  "description": "",
+  "main": "build/index.js",
+  "scripts": {
+    "start": "node index.js",
+    "build": "node_modules/typescript/bin/tsc",
+    "dev": "npm run build && npm run start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/a-abdurazzoq/namaz-time.git"
+  },
+  "author": "Abdurazzoq Abdullayev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/a-abdurazzoq/namaz-time/issues"
+  },
+  "homepage": "https://github.com/a-abdurazzoq/namaz-time#readme"
+}
