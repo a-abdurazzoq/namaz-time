@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./fonts/bebasneue/style.css">
+    <title>Pray time</title>                
+    <style>
+        *{
+            font-family: 'Bebas Neue', 'serif';
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        
+        .position-absolute{
+            position: absolute;
+        }
+
+        body, html{
+            width: 1080px;
+            height: 1080px;
+        }
+
+        .photo{
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .photo > img {
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .Prayer {
+            width: 272px;
+            height: 159px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }        
+        
+        .Prayer p{
+            color: #2A2A2A;
+            font-size: 135px;
+            line-height: 1;
+            font-weight: 700;
+            text-align: center;
+        }
+        
+        .photo .Fajr{
+            top: 474px;
+            left: 74px;
+        }
+
+        .photo .Sun{
+            top: 474px;
+            left: 398px;
+            width: 273px;
+        }
+        
+        .photo .Dhuhr{
+            top: 474px;
+            left: 733px;
+        }
+
+        .photo .Asr{
+            top: 768px;
+            left: 74px;
+        }
+        
+        .photo .Maghrib{
+            top: 767px;
+            left: 403px;
+            width: 273px;
+            height: 160px;
+
+            /* top: 768px; */
+            /* left: 398px; */
+        }
+        
+        .photo .Isha{
+            top: 768px;
+            left: 733px;
+        }
+    </style>
+</head>
+<body>
+    <div class="photo">
+        <img class="position-absolute" src="./default.jpg" alt="">
+
+        <div class="Prayer Fajr position-absolute">
+            <p>06:21</p>
+        </div>
+
+        <div class="Prayer Sun position-absolute">
+            <p>07:48</p>
+        </div>
+
+        <div class="Prayer Dhuhr position-absolute">
+            <p>12:31</p>
+        </div>
+
+        <div class="Prayer Asr position-absolute">
+            <p>15:33</p>
+        </div>
+
+        <div class="Prayer Maghrib position-absolute">
+            <p>17:19</p>
+        </div>
+
+        <div class="Prayer Isha position-absolute">
+            <p>18:35</p>
+        </div>
+    </div>
+</body>
+</html>
