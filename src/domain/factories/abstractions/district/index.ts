@@ -1,8 +1,8 @@
 import {Factory} from "../factory";
 import {District} from "../../../entities/district";
 
-interface DistrictDto {
+export interface DistrictDto {
     id: string;
     name: string;
 }
-interface DistrictFactory extends Factory<DistrictDto, District> {}
+export interface DistrictFactory extends Factory<DistrictDto, District> {}
