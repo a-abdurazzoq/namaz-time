@@ -1,6 +1,6 @@
 import {Factory} from "../factory";
-import {TelegramChannel} from "../../../entities/telegram-channel";
-import {Mosque} from "../../../entities/mosque";
+import {TelegramChannel} from "../../../entities";
+import {Mosque} from "../../../entities";
 
 export interface TelegramChannelDto {
     name: string;

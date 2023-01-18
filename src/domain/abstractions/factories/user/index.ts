@@ -1,5 +1,5 @@
 import {Factory} from "../factory";
-import {User} from "../../../entities/user";
+import {User} from "../../../entities";
 
 export interface UserDto {
     username: string;

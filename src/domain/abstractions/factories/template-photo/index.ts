@@ -1,6 +1,6 @@
 import {Factory} from "../factory";
-import {TemplatePhoto} from "../../../entities/template-photo";
-import {User} from "../../../entities/user";
+import {TemplatePhoto} from "../../../entities";
+import {User} from "../../../entities";
 
 export interface TemplatePhotoDto {
     fileName: string;
