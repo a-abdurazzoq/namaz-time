@@ -1,5 +1,5 @@
 import {Factory} from "../factory";
-import {Prayer} from "../../../entities/prayer";
+import {Prayer} from "../../../entities";
 
 export interface PrayerDto {
     name: string;
