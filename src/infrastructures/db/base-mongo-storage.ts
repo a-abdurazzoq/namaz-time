@@ -10,7 +10,7 @@ export class BaseMongoStorageImpl implements Storage {
     }
 
     async open(): Promise<void> {
-        await this.init()
+        await this.connect()
         return
     }
 
@@ -18,7 +18,7 @@ export class BaseMongoStorageImpl implements Storage {
         await mongoose.disconnect()
         return
     }
-    private async init() {
+    private async connect() {
         await mongoose.connect(this.mongodbURI)
     }
 
