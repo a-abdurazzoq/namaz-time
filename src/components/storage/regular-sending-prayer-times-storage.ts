@@ -1,6 +1,6 @@
 import {BaseMongoStorageImpl} from "../../infrastructures/db";
 import {MosqueModel, PrayerModel, TelegramChannelModel, TemplatePhotoModel, UserModel} from "../../models";
-import {RegularSendingPrayerTimesStorage} from "../abstractions/storage/regular-sending-prayer-times-storage";
+import {RegularSendingPrayerTimesStorage} from "../abstractions/storage";
 import {injectable} from "inversify";
 
 @injectable()
