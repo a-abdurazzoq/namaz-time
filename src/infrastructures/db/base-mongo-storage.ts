@@ -1,4 +1,4 @@
-import {Storage} from "../abstractions/db/storage";
+import {Storage} from "../abstractions";
 import mongoose from "mongoose";
 
 export class BaseMongoStorageImpl implements Storage {
