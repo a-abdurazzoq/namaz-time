@@ -8,6 +8,7 @@ export class BaseMongoStorageImpl implements Storage {
         this.mongodbURI = String(process.env.MONGODB_URI)
         this.isMongodbURI(this.mongodbURI)
     }
+
     async open(): Promise<void> {
         await this.init()
         return
