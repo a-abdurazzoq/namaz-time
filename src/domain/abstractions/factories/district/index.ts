@@ -1,5 +1,5 @@
 import {Factory} from "../factory";
-import {District} from "../../../entities/district";
+import {District} from "../../../entities";
 
 export interface DistrictDto {
     id: string;
