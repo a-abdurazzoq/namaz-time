@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/a-abdurazzoq/namaz-time#readme",
   "dependencies": {
+    "@types/node": "^18.11.18",
     "express": "^4.18.2",
     "express-validator": "^6.14.2",
     "inversify": "^6.0.1",
