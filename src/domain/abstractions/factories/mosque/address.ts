@@ -1,7 +1,7 @@
 import {Factory} from "../factory";
-import {Address} from "../../../entities/mosque/address";
-import {City} from "../../../entities/city";
-import {District} from "../../../entities/district";
+import {Address} from "../../../entities";
+import {City} from "../../../entities";
+import {District} from "../../../entities";
 
 export interface AddressDto {
     city: City;
