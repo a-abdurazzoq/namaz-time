@@ -2,10 +2,11 @@ import {Storage} from "../abstractions";
 import mongoose from "mongoose";
 
 export class BaseMongoStorageImpl implements Storage {
-    constructor(
-        private mongodbURI: string
-    ) {
-        this.isMongodbURI(mongodbURI)
+    private readonly mongodbURI: string
+
+    constructor() {
+        this.mongodbURI = String(process.env.MONGODB_URI)
+        this.isMongodbURI(this.mongodbURI)
     }
     async open(): Promise<void> {
         await this.init()
