@@ -1,7 +1,7 @@
 import {Factory} from "../factory";
-import {Mosque} from "../../../entities/mosque";
-import {User} from "../../../entities/user";
-import {Address} from "../../../entities/mosque/address";
+import {Mosque} from "../../../entities";
+import {User} from "../../../entities";
+import {Address} from "../../../entities";
 
 export interface MosqueDto {
     name: string;
