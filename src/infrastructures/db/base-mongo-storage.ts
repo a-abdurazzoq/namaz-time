@@ -16,14 +16,19 @@ export class BaseMongoStorageImpl implements Storage {
 
     async close(): Promise<void> {
         await mongoose.disconnect()
+        console.log("Приложение успешно отсоединение к базе данных")
         return
     }
     private async connect() {
         await mongoose.connect(this.mongodbURI)
+        console.log("Приложение успешно подключено к базе данных")
+        return
     }
 
     private isMongodbURI(mongodbURI: string) {
-        if(!mongodbURI || mongodbURI?.constructor !== String)
-            throw new Error("Не указанно URI база данных")
+        let regexp = /^mongodb:\/\//
+
+        if(!regexp.test(mongodbURI))
+            throw new Error("Неправильный формат URI Mongodb")
     }
 }
