@@ -1,6 +1,8 @@
-import {AddressDto, AddressFactory} from "../abstractions/mosque/address";
-import {Address} from "../../entities/mosque/address";
+import {AddressDto, AddressFactory} from "../../abstractions/factories";
+import {Address} from "../../entities";
+import {injectable} from "inversify";
 
+@injectable()
 export class AddressFactoryImpl implements AddressFactory {
     create(dto: AddressDto): Address {
         return new Address(

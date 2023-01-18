@@ -1,6 +1,8 @@
-import {TemplatePhotoDto, TemplatePhotoFactory} from "../abstractions/template-photo";
-import {TemplatePhoto} from "../../entities/template-photo";
+import {TemplatePhotoDto, TemplatePhotoFactory} from "../../abstractions/factories";
+import {TemplatePhoto} from "../../entities";
+import {injectable} from "inversify";
 
+@injectable()
 export class TemplatePhotoFactoryImpl implements TemplatePhotoFactory {
     create(dto: TemplatePhotoDto): TemplatePhoto {
         return new TemplatePhoto(

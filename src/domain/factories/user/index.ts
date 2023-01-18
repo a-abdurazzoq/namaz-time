@@ -1,6 +1,8 @@
-import {UserDto, UserFactory} from "../abstractions/user";
-import {User} from "../../entities/user";
+import {UserDto, UserFactory} from "../../abstractions/factories";
+import {User} from "../../entities";
+import {injectable} from "inversify";
 
+@injectable()
 export class UserFactoryImpl implements UserFactory {
     create(dto: UserDto): User {
         return new User(

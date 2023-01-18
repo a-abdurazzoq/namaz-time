@@ -1,6 +1,8 @@
-import {PrayerDto, PrayerFactory} from "../abstractions/prayer";
-import {Prayer} from "../../entities/prayer";
+import {PrayerDto, PrayerFactory} from "../../abstractions/factories";
+import {Prayer} from "../../entities";
+import {injectable} from "inversify";
 
+@injectable()
 export class PrayerFactoryImpl implements PrayerFactory {
     create(dto: PrayerDto): Prayer {
         return new Prayer(
