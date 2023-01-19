@@ -8,12 +8,25 @@ export namespace Symbols {
         Address: Symbol.for("AddressFactory"),
         District: Symbol.for("DistrictFactory"),
         TemplatePhoto: Symbol.for("TemplatePhotoFactory"),
-        TelegramChannel: Symbol.for("TelegramChannelFactory")
+        TelegramChannel: Symbol.for("TelegramChannelFactory"),
+        Scheduler: Symbol.for("SchedulerFactory")
     }
 
-    export const Storages = {
-        NamazTime: Symbol.for("NamazTimeStorage"),
-        RegularSendingPrayerTimes: Symbol.for("RegularSendingPrayerTimesStorage")
+    export const UseCases = {
+
     }
 
+    export const Controllers = {
+        Scheduler: Symbol.for("SchedulerController")
+    }
+
+    export const Configs = {
+        Scheduler: Symbol.for("SchedulerConfig")
+    }
+
+    export const Infrastructures = {
+        Application: Symbol.for("Application"),
+        Logger: Symbol.for("Logger"),
+        Storage: Symbol.for("Storage")
+    }
 }
