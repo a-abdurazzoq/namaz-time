@@ -1,5 +1,6 @@
 import {Config} from "../abstractions/schduler";
 import {Controller} from "../../controllers/abstractions";
+import {Logger} from "../abstractions/logger";
 
 export class Scheduler {
     private timer: NodeJS.Timer
