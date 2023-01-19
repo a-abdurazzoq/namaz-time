@@ -19,8 +19,21 @@ import {
 } from "../../domain/factories";
 import {NamazTimeStorageImpl} from "../../components/storage/namaz-time-storage";
 import {NamazTimeStorage} from "../../components/abstractions/storage";
+import {Application} from "../../infrastructures/abstractions/application";
+import {APIApplicationImpl} from "../../infrastructures/application";
+import {Logger} from "../../components/abstractions/logger";
+import {ConsoleLogger} from "../../components/logger";
 
 export const namazTimeModule = new ContainerModule(bind => {
+    // Application
+    bind<Application>(Symbols.Infrastructures.Application).to(APIApplicationImpl).inSingletonScope()
+
+    // Storages
+    bind<NamazTimeStorage>(Symbols.Infrastructures.Storage).to(NamazTimeStorageImpl).inSingletonScope()
+
+    // Loggers
+    bind<Logger>(Symbols.Infrastructures.Logger).to(ConsoleLogger).inSingletonScope()
+
     // Factories
     bind<CityFactory>(Symbols.Factories.City).to(CityFactoryImpl).inSingletonScope()
     bind<UserFactory>(Symbols.Factories.User).to(UserFactoryImpl).inSingletonScope()
@@ -30,7 +43,4 @@ export const namazTimeModule = new ContainerModule(bind => {
     bind<DistrictFactory>(Symbols.Factories.District).to(DistrictFactoryImpl).inSingletonScope()
     bind<TemplatePhotoFactory>(Symbols.Factories.TemplatePhoto).to(TemplatePhotoFactoryImpl).inSingletonScope()
     bind<TelegramChannelFactory>(Symbols.Factories.TelegramChannel).to(TelegramChannelFactoryImpl).inSingletonScope()
-
-    // Storages
-    bind<NamazTimeStorage>(Symbols.Storages.NamazTime).to(NamazTimeStorageImpl).inSingletonScope()
 })
