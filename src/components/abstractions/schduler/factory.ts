@@ -1,10 +1,11 @@
 import {Factory} from "../../../domain/abstractions/factories/factory";
 import {Scheduler} from "../../schduler";
-import {Config} from "./config";
+import {SchedulerConfig} from "./schedulerConfig";
 import {Controller} from "../../../controllers/abstractions";
+import {Logger} from "../logger";
 
 export interface SchedulerDto {
-    config: Config;
+    config: SchedulerConfig;
     controller: Controller;
     logger: Logger;
 }
