@@ -4,9 +4,11 @@
   "description": "",
   "main": "build/index.js",
   "scripts": {
-    "start": "node index.js",
-    "build": "node_modules/typescript/bin/tsc",
-    "dev": "npm run build && npm run start"
+    "build": "node node_modules/typescript/bin/tsc",
+    "start:api": "node build/applications/namaz-time",
+    "start:scheduler": "node build/applications/regular-sending-prayer-times",
+    "dev:api": "npm run build && npm run start:api",
+    "dev:scheduler": "npm run build && npm run start:scheduler"
   },
   "repository": {
     "type": "git",
