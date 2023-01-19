@@ -1,3 +1,7 @@
+import {LogData, Logger} from "../abstractions/logger";
+import {injectable} from "inversify";
+
+@injectable()
 export class ConsoleLogger implements Logger {
     public async print(logData: LogData): Promise<void> {
         if (!logData.date) logData.date = new Date()

@@ -1,28 +1,40 @@
 import {Storage} from "../abstractions";
 import mongoose from "mongoose";
+import {inject, injectable} from "inversify";
+import {Logger} from "../../components/abstractions/logger";
+import {Symbols} from "../../dependencies/symbols";
 
+@injectable()
 export class BaseMongoStorageImpl implements Storage {
     private readonly mongodbURI: string
 
-    constructor() {
+    constructor(
+        @inject<Logger>(Symbols.Infrastructures.Logger) private logger: Logger
+    ) {
         this.mongodbURI = String(process.env.MONGODB_URI)
         this.isMongodbURI(this.mongodbURI)
     }
 
-    async open(): Promise<void> {
+    public async open(): Promise<void> {
+        this.configuration()
         await this.connect()
         return
     }
 
-    async close(): Promise<void> {
+    public async close(): Promise<void> {
         await mongoose.disconnect()
-        console.log("Приложение успешно отсоединение к базе данных")
+        await this.logger.print({result: "Приложение успешно отсоединение к базе данных"})
         return
     }
+
     private async connect() {
         await mongoose.connect(this.mongodbURI)
-        console.log("Приложение успешно подключено к базе данных")
+        await this.logger.print({result: "Приложение успешно подключено к базе данных"})
         return
+    }
+
+    private configuration() {
+        mongoose.set("strictQuery", false)
     }
 
     private isMongodbURI(mongodbURI: string) {
