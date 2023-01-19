@@ -1,5 +1,5 @@
 export type millisecond = number
 
-export interface Config {
+export interface SchedulerConfig {
     getTimeInterval(): millisecond
 }

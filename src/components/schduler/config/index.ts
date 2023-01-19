@@ -1,6 +1,8 @@
-import {Config, millisecond} from "../../abstractions/schduler";
+import {SchedulerConfig, millisecond} from "../../abstractions/schduler";
+import {injectable} from "inversify";
 
-export class ConfigScheduler implements Config {
+@injectable()
+export class ConfigScheduler implements SchedulerConfig {
     getTimeInterval(): millisecond {
         return this.getTimeByHourInterval()
     }
