@@ -1,4 +1,4 @@
-import {Config} from "../abstractions/schduler";
+import {SchedulerConfig} from "../abstractions/schduler";
 import {Controller} from "../../controllers/abstractions";
 import {Logger} from "../abstractions/logger";
 
@@ -6,7 +6,7 @@ export class Scheduler {
     private timer: NodeJS.Timer
 
     constructor(
-        private config: Config,
+        private config: SchedulerConfig,
         private controller: Controller,
         private logger: Logger
     ) {}
