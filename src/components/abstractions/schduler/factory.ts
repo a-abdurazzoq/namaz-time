@@ -6,7 +6,7 @@ import {Controller} from "../../../controllers/abstractions";
 export interface SchedulerDto {
     config: Config;
     controller: Controller;
-    logger: any;
+    logger: Logger;
 }
 
 export interface SchedulerFactory extends Factory<SchedulerDto, Scheduler> {}
