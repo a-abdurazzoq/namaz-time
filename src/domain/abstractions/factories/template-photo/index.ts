@@ -3,6 +3,7 @@ import {TemplatePhoto} from "../../../entities";
 import {User} from "../../../entities";
 
 export interface TemplatePhotoDto {
+    id: string;
     fileName: string;
     user: User;
     createAt: Date;
