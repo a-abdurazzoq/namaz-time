@@ -26,7 +26,7 @@ export class ConsoleLogger implements Logger {
     }
 
     private printResult(loggerData: LoggerResultData) {
-        console.info(loggerData.date, "-", "RESULT", "-", loggerData.result)
+        console.log(loggerData.date, "-", "RESULT", "-", loggerData.result)
     }
 
     private printError(loggerData: LoggerErrorData) {
