@@ -1,6 +1,7 @@
-import {Schema, model} from "mongoose"
+import {Schema, model, Types} from "mongoose"
 
 export interface IPrayerModel {
+    _id: Types.ObjectId;
     name: string;
     time: Date;
     create_at: Date;

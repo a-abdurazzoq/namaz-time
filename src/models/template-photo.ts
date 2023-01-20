@@ -1,7 +1,7 @@
 import {Schema, model, Types} from "mongoose"
 
 export interface ITemplatePhotoModel {
-
+    _id: Types.ObjectId;
     file_name: string;
     user_id: Types.ObjectId;
     create_at: Date;

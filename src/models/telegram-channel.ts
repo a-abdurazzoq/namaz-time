@@ -1,6 +1,7 @@
 import {Schema, model, Types} from "mongoose"
 
 export interface ITelegramChannelModel {
+    _id: Types.ObjectId;
     name: string;
     mosque_id: Types.ObjectId;
     chat_id: number;
