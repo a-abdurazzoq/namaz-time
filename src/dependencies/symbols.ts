@@ -9,7 +9,19 @@ export namespace Symbols {
         District: Symbol.for("DistrictFactory"),
         TemplatePhoto: Symbol.for("TemplatePhotoFactory"),
         TelegramChannel: Symbol.for("TelegramChannelFactory"),
+        ChatForSendingPrayerTimes: Symbol.for("ChatForSendingPrayerTimesFactory"),
         Scheduler: Symbol.for("SchedulerFactory")
+    }
+
+    export const Repositories = {
+        User: Symbol.for("UserRepositories"),
+        City: Symbol.for("CityRepositories"),
+        Prayer: Symbol.for("PrayerRepositories"),
+        Mosque: Symbol.for("MosqueRepositories"),
+        District: Symbol.for("DistrictRepositories"),
+        TemplatePhoto: Symbol.for("TemplatePhotoRepositories"),
+        TelegramChannel: Symbol.for("TelegramChannelRepositories"),
+        ChatForSendingPrayerTimes: Symbol.for("ChatForSendingPrayerTimesRepositories"),
     }
 
     export const UseCases = {
