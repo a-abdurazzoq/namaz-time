@@ -24,8 +24,6 @@ import {
 } from "../../domain/factories";
 import {SchedulerConfig, SchedulerFactory} from "../../components/abstractions/schduler";
 import {SchedulerFactoryImpl} from "../../components/schduler";
-import {RegularSendingPrayerTimesStorage} from "../../components/abstractions/storage";
-import {RegularSendingPrayerTimesStorageImpl} from "../../components/storage/regular-sending-prayer-times-storage";
 import {Application} from "../../infrastructures/abstractions/application";
 import {SchedulerApplicationImpl} from "../../infrastructures/application";
 import {Logger} from "../../components/abstractions/logger";
@@ -50,13 +48,15 @@ import {
     UserRepositoryImpl
 } from "../../repositories";
 import {DistrictRepositoryImpl} from "../../repositories/district-repostiory";
+import {Storage} from "../../infrastructures/abstractions";
+import {BaseMongoStorageImpl} from "../../infrastructures/db";
 
 export const regularSendingPrayerTimesModule = new ContainerModule(bind => {
     // Application
     bind<Application>(Symbols.Infrastructures.Application).to(SchedulerApplicationImpl).inSingletonScope()
 
     // Storages
-    bind<RegularSendingPrayerTimesStorage>(Symbols.Infrastructures.Storage).to(RegularSendingPrayerTimesStorageImpl).inSingletonScope()
+    bind<Storage>(Symbols.Infrastructures.Storage).to(BaseMongoStorageImpl).inSingletonScope()
 
     // Loggers
     bind<Logger>(Symbols.Infrastructures.Logger).to(ConsoleLogger).inSingletonScope()

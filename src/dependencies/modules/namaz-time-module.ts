@@ -22,8 +22,6 @@ import {
     CityFactoryImpl,
     UserFactoryImpl
 } from "../../domain/factories";
-import {NamazTimeStorageImpl} from "../../components/storage/namaz-time-storage";
-import {NamazTimeStorage} from "../../components/abstractions/storage";
 import {Application} from "../../infrastructures/abstractions/application";
 import {APIApplicationImpl} from "../../infrastructures/application";
 import {Logger} from "../../components/abstractions/logger";
@@ -45,13 +43,15 @@ import {
     UserRepositoryImpl
 } from "../../repositories";
 import {DistrictRepositoryImpl} from "../../repositories/district-repostiory";
+import {Storage} from "../../infrastructures/abstractions";
+import {BaseMongoStorageImpl} from "../../infrastructures/db";
 
 export const namazTimeModule = new ContainerModule(bind => {
     // Application
     bind<Application>(Symbols.Infrastructures.Application).to(APIApplicationImpl).inSingletonScope()
 
     // Storages
-    bind<NamazTimeStorage>(Symbols.Infrastructures.Storage).to(NamazTimeStorageImpl).inSingletonScope()
+    bind<Storage>(Symbols.Infrastructures.Storage).to(BaseMongoStorageImpl).inSingletonScope()
 
     // Loggers
     bind<Logger>(Symbols.Infrastructures.Logger).to(ConsoleLogger).inSingletonScope()
