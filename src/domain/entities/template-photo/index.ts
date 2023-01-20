@@ -2,6 +2,7 @@ import {User} from "../user";
 
 export class TemplatePhoto {
     constructor(
+        private id: string,
         private fileName: string,
         private user: User,
         private createAt: Date,

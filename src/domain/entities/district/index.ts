@@ -1,13 +1,13 @@
 export class District {
     constructor(
-        private id: string,
+        private id:  number,
         private name: string
     ) {
         this.isId(id)
         this.isName(name)
     }
 
-    public getId(): string {
+    public getId(): number {
         return this.id
     }
 
@@ -15,9 +15,9 @@ export class District {
         return this.name
     }
 
-    private isId(id: string): void {
-        if(id.constructor !== String) {
-            throw new Error("id is not string")
+    private isId(id: number): void {
+        if(id.constructor !== Number) {
+            throw new Error("id is not number")
         }
     }
 

@@ -1,5 +1,6 @@
 export class Prayer {
     constructor(
+        private id: string,
         private name: string,
         private time: Date,
         private createAt: Date,

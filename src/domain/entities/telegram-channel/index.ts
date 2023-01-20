@@ -2,6 +2,7 @@ import {Mosque} from "../mosque";
 
 export class TelegramChannel {
     constructor(
+        private id: string,
         private name: string,
         private mosque: Mosque,
         private chatId: number,

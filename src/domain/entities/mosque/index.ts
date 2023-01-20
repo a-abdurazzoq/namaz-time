@@ -3,6 +3,7 @@ import {User} from "../user";
 
 export class Mosque {
     constructor(
+        private id: string,
         private name: string,
         private user: User,
         private address: Address,
