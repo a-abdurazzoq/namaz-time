@@ -2,7 +2,7 @@ import {Factory} from "../factory";
 import {District} from "../../../entities";
 
 export interface DistrictDto {
-    id: string;
+    id: number;
     name: string;
 }
 export interface DistrictFactory extends Factory<DistrictDto, District> {}
