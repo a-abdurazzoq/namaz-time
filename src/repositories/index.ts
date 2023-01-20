@@ -1,0 +1,6 @@
+export * from "./chat-for-sending-prayer-times-repository"
+export * from "./telegram-channel-repository"
+export * from "./template-photo-repository"
+export * from "./mosque-repository"
+export * from "./prayer-repository"
+export * from "./user-repository"
