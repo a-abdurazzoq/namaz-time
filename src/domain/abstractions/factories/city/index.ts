@@ -2,7 +2,7 @@ import {Factory} from "../factory";
 import {City} from "../../../entities";
 
 export interface CityDto {
-    id: string;
+    id: number;
     name: string;
 }
 
