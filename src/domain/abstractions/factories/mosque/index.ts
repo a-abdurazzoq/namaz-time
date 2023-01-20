@@ -4,6 +4,7 @@ import {User} from "../../../entities";
 import {Address} from "../../../entities";
 
 export interface MosqueDto {
+    id: string;
     name: string;
     user: User;
     address: Address;
