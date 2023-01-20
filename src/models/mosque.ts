@@ -1,10 +1,11 @@
 import {Schema, model, Types} from "mongoose"
 
 export interface IMosqueModel {
+    _id: Types.ObjectId;
     name: string,
     address: {
-        city_id: Types.ObjectId;
-        district_id: Types.ObjectId;
+        city_id: number;
+        district_id: number;
         street: string;
         home: string;
     },
@@ -20,11 +21,11 @@ const MosqueSchema = new Schema({
     },
     address: {
         city_id: {
-            type: Types.ObjectId,
+            type: Number,
             required: true
         },
         district_id: {
-            type: Types.ObjectId
+            type: Number
         },
         street: {
             type: String
