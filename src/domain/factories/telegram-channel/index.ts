@@ -6,6 +6,7 @@ import {injectable} from "inversify";
 export class TelegramChannelFactoryImpl implements TelegramChannelFactory {
     create(dto: TelegramChannelDto): TelegramChannel {
         return new TelegramChannel(
+            dto.id,
             dto.name,
             dto.mosque,
             dto.chatId,

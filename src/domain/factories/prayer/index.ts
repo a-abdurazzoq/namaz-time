@@ -6,6 +6,7 @@ import {injectable} from "inversify";
 export class PrayerFactoryImpl implements PrayerFactory {
     create(dto: PrayerDto): Prayer {
         return new Prayer(
+            dto.id,
             dto.name,
             dto.time,
             dto.createAt,

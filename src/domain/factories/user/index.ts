@@ -6,6 +6,7 @@ import {injectable} from "inversify";
 export class UserFactoryImpl implements UserFactory {
     create(dto: UserDto): User {
         return new User(
+            dto.id,
             dto.username,
             dto.password,
             dto.fullName,

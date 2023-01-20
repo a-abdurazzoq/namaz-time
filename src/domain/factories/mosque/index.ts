@@ -6,6 +6,7 @@ import {injectable} from "inversify";
 export class MosqueFactoryImpl implements MosqueFactory {
     create(dto: MosqueDto): Mosque {
         return new Mosque(
+            dto.id,
             dto.name,
             dto.user,
             dto.address,
