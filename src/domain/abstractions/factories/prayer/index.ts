@@ -2,6 +2,7 @@ import {Factory} from "../factory";
 import {Prayer} from "../../../entities";
 
 export interface PrayerDto {
+    id: string;
     name: string;
     time: Date;
     createAt: Date;
