@@ -3,6 +3,7 @@ import {TelegramChannel} from "../../../entities";
 import {Mosque} from "../../../entities";
 
 export interface TelegramChannelDto {
+    id: string;
     name: string;
     mosque: Mosque;
     chatId: number;
