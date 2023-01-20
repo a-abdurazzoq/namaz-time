@@ -1,9 +1,9 @@
-export interface LogData {
+export interface LoggerDto {
     result?: any;
     error?: any;
     date?: Date;
 }
 
 export interface Logger {
-    print(logData: LogData): Promise<void>
+    print(logData: LoggerDto): Promise<void>
 }
