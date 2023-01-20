@@ -1,4 +1,4 @@
-import {Controller} from "./abstractions";
+import {Controller} from "../abstractions";
 import {injectable} from "inversify";
 
 @injectable()
