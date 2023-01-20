@@ -15,4 +15,16 @@ export class ConfigScheduler implements SchedulerConfig {
 
         return date.getTime() - currentDate.getTime()
     }
+
+    private getTimeByMinuteInterval(): millisecond {
+        let intervalMinutes = 10
+        let currentDate = new Date()
+        let date = new Date()
+
+        date.setMinutes(currentDate.getMinutes()+intervalMinutes, 0,0)
+        date.setMinutes(date.getMinutes()-(date.getMinutes() % intervalMinutes), 0,0)
+
+
+        return date.getTime() - currentDate.getTime()
+    }
 }
