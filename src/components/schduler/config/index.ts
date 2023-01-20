@@ -4,7 +4,7 @@ import {injectable} from "inversify";
 @injectable()
 export class ConfigScheduler implements SchedulerConfig {
     getTimeInterval(): millisecond {
-        return this.getTimeByHourInterval()
+        return this.getTimeByMinuteInterval()
     }
 
     private getTimeByHourInterval(): millisecond {
