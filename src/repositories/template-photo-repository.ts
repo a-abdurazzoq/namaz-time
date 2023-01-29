@@ -8,8 +8,8 @@ import {TemplatePhotoModel, ITemplatePhotoModel} from "../models";
 @injectable()
 export class TemplatePhotoRepositoryImpl implements TemplatePhotoRepository {
     constructor(
-        @inject<TemplatePhotoFactory>(Symbols.Factories.TemplatePhoto) private templatePhotoFactory: TemplatePhotoFactory,
-        @inject<UserRepository>(Symbols.Repositories.User) private userRepository: UserRepository
+        @inject(Symbols.Factories.TemplatePhoto) private templatePhotoFactory: TemplatePhotoFactory,
+        @inject(Symbols.Repositories.User) private userRepository: UserRepository
     ) {}
 
     public async getById(id: string): Promise<TemplatePhoto> {
