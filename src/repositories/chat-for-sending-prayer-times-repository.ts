@@ -13,6 +13,12 @@ export class ChatForSendingPrayerTimesRepositoryImpl implements ChatForSendingPr
         @inject(Symbols.Repositories.TemplatePhoto) private templatePhotoRepository: TemplatePhotoRepository
     ) {}
 
+    public async getAllLessAndEqualByNextTime(date: Date): Promise<ChatForSendingPrayerTimes[]> {
+        let getChatsForSendingPrayerTimes = await ChatForSendingPrayerTimesModel.find<IChatForSendingPrayerTimesModel>({next_time: {$gte: date}})
+
+        return this.toEntities(getChatsForSendingPrayerTimes)
+    }
+
     public async getById(id: string): Promise<ChatForSendingPrayerTimes> {
         let getChatForSendingPrayerTimes = await ChatForSendingPrayerTimesModel.findById<IChatForSendingPrayerTimesModel>(id)
 
