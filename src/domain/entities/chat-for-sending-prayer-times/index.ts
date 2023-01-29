@@ -1,7 +1,11 @@
+import {TelegramChannel} from "../telegram-channel";
+import {TemplatePhoto} from "../template-photo";
+
 export class ChatForSendingPrayerTimes {
     constructor(
         private id: string,
-        private telegramChannelId: string,
+        private telegramChannel: TelegramChannel,
+        private templatePhoto: TemplatePhoto,
         private chatId: number,
         private timePerDay: number,
         private nextTime: Date,
@@ -12,6 +16,15 @@ export class ChatForSendingPrayerTimes {
     public getId(): string {
         return this.id
     }
+
+    public getTelegramChannel(): TelegramChannel {
+        return this.telegramChannel
+    }
+
+    public getTemplatePhoto(): TemplatePhoto {
+        return this.templatePhoto
+    }
+
     public getChatId(): number {
         return this.chatId
     }
