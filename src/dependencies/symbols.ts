@@ -24,6 +24,10 @@ export namespace Symbols {
         ChatForSendingPrayerTimes: Symbol.for("ChatForSendingPrayerTimesRepositories"),
     }
 
+    export const Clients = {
+        TelegramBot: Symbol.for("TelegramBotClient")
+    }
+
     export const UseCases = {
 
     }
