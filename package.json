@@ -22,12 +22,15 @@
   "homepage": "https://github.com/a-abdurazzoq/namaz-time#readme",
   "dependencies": {
     "@types/node": "^18.11.18",
+    "axios": "^1.2.3",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "express-validator": "^6.14.2",
+    "form-data": "^4.0.0",
     "inversify": "^6.0.1",
     "json-request-validator": "^1.0.6",
     "mongoose": "^6.8.3",
+    "puppeteer": "^19.6.1",
     "reflect-metadata": "^0.1.13"
   },
   "devDependencies": {
