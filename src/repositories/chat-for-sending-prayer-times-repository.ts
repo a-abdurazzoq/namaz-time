@@ -1,4 +1,4 @@
-import {ChatForSendingPrayerTimesRepository} from "./abstractions";
+import {ChatForSendingPrayerTimesRepository, TelegramChannelRepository, TemplatePhotoRepository} from "./abstractions";
 import {ChatForSendingPrayerTimes} from "../domain/entities";
 import {inject, injectable} from "inversify";
 import {ChatForSendingPrayerTimesFactory} from "../domain/abstractions/factories";
@@ -18,6 +18,12 @@ export class ChatForSendingPrayerTimesRepositoryImpl implements ChatForSendingPr
             throw new Error("Chat for sending prayer times not found by id")
 
         return this.toEntity(getChatForSendingPrayerTimes)
+    }
+
+    private toEntities(chatsForSendingPrayerTimesModel: IChatForSendingPrayerTimesModel[]): Promise<ChatForSendingPrayerTimes[]> {
+        let entities = chatsForSendingPrayerTimesModel.map(chatForSendingPrayerTimesModel => this.toEntity(chatForSendingPrayerTimesModel))
+
+        return Promise.all(entities)
     }
 
     private async toEntity(chatsForSendingPrayerTimesModel: IChatForSendingPrayerTimesModel): Promise<ChatForSendingPrayerTimes> {
