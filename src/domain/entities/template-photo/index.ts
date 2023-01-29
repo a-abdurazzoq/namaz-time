@@ -13,6 +13,10 @@ export class TemplatePhoto {
         this.isUpdateAt(this.updateAt)
     }
 
+    getId(): string {
+        return this.id
+    }
+
     public getFileName(): string {
         return this.fileName
     }
