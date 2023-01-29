@@ -8,7 +8,9 @@ import {ChatForSendingPrayerTimesModel, IChatForSendingPrayerTimesModel} from ".
 @injectable()
 export class ChatForSendingPrayerTimesRepositoryImpl implements ChatForSendingPrayerTimesRepository {
     constructor(
-        @inject<ChatForSendingPrayerTimesFactory>(Symbols.Factories.ChatForSendingPrayerTimes) private chatForSendingPrayerTimesFactory: ChatForSendingPrayerTimesFactory
+        @inject(Symbols.Factories.ChatForSendingPrayerTimes) private chatForSendingPrayerTimesFactory: ChatForSendingPrayerTimesFactory,
+        @inject(Symbols.Repositories.TelegramChannel) private telegramChannelRepository: TelegramChannelRepository,
+        @inject(Symbols.Repositories.TemplatePhoto) private templatePhotoRepository: TemplatePhotoRepository
     ) {}
 
     public async getById(id: string): Promise<ChatForSendingPrayerTimes> {
