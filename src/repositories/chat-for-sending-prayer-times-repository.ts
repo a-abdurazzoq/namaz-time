@@ -20,10 +20,14 @@ export class ChatForSendingPrayerTimesRepositoryImpl implements ChatForSendingPr
         return this.toEntity(getChatForSendingPrayerTimes)
     }
 
-    private toEntity(chatsForSendingPrayerTimesModel: IChatForSendingPrayerTimesModel): ChatForSendingPrayerTimes {
+    private async toEntity(chatsForSendingPrayerTimesModel: IChatForSendingPrayerTimesModel): Promise<ChatForSendingPrayerTimes> {
+        let telegramChannel = await this.telegramChannelRepository.getById(chatsForSendingPrayerTimesModel.telegram_channel_id.toHexString())
+        let templatePhoto = await this.templatePhotoRepository.getById(chatsForSendingPrayerTimesModel.template_photo_id.toHexString())
+
         return this.chatForSendingPrayerTimesFactory.create({
             id: chatsForSendingPrayerTimesModel._id.toHexString(),
-            telegramChannelId: chatsForSendingPrayerTimesModel.telegram_channel_id.toHexString(),
+            telegramChannel: telegramChannel,
+            templatePhoto: templatePhoto,
             chatId: chatsForSendingPrayerTimesModel.chat_id,
             timePerDay: chatsForSendingPrayerTimesModel.time_per_day,
             nextTime: chatsForSendingPrayerTimesModel.next_time,
