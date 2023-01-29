@@ -9,21 +9,25 @@ export class ChatForSendingPrayerTimes {
         private updateAt: Date
     ) {}
 
-    public getTelegramChannelId(): string {
-        return this.telegramChannelId
+    public getId(): string {
+        return this.id
     }
     public getChatId(): number {
         return this.chatId
     }
+
     public getTimePerDay(): number {
         return this.timePerDay
     }
+
     public getNextTime(): Date {
         return this.nextTime
     }
+
     public getCreateAt(): Date {
         return this.createAt
     }
+
     public getUpdateAt(): Date {
         return this.updateAt
     }
