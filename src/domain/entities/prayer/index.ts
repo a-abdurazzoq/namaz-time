@@ -12,6 +12,10 @@ export class Prayer {
         this.isUpdateAt(updateAt)
     }
 
+    getId(): string {
+        return this.id
+    }
+
     public getName(): string {
         return this.name
     }
