@@ -15,6 +15,10 @@ export class TelegramChannel {
         this.isUpdateAt(this.updateAt)
     }
 
+    getId(): string {
+        return this.id
+    }
+
     getName(): string {
         return this.name
     }
