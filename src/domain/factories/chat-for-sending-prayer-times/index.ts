@@ -7,7 +7,8 @@ export class ChatForSendingPrayerTimesFactoryImpl implements ChatForSendingPraye
     create(dto: ChatForSendingPrayerTimesDto): ChatForSendingPrayerTimes {
         return new ChatForSendingPrayerTimes(
             dto.id,
-            dto.telegramChannelId,
+            dto.telegramChannel,
+            dto.templatePhoto,
             dto.chatId,
             dto.timePerDay,
             dto.nextTime,
