@@ -8,12 +8,12 @@ export class ConfigScheduler implements SchedulerConfig {
     }
 
     private getTimeByHourInterval(): millisecond {
-        let currentDate = new Date()
-        let date = new Date()
-        date.setHours(currentDate.getHours()+1, 0,0,0)
+        let currentDate = new Date();
+        let nextHour = new Date(currentDate);
 
+        nextHour.setHours(nextHour.getHours() + 1, 0, 0, 0);
 
-        return date.getTime() - currentDate.getTime()
+        return nextHour.getTime() - currentDate.getTime();
     }
 
     private getTimeByMinuteInterval(): millisecond {
