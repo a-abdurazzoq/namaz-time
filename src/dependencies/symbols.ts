@@ -34,6 +34,8 @@ export namespace Symbols {
         SendPrayerTimesToTelegramChannel: Symbol.for("SendPrayerTimesToTelegramChannelUseCase")
     }
 
+    export const Services = {
+        TemplatePhoto: Symbol.for("TemplatePhotoService")
     }
 
     export const Controllers = {
