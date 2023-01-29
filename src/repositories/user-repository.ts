@@ -8,7 +8,7 @@ import {UserModel, IUserModel} from "../models";
 @injectable()
 export class UserRepositoryImpl implements UserRepository {
     constructor(
-        @inject<UserFactory>(Symbols.Factories.User) private userFactory: UserFactory
+        @inject(Symbols.Factories.User) private userFactory: UserFactory
     ) {}
 
     public async getById(id: string): Promise<User> {

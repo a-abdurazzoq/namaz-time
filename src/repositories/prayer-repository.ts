@@ -8,7 +8,7 @@ import {PrayerFactory} from "../domain/abstractions/factories";
 @injectable()
 export class PrayerRepositoryImpl implements PrayerRepository {
     constructor(
-        @inject<PrayerFactory>(Symbols.Factories.Prayer) private prayerFactory: PrayerFactory
+        @inject(Symbols.Factories.Prayer) private prayerFactory: PrayerFactory
     ) {}
 
     public async getById(id: string): Promise<Prayer> {

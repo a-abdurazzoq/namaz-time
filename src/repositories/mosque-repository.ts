@@ -8,11 +8,11 @@ import {AddressFactory, MosqueFactory} from "../domain/abstractions/factories";
 @injectable()
 export class MosqueRepositoryImpl implements MosqueRepository {
     constructor(
-        @inject<MosqueFactory>(Symbols.Factories.Mosque) private mosqueFactory: MosqueFactory,
-        @inject<AddressFactory>(Symbols.Factories.Address) private addressFactory: AddressFactory,
-        @inject<CityRepository>(Symbols.Repositories.City) private cityRepository: CityRepository,
-        @inject<DistrictRepository>(Symbols.Repositories.District) private districtRepository: DistrictRepository,
-        @inject<UserRepository>(Symbols.Repositories.User) private userRepository: UserRepository,
+        @inject(Symbols.Factories.Mosque) private mosqueFactory: MosqueFactory,
+        @inject(Symbols.Factories.Address) private addressFactory: AddressFactory,
+        @inject(Symbols.Repositories.City) private cityRepository: CityRepository,
+        @inject(Symbols.Repositories.District) private districtRepository: DistrictRepository,
+        @inject(Symbols.Repositories.User) private userRepository: UserRepository,
     ) {}
 
     public async getById(id: string): Promise<Mosque> {

@@ -8,8 +8,8 @@ import {TelegramChannelFactory} from "../domain/abstractions/factories";
 @injectable()
 export class TelegramChannelRepositoryImpl implements TelegramChannelRepository {
     constructor(
-        @inject<TelegramChannelFactory>(Symbols.Factories.TelegramChannel) private telegramChannelFactory: TelegramChannelFactory,
-        @inject<MosqueRepository>(Symbols.Repositories.Mosque) private mosqueRepository: MosqueRepository
+        @inject(Symbols.Factories.TelegramChannel) private telegramChannelFactory: TelegramChannelFactory,
+        @inject(Symbols.Repositories.Mosque) private mosqueRepository: MosqueRepository
     ) {}
 
     public async getById(id: string): Promise<TelegramChannel> {

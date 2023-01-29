@@ -8,7 +8,7 @@ import {DistrictModel, IDistrictModel} from "../models";
 @injectable()
 export class DistrictRepositoryImpl implements DistrictRepository {
     constructor(
-        @inject<DistrictFactory>(Symbols.Factories.District) private DistrictFactory: DistrictFactory
+        @inject(Symbols.Factories.District) private DistrictFactory: DistrictFactory
     ) {}
 
     public async getById(id: number): Promise<District> {
