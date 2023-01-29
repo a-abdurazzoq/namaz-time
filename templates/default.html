@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./fonts/bebasneue/style.css">
+    <link rel="stylesheet" href="./fonts/roboto/style.css">
     <title>Pray time</title>                
     <style>
         *{
@@ -37,20 +38,18 @@
             left: 0;
         }
 
-        .Prayer {
-            width: 272px;
-            height: 159px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }        
-        
-        .Prayer p{
-            color: #2A2A2A;
-            font-size: 135px;
-            line-height: 1;
-            font-weight: 700;
+        .photo > .Date {
+            top: 307px;
+            width: 100%;
             text-align: center;
+            left: 0;
+        }
+        
+        .photo > .Date > p{
+            font-size: 36.38px;
+            font-weight: 500;
+            color: #ffffff;
+            font-family: 'Roboto',serif;
         }
         
         .photo .Fajr{
@@ -88,34 +87,54 @@
             top: 768px;
             left: 733px;
         }
+
+        .Prayer {
+            width: 272px;
+            height: 159px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }        
+        
+        .Prayer p{
+            color: #2A2A2A;
+            font-size: 135px;
+            line-height: 1;
+            font-weight: 700;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
     <div class="photo">
         <img class="position-absolute" src="./default.jpg" alt="">
 
+        <div class="Date position-absolute">
+            <p></p>
+        </div>
+
         <div class="Prayer Fajr position-absolute">
-            <p>04:12</p>
+            <p></p>
         </div>
 
         <div class="Prayer Sun position-absolute">
-            <p>05:38</p>
+            <p></p>
         </div>
 
         <div class="Prayer Dhuhr position-absolute">
-            <p>12:31</p>
+            <p></p>
         </div>
 
         <div class="Prayer Asr position-absolute">
-            <p>17:14</p>
+            <p></p>
         </div>
 
         <div class="Prayer Maghrib position-absolute">
-            <p>19:16</p>
+            <p></p>
         </div>
 
         <div class="Prayer Isha position-absolute">
-            <p>20:39</p>
+            <p></p>
         </div>
     </div>
 </body>
