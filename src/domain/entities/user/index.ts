@@ -16,6 +16,10 @@ export class User {
         this.isUpdateAt(updateAt)
     }
 
+    getId(): string {
+        return this.id
+    }
+
     public getUsername(): string {
         return this.username
     }
