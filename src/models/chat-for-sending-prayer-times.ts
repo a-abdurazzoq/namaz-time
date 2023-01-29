@@ -3,6 +3,7 @@ import {Schema, model, Types} from "mongoose"
 export interface IChatForSendingPrayerTimesModel {
     _id: Types.ObjectId;
     telegram_channel_id: Types.ObjectId;
+    template_photo_id: Types.ObjectId;
     chat_id: number;
     time_per_day: number;
     next_time: Date;
@@ -12,6 +13,10 @@ export interface IChatForSendingPrayerTimesModel {
 
 const ChatForSendingPrayerTimesSchema = new Schema({
     telegram_channel_id: {
+        type: Types.ObjectId,
+        required: true
+    },
+    template_photo_id: {
         type: Types.ObjectId,
         required: true
     },
