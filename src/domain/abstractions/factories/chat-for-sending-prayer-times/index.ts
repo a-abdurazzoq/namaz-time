@@ -1,9 +1,9 @@
 import {Factory} from "../factory";
-import {ChatForSendingPrayerTimes} from "../../../entities";
+import {ChatForSendingPrayerTimes, TelegramChannel} from "../../../entities";
 
 export interface ChatForSendingPrayerTimesDto {
     id: string;
-    telegramChannelId: string;
+    telegramChannel: TelegramChannel;
     chatId: number;
     timePerDay: number;
     nextTime: Date;
