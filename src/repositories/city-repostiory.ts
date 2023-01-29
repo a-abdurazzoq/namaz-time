@@ -8,7 +8,7 @@ import {CityModel, ICityModel} from "../models";
 @injectable()
 export class CityRepositoryImpl implements CityRepository {
     constructor(
-        @inject<CityFactory>(Symbols.Factories.City) private cityFactory: CityFactory
+        @inject(Symbols.Factories.City) private cityFactory: CityFactory
     ) {}
 
     public async getById(id: number): Promise<City> {
