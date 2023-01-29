@@ -29,6 +29,10 @@ export namespace Symbols {
     }
 
     export const UseCases = {
+        GetAllExecuteTimeChatsForSending: Symbol.for("GetAllExecuteTimeChatsForSendingUseCase"),
+        MassSendPrayerTimesToTelegramChannels: Symbol.for("MassSendPrayerTimesToTelegramChannelsUseCase"),
+        SendPrayerTimesToTelegramChannel: Symbol.for("SendPrayerTimesToTelegramChannelUseCase")
+    }
 
     }
 
