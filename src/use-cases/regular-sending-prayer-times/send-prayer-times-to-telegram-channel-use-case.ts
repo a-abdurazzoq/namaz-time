@@ -14,15 +14,15 @@ export class SendPrayerTimesToTelegramChannelUseCaseImpl implements SendPrayerTi
         let photoBuffer = await this.templatePhotoRepository.generatePhotoByChatForSendingPrayerTimes(params)
 
         let response = await this.telegramBotClient.sendPhoto({
-            chat_id: params.getChatId(),
+            chat_id: params.chatForSendingPrayerTimes.getChatId(),
             photo: photoBuffer
         })
 
         if(!response.ok)
             return {
                 success: response.ok,
-                id: params.getId(),
-                name: params.getTelegramChannel().getName(),
+                id: params.chatForSendingPrayerTimes.getId(),
+                name: params.chatForSendingPrayerTimes.getTelegramChannel().getName(),
                 error: {
                     error_code: response.error_code,
                     description: response.description
@@ -31,8 +31,8 @@ export class SendPrayerTimesToTelegramChannelUseCaseImpl implements SendPrayerTi
 
         return {
             success: response.ok,
-            id: params.getId(),
-            name: params.getTelegramChannel().getName()
+            id: params.chatForSendingPrayerTimes.getId(),
+            name: params.chatForSendingPrayerTimes.getTelegramChannel().getName()
         }
     }
 }
