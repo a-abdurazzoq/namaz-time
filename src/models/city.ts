@@ -1,6 +1,6 @@
-import {Schema, model} from "mongoose"
+import {Schema, model, Document} from "mongoose"
 
-export interface ICityModel {
+export interface ICityModel extends Document {
     _id: number,
     name: string,
 }
