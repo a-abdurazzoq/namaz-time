@@ -1,7 +1,6 @@
-import {Schema, model, Types} from "mongoose"
+import {Schema, model, Types, Document} from "mongoose"
 
-export interface IMosqueModel {
-    _id: Types.ObjectId;
+export interface IMosqueModel extends Document {
     name: string,
     address: {
         city_id: number;
