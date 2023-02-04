@@ -7,7 +7,7 @@ import {
     DistrictFactory,
     AddressFactory,
     MosqueFactory,
-    PrayerFactory,
+    PrayersInDayFactory,
     CityFactory,
     UserFactory
 } from "../../domain/abstractions/factories";
@@ -18,7 +18,7 @@ import {
     DistrictFactoryImpl,
     AddressFactoryImpl,
     MosqueFactoryImpl,
-    PrayerFactoryImpl,
+    PrayersInDayFactoryImpl,
     CityFactoryImpl,
     UserFactoryImpl
 } from "../../domain/factories";
@@ -31,14 +31,14 @@ import {
     CityRepository,
     DistrictRepository,
     MosqueRepository,
-    PrayerRepository, TelegramChannelRepository, TemplatePhotoRepository,
+    PrayersInDayRepository, TelegramChannelRepository, TemplatePhotoRepository,
     UserRepository
 } from "../../repositories/abstractions";
 import {CityRepositoryImpl} from "../../repositories/city-repostiory";
 import {
     ChatForSendingPrayerTimesRepositoryImpl,
     MosqueRepositoryImpl,
-    PrayerRepositoryImpl, TelegramChannelRepositoryImpl,
+    PrayersInDayRepositoryImpl, TelegramChannelRepositoryImpl,
     TemplatePhotoRepositoryImpl,
     UserRepositoryImpl
 } from "../../repositories";
@@ -60,7 +60,7 @@ export const namazTimeModule = new ContainerModule(bind => {
     bind<CityFactory>(Symbols.Factories.City).to(CityFactoryImpl).inSingletonScope()
     bind<UserFactory>(Symbols.Factories.User).to(UserFactoryImpl).inSingletonScope()
     bind<MosqueFactory>(Symbols.Factories.Mosque).to(MosqueFactoryImpl).inSingletonScope()
-    bind<PrayerFactory>(Symbols.Factories.Prayer).to(PrayerFactoryImpl).inSingletonScope()
+    bind<PrayersInDayFactory>(Symbols.Factories.PrayersInDay).to(PrayersInDayFactoryImpl).inSingletonScope()
     bind<AddressFactory>(Symbols.Factories.Address).to(AddressFactoryImpl).inSingletonScope()
     bind<DistrictFactory>(Symbols.Factories.District).to(DistrictFactoryImpl).inSingletonScope()
     bind<TemplatePhotoFactory>(Symbols.Factories.TemplatePhoto).to(TemplatePhotoFactoryImpl).inSingletonScope()
@@ -71,7 +71,7 @@ export const namazTimeModule = new ContainerModule(bind => {
     bind<CityRepository>(Symbols.Repositories.City).to(CityRepositoryImpl).inSingletonScope()
     bind<UserRepository>(Symbols.Repositories.User).to(UserRepositoryImpl).inSingletonScope()
     bind<MosqueRepository>(Symbols.Repositories.Mosque).to(MosqueRepositoryImpl).inSingletonScope()
-    bind<PrayerRepository>(Symbols.Repositories.Prayer).to(PrayerRepositoryImpl).inSingletonScope()
+    bind<PrayersInDayRepository>(Symbols.Repositories.PrayersInDay).to(PrayersInDayRepositoryImpl).inSingletonScope()
     bind<DistrictRepository>(Symbols.Repositories.District).to(DistrictRepositoryImpl).inSingletonScope()
     bind<TemplatePhotoRepository>(Symbols.Repositories.TemplatePhoto).to(TemplatePhotoRepositoryImpl).inSingletonScope()
     bind<TelegramChannelRepository>(Symbols.Repositories.TelegramChannel).to(TelegramChannelRepositoryImpl).inSingletonScope()
