@@ -1,6 +1,6 @@
-import {Schema, model} from "mongoose"
+import {Schema, model, Document} from "mongoose"
 
-export interface IDistrictModel {
+export interface IDistrictModel extends Document {
     _id: number,
     name: string,
 }
