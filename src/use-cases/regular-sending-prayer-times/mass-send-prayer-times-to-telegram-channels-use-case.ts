@@ -16,10 +16,16 @@ export class MassSendPrayerTimesToTelegramChannelsUseCaseImpl implements MassSen
     async execute(params: MassSendPrayerTimesToTelegramChannels.Params): Promise<MassSendPrayerTimesToTelegramChannels.Response> {
         let success: MassSendPrayerTimesToTelegramChannels.Results<Chat> = {count: 0, chats: []}
         let failed: MassSendPrayerTimesToTelegramChannels.Results<ChatWithError> = {count: 0, chats: []}
+        let necessaryDate = new Date();
+        necessaryDate.setDate(necessaryDate.getDate()+1)
+        necessaryDate.setHours(0, 0, 0, 0,)
 
         for (let i = 0; i < params.length; i++) {
-            let chat = params[i]
-            let response = await this.sendPrayerTimesToTelegramChannelUseCase.execute(chat)
+            let chatForSendingPrayerTimes = params[i]
+            let response = await this.sendPrayerTimesToTelegramChannelUseCase.execute({
+                necessaryDate: necessaryDate,
+                chatForSendingPrayerTimes: chatForSendingPrayerTimes
+            })
 
             if(this.isError(response)) {
                 failed.count++
