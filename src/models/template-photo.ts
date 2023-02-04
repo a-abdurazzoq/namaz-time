@@ -1,7 +1,6 @@
-import {Schema, model, Types} from "mongoose"
+import {Schema, model, Types, Document} from "mongoose"
 
-export interface ITemplatePhotoModel {
-    _id: Types.ObjectId;
+export interface ITemplatePhotoModel extends Document {
     file_name: string;
     user_id: Types.ObjectId;
     create_at: Date;
