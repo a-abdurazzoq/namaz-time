@@ -1,7 +1,6 @@
-import {Schema, model, Types} from "mongoose"
+import {Schema, model, Types, Document} from "mongoose"
 
-export interface ITelegramChannelModel {
-    _id: Types.ObjectId;
+export interface ITelegramChannelModel extends Document {
     name: string;
     mosque_id: Types.ObjectId;
     chat_id: number;
