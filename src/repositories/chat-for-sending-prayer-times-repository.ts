@@ -23,7 +23,7 @@ export class ChatForSendingPrayerTimesRepositoryImpl implements ChatForSendingPr
         let getChatForSendingPrayerTimes = await ChatForSendingPrayerTimesModel.findById<IChatForSendingPrayerTimesModel>(id)
 
         if(!getChatForSendingPrayerTimes)
-            throw new Error("Chat for sending prayer times not found by id")
+            throw new Error("Chat for sending prayers in day times not found by id")
 
         return this.toEntity(getChatForSendingPrayerTimes)
     }
