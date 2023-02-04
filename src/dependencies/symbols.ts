@@ -3,7 +3,10 @@ export namespace Symbols {
     export const Factories = {
         User: Symbol.for("UserFactory"),
         City: Symbol.for("CityFactory"),
-        Prayer: Symbol.for("PrayerFactory"),
+        PrayersInDay: Symbol.for("PrayersInDayFactory"),
+        PrayerTimes: Symbol.for("PrayerTimesFactory"),
+        IslamicCalendar: Symbol.for("IslamicCalendarFactory"),
+        IslamicMonth: Symbol.for("IslamicMonthFactory"),
         Mosque: Symbol.for("MosqueFactory"),
         Address: Symbol.for("AddressFactory"),
         District: Symbol.for("DistrictFactory"),
@@ -16,8 +19,10 @@ export namespace Symbols {
     export const Repositories = {
         User: Symbol.for("UserRepositories"),
         City: Symbol.for("CityRepositories"),
-        Prayer: Symbol.for("PrayerRepositories"),
+        PrayersInDay: Symbol.for("PrayersInDayRepositories"),
         Mosque: Symbol.for("MosqueRepositories"),
+        IslamicCalendar: Symbol.for("IslamicCalendarRepositories"),
+        IslamicMonth: Symbol.for("IslamicMonthRepositories"),
         District: Symbol.for("DistrictRepositories"),
         TemplatePhoto: Symbol.for("TemplatePhotoRepositories"),
         TelegramChannel: Symbol.for("TelegramChannelRepositories"),
