@@ -15,23 +15,28 @@ export class TelegramChannel {
         this.isUpdateAt(this.updateAt)
     }
 
-    getId(): string {
+    public getId(): string {
         return this.id
     }
 
-    getName(): string {
+
+    public getName(): string {
         return this.name
     }
-    getMosque(): Mosque {
+
+    public getMosque(): Mosque {
         return this.mosque
     }
-    getChatId(): number {
+
+    public getChatId(): number {
         return this.chatId
     }
-    getCreateAt(): Date {
+
+    public getCreateAt(): Date {
         return this.createAt
     }
-    getUpdateAt(): Date {
+
+    public getUpdateAt(): Date {
         return this.updateAt
     }
 
