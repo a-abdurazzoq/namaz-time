@@ -15,7 +15,7 @@ export class Mosque {
         this.isUpdateAt(updateAt)
     }
 
-    getId(): string {
+    public getId(): string {
         return this.id
     }
 
