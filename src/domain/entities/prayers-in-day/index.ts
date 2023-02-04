@@ -1,45 +1,38 @@
-export class Prayer {
+import {PrayerTimes} from "./prayer-times";
+import {IslamicCalendar} from "../islamic-calendar";
+
+export class PrayersInDay {
     constructor(
         private id: string,
-        private name: string,
-        private time: Date,
+        private islamicCalendar: IslamicCalendar,
+        private prayerTimes: PrayerTimes,
         private createAt: Date,
         private updateAt: Date
     ) {
-        this.isName(name)
-        this.isTime(time)
         this.isCreateAt(createAt)
         this.isUpdateAt(updateAt)
     }
 
-    getId(): string {
+    public getId(): string {
         return this.id
     }
 
-    public getName(): string {
-        return this.name
+    public getIslamicCalendar(): IslamicCalendar {
+        return this.islamicCalendar
     }
-    public getTime(): Date {
-        return this.time
+
+    public getPrayerTimes(): PrayerTimes {
+        return this.prayerTimes
     }
+
     public getCreateAt(): Date {
         return this.createAt
     }
+
     public getUpdateAt(): Date {
         return this.updateAt
     }
 
-    private isName(name: string): void {
-        if(name.constructor !== String) {
-            throw new Error("name is not string")
-        }
-    }
-
-    private isTime(time: Date): void {
-        if(time.constructor !== Date) {
-            throw new Error("time is not date")
-        }
-    }
 
     private isCreateAt(createAt: Date): void {
         if(createAt.constructor !== Date) {
