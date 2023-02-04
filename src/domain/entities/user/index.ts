@@ -16,7 +16,7 @@ export class User {
         this.isUpdateAt(updateAt)
     }
 
-    getId(): string {
+    public getId(): string {
         return this.id
     }
 
