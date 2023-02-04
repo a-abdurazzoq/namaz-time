@@ -1,7 +1,6 @@
-import {Schema, model, Types} from "mongoose"
+import {Schema, model, Types, Document} from "mongoose"
 
-export interface IChatForSendingPrayerTimesModel {
-    _id: Types.ObjectId;
+export interface IChatForSendingPrayerTimesModel extends Document {
     telegram_channel_id: Types.ObjectId;
     template_photo_id: Types.ObjectId;
     chat_id: number;
