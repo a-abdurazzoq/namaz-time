@@ -44,6 +44,7 @@ export class User {
         return this.updateAt
     }
 
+
     private isUsername(username: string): void {
         if(username.constructor !== String) {
             throw new Error("username is not string")
