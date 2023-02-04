@@ -13,7 +13,7 @@ export class TemplatePhoto {
         this.isUpdateAt(this.updateAt)
     }
 
-    getId(): string {
+    public getId(): string {
         return this.id
     }
 
@@ -32,6 +32,7 @@ export class TemplatePhoto {
     public getUpdateAt(): Date {
         return this.updateAt
     }
+
 
     private isFileName(fileName: string): void {
         if(fileName.constructor !== Date) {
