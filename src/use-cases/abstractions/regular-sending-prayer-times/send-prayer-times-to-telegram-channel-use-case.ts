@@ -4,7 +4,10 @@ import {ChatForSendingPrayerTimes} from "../../../domain/entities";
 export interface SendPrayerTimesToTelegramChannelUseCase extends UseCase<SendPrayerTimesToTelegramChannel.Params, SendPrayerTimesToTelegramChannel.Response> {}
 
 export namespace SendPrayerTimesToTelegramChannel {
-    export type Params = ChatForSendingPrayerTimes
+    export interface Params {
+        chatForSendingPrayerTimes: ChatForSendingPrayerTimes;
+        necessaryDate: Date
+    }
 
     export type Response = Error | Success
 
