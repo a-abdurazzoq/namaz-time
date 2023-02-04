@@ -14,15 +14,15 @@ export class TemplatePhotoServiceImpl implements TemplatePhotoService {
         await page.evaluate((p: PhotoGenerationParams) => {
             let date = document.querySelector<HTMLElement>('.Date p')
             let fajr = document.querySelector<HTMLElement>('.Fajr p')
-            let sun = document.querySelector<HTMLElement>('.Sun p')
+            let shurooq = document.querySelector<HTMLElement>('.Sun p')
             let dhuhr = document.querySelector<HTMLElement>('.Dhuhr p')
             let asr = document.querySelector<HTMLElement>('.Asr p')
             let maghrib = document.querySelector<HTMLElement>('.Maghrib p')
             let isha = document.querySelector<HTMLElement>('.Isha p')
 
-            if(date) date.innerText = p.date
+            if(date) date.innerText = `${p.gregorianFullDate}  |  ${p.islamicFullDate}`
             if(fajr) fajr.innerText = p.fajr
-            if(sun) sun.innerText = p.sun
+            if(shurooq) shurooq.innerText = p.shurooq
             if(dhuhr) dhuhr.innerText = p.dhuhr
             if(asr) asr.innerText = p.asr
             if(maghrib) maghrib.innerText = p.maghrib
