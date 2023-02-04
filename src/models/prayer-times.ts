@@ -71,4 +71,4 @@ const PrayerTimesSchema = new Schema({
     },
 })
 
-export const IPrayerTimesModel = model<IPrayerTimesModel>("prayer_times", PrayerTimesSchema)
+export const PrayerTimesModel = model<IPrayerTimesModel>("prayer_times", PrayerTimesSchema)
