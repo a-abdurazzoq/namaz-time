@@ -3,6 +3,7 @@ import {PrayersInDay} from "../../domain/entities";
 export interface PrayersInDayRepository {
     getById(id: string): Promise<PrayersInDay>;
     getIslamicCalendarId(islamicCalendarId: string): Promise<PrayersInDay>;
+    getPrayerTimesByDate(date: Date): Promise<PrayersInDay>;
     insertPrayersPerMonth(prayersPerMonth: InsertPrayerTimesParams[]): Promise<PrayersInDay[]>;
     insertPrayerTimes(prayerTimes: InsertPrayerTimesParams): Promise<PrayersInDay>;
     deleteAll(): Promise<void>;
