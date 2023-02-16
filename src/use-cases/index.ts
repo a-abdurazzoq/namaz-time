@@ -5,3 +5,5 @@ export * from "./scheduler/regular-sending-prayer-times/send-prayer-times-to-tel
 export * from "./scheduler/update-prayers-per-month/update-prayers-per-month-use-case"
 
 export * from "./scheduler/update-islamic-calenadar/update-islamic-calendar-use-case"
+
+export * from "./api/namaz-time-api/prayer-times/get-prayer-times-use-case"
