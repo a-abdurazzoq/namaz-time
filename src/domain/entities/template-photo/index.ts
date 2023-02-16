@@ -35,7 +35,7 @@ export class TemplatePhoto {
 
 
     private isFileName(fileName: string): void {
-        if(fileName.constructor !== Date) {
+        if(fileName.constructor !== String) {
             throw new Error("fileName is not string")
         }
     }

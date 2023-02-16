@@ -2,6 +2,7 @@ import {injectable} from "inversify";
 import puppeteer from "puppeteer";
 
 import {PhotoGenerationParams, TemplatePhotoService} from "../abstractions/template-photo-service";
+import path from "path";
 
 @injectable()
 export class TemplatePhotoServiceImpl implements TemplatePhotoService {
@@ -9,7 +10,7 @@ export class TemplatePhotoServiceImpl implements TemplatePhotoService {
         const browser = await puppeteer.launch();
         const page = await browser.newPage();
         await page.setViewport({width: 1080, height: 1080, deviceScaleFactor: 1});
-        await page.goto("");
+        await page.goto("file://D:/Projects/namaz-time/templates/default.html");
 
         await page.evaluate((p: PhotoGenerationParams) => {
             let date = document.querySelector<HTMLElement>('.Date p')

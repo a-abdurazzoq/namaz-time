@@ -5,10 +5,20 @@
   "main": "build/index.js",
   "scripts": {
     "build": "node node_modules/typescript/bin/tsc",
-    "start:api": "node build/applications/namaz-time",
-    "start:scheduler": "node build/applications/regular-sending-prayer-times",
+
+    "start:api": "node build/applications/api/namaz-time-api",
+
+    "start:scheduler:regular-sending-prayer-times": "node build/applications/scheduler/regular-sending-prayer-times",
+    "start:scheduler:update-prayers-per-month": "node build/applications/scheduler/update-prayers-per-month",
+
+    "start:seed-data": "node build/applications/seed-data/seed-data",
+
     "dev:api": "npm run build && npm run start:api",
-    "dev:scheduler": "npm run build && npm run start:scheduler"
+
+    "dev:scheduler:regular-sending-prayer-times": "npm run build && npm run start:scheduler:regular-sending-prayer-times",
+    "dev:scheduler:update-prayers-per-month": "npm run build && npm run start:scheduler:update-prayers-per-month",
+
+    "dev:seed-data": "npm run build && npm run start:seed-data"
   },
   "repository": {
     "type": "git",
@@ -30,6 +40,7 @@
     "inversify": "^6.0.1",
     "json-request-validator": "^1.0.6",
     "mongoose": "^6.8.3",
+    "node-html-parser": "^6.1.4",
     "puppeteer": "^19.6.1",
     "reflect-metadata": "^0.1.13"
   },

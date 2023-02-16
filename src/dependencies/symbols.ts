@@ -1,3 +1,5 @@
+import {NamozVaqtiClientImpl} from "../clients/namoz-vaqti-client";
+
 export namespace Symbols {
 
     export const Factories = {
@@ -30,17 +32,22 @@ export namespace Symbols {
     }
 
     export const Clients = {
-        TelegramBot: Symbol.for("TelegramBotClient")
+        TelegramBot: Symbol.for("TelegramBotClient"),
+        NamozVaqti: Symbol.for("NamozVaqtiClient"),
+        Aladhan: Symbol.for("AladhanClient"),
     }
 
     export const UseCases = {
         GetAllExecuteTimeChatsForSending: Symbol.for("GetAllExecuteTimeChatsForSendingUseCase"),
         MassSendPrayerTimesToTelegramChannels: Symbol.for("MassSendPrayerTimesToTelegramChannelsUseCase"),
-        SendPrayerTimesToTelegramChannel: Symbol.for("SendPrayerTimesToTelegramChannelUseCase")
+        SendPrayerTimesToTelegramChannel: Symbol.for("SendPrayerTimesToTelegramChannelUseCase"),
+        UpdateIslamicCalendar: Symbol.for("UpdateIslamicCalendarUseCase"),
+        UpdatePrayersPerMonth: Symbol.for("UpdatePrayersPerMonthUseCase")
     }
 
     export const Services = {
-        TemplatePhoto: Symbol.for("TemplatePhotoService")
+        TemplatePhoto: Symbol.for("TemplatePhotoService"),
+        HtmlTableToJson: Symbol.for("HtmlTableToJsonService")
     }
 
     export const Controllers = {
@@ -53,6 +60,8 @@ export namespace Symbols {
 
     export const Infrastructures = {
         Application: Symbol.for("Application"),
+        SeedData: Symbol.for("SeedData"),
+        SeedDataModules: Symbol.for("SeedDataModules"),
         Logger: Symbol.for("Logger"),
         Storage: Symbol.for("Storage")
     }

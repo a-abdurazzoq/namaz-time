@@ -15,14 +15,12 @@ export interface IPrayerTimesModel extends Document {
 }
 
 const validatePrayerTime = {
-    validate: {
-        validator(date: string) {
-            return /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/.test(date);
-        },
-        message(props: any) {
-            return `${props.value} is not a valid phone number!`
-        }
+    validator(date: string) {
+        return /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/.test(date);
     },
+    message(props: any) {
+        return `${props.value} is not a valid phone number!`
+    }
 }
 
 const PrayerTimesSchema = new Schema({
@@ -34,6 +32,7 @@ const PrayerTimesSchema = new Schema({
         fajr: {
             type: String,
             required: true,
+            validate: validatePrayerTime
         },
         shurooq: {
             type: String,
@@ -59,7 +58,7 @@ const PrayerTimesSchema = new Schema({
             type: String,
             required: true,
             validate: validatePrayerTime
-        },
+        }
     },
     create_at: {
         type: Date,
@@ -71,4 +70,4 @@ const PrayerTimesSchema = new Schema({
     },
 })
 
-export const PrayerTimesModel = model<IPrayerTimesModel>("prayer_times", PrayerTimesSchema)
+export const PrayerTimesModel = model<IPrayerTimesModel>("prayer-times", PrayerTimesSchema)

@@ -4,14 +4,14 @@ export interface IIslamicCalendarModel extends Document {
     year: number,
     day_number: number,
     month_number: number,
-    gregorian_time: Date,
+    gregorian_date: Date,
     create_at: Date,
     update_at: Date,
 }
 
 const IslamicCalendarSchema = new Schema({
     year: {
-        type: String,
+        type: Number,
         required: true
     },
     day_number: {
@@ -22,7 +22,7 @@ const IslamicCalendarSchema = new Schema({
         type: Number,
         required: true
     },
-    gregorian_time: {
+    gregorian_date: {
         type: Date,
         required: true
     },
@@ -36,4 +36,4 @@ const IslamicCalendarSchema = new Schema({
     }
 })
 
-export const IslamicCalendarModel = model<IIslamicCalendarModel>("IslamicCalendars", IslamicCalendarSchema)
+export const IslamicCalendarModel = model<IIslamicCalendarModel>("islamic-calendars", IslamicCalendarSchema)

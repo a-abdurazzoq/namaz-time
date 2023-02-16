@@ -12,7 +12,7 @@ export class UserRepositoryImpl implements UserRepository {
     ) {}
 
     public async getById(id: string): Promise<User> {
-        let getUser = await UserModel.findById<IUserModel>(id)
+        let getUser = await UserModel.findById(id)
 
         if(!getUser)
             throw new Error("User not found by id")

@@ -1,1 +1,1 @@
-export * from "./base-mongo-storage"
+export * from "./storages/base-mongo-storage"

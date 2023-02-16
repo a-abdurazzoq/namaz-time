@@ -1,6 +1,9 @@
+import {City} from "../city";
+
 export class District {
     constructor(
         private id:  number,
+        private city:  City,
         private name: string
     ) {
         this.isId(id)
@@ -9,6 +12,10 @@ export class District {
 
     public getId(): number {
         return this.id
+    }
+
+    public getCity(): City {
+        return this.city
     }
 
     public getName(): string {

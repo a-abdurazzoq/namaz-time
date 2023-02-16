@@ -35,14 +35,27 @@ export class Scheduler {
         finally {
             this.setTimer()
         }
-        await this.logger.print({result: "Задача выполнена"})
+        await this.logger.print({result: "Задача завершена"})
         return
+    }
+
+    private loggingNextRunTime(millisecond: number): void {
+        let currentDate = new Date()
+        currentDate.setMilliseconds(currentDate.getMilliseconds()+millisecond)
+
+        let nextTimeInTextFormat = Intl.DateTimeFormat("mn-MN", {dateStyle: "short", timeStyle: "medium"}).format(currentDate)
+
+        this.logger.print({result: `Следующее время выполнения в ${nextTimeInTextFormat}`})
     }
 
     private setTimer(): void {
         this.unsetTimer()
 
-        this.timer = setTimeout(this.executeTime.bind(this), this.getNextTime())
+        let nextTime = this.getNextTime()
+
+        this.timer = setTimeout(this.executeTime.bind(this), nextTime)
+        this.loggingNextRunTime(nextTime)
+
         return
     }
 

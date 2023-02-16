@@ -4,7 +4,7 @@ export class TelegramChannel {
     constructor(
         private id: string,
         private name: string,
-        private mosque: Mosque,
+        private mosque: Mosque | null,
         private chatId: number,
         private createAt: Date,
         private updateAt: Date
@@ -24,7 +24,7 @@ export class TelegramChannel {
         return this.name
     }
 
-    public getMosque(): Mosque {
+    public getMosque(): Mosque | null {
         return this.mosque
     }
 
@@ -44,6 +44,12 @@ export class TelegramChannel {
     private isName(name: string): void {
         if(name.constructor !== String) {
             throw new Error("name is not string")
+        }
+    }
+
+    private isMosque(mosque: Mosque | null): never | void {
+        if(!(mosque instanceof Mosque) && mosque !== null) {
+            throw new Error("mosque is not instanced from Mosque or is not null")
         }
     }
 

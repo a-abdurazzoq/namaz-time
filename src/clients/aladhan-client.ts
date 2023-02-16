@@ -4,10 +4,9 @@ import {injectable} from "inversify";
 
 
 @injectable()
-class AladhanClientImpl implements AladhanClient {
-    constructor(
-        private url: string = "https://api.aladhan.com/v1"
-    ) {}
+export class AladhanClientImpl implements AladhanClient {
+
+    private url: string = "https://api.aladhan.com/v1"
 
     public async getIslamicCalendarByMonth(params: GetIslamicCalendarByMonth.Params): Promise<GetIslamicCalendarByMonth.Data> {
         const response = await axios.get<GetIslamicCalendarByMonth.Response>(`${this.url}/gToHCalendar/${params.month}$/${params.year}`)

@@ -2,7 +2,7 @@ import {Schema, model, Types, Document} from "mongoose"
 
 export interface ITelegramChannelModel extends Document {
     name: string;
-    mosque_id: Types.ObjectId;
+    mosque_id: Types.ObjectId | null;
     chat_id: number;
     create_at: Date;
     update_at: Date;
@@ -15,10 +15,11 @@ const TelegramChannelSchema = new Schema({
     },
     mosque_id: {
         type: Types.ObjectId,
-        required: true,
+        default: null
     },
     chat_id: {
         type: Number,
+        required: true
     },
     create_at: {
         type: Date,

@@ -14,7 +14,7 @@ export class ChatForSendingPrayerTimesRepositoryImpl implements ChatForSendingPr
     ) {}
 
     public async getAllLessAndEqualByNextTime(date: Date): Promise<ChatForSendingPrayerTimes[]> {
-        let getChatsForSendingPrayerTimes = await ChatForSendingPrayerTimesModel.find<IChatForSendingPrayerTimesModel>({next_time: {$gte: date}})
+        let getChatsForSendingPrayerTimes = await ChatForSendingPrayerTimesModel.find<IChatForSendingPrayerTimesModel>({next_time: {$lte: date}})
 
         return this.toEntities(getChatsForSendingPrayerTimes)
     }
@@ -24,6 +24,20 @@ export class ChatForSendingPrayerTimesRepositoryImpl implements ChatForSendingPr
 
         if(!getChatForSendingPrayerTimes)
             throw new Error("Chat for sending prayers in day times not found by id")
+
+        return this.toEntity(getChatForSendingPrayerTimes)
+    }
+
+    public async updateNextTime(chatForSendingPrayerTimes: ChatForSendingPrayerTimes): Promise<ChatForSendingPrayerTimes> {
+        let getChatForSendingPrayerTimes = await ChatForSendingPrayerTimesModel.findByIdAndUpdate(chatForSendingPrayerTimes.getId(), {
+            $set: {
+                next_time: chatForSendingPrayerTimes.updateNextTime().getTime(),
+                update_at: Date.now()
+            }
+        })
+
+        if(!getChatForSendingPrayerTimes)
+            throw new Error("An error occurred while trying to update the next \"Chat for sending prayer times\" date")
 
         return this.toEntity(getChatForSendingPrayerTimes)
     }

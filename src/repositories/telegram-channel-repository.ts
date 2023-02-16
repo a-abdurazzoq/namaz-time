@@ -22,7 +22,10 @@ export class TelegramChannelRepositoryImpl implements TelegramChannelRepository 
     }
 
     private async toEntity(telegramChannelModel: ITelegramChannelModel): Promise<TelegramChannel> {
-        let mosque = await this.mosqueRepository.getById(telegramChannelModel.mosque_id.toHexString())
+        let mosque = null
+
+        if (telegramChannelModel.mosque_id)
+            mosque = await this.mosqueRepository.getById(telegramChannelModel.mosque_id.toHexString())
 
         return this.telegramChannelFactory.create({
             id: telegramChannelModel._id.toHexString(),

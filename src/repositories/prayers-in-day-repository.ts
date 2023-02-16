@@ -1,10 +1,11 @@
-import {PrayersInDayRepository} from "./abstractions";
+import {InsertPrayerTimesParams, PrayersInDayRepository} from "./abstractions";
 import {inject, injectable} from "inversify";
 import {Symbols} from "../dependencies/symbols";
-import {PrayersInDay} from "../domain/entities";
+import {IslamicCalendar, PrayersInDay} from "../domain/entities";
 import {IPrayerTimesModel, PrayerTimesModel} from "../models";
 import {PrayersInDayFactory, PrayerTimesFactory} from "../domain/abstractions/factories";
-import {IslamicCalendarRepository} from "./abstractions/islamic-calendar";
+import {IslamicCalendarRepository} from "./abstractions";
+import {Types} from "mongoose";
 
 @injectable()
 export class PrayersInDayRepositoryImpl implements PrayersInDayRepository {
@@ -24,13 +25,71 @@ export class PrayersInDayRepositoryImpl implements PrayersInDayRepository {
     }
 
     public async getIslamicCalendarId(islamicCalendarId: string): Promise<PrayersInDay> {
-        let getPrayer = await PrayerTimesModel.findById(islamicCalendarId)
+        let getPrayer = await PrayerTimesModel.findOne({islamic_calendar_id: new Types.ObjectId(islamicCalendarId)})
 
         if(!getPrayer)
             throw new Error("Prayers in day not found by islamic calendar id")
 
         return this.toEntity(getPrayer)
     }
+
+    public async insertPrayersPerMonth(prayersPerMonth: InsertPrayerTimesParams[]): Promise<PrayersInDay[]> {
+        let insertPrayersPerMonth: PrayersInDay[] = []
+
+        for (const prayerTimes of prayersPerMonth) {
+            insertPrayersPerMonth.push(await this.insertPrayerTimes(prayerTimes))
+        }
+
+        return insertPrayersPerMonth
+    }
+
+    public async insertPrayerTimes(prayerTimes: InsertPrayerTimesParams): Promise<PrayersInDay> {
+        const islamicDay = await this.islamicCalendarRepository.getDayByGregorianTimeAndIslamicDay({islamicDay: prayerTimes.islamicDay, gregorianDate: prayerTimes.gregorianDate})
+        const hasPrayerTimes =  await this.hasPrayerTimes(islamicDay)
+
+        if(hasPrayerTimes)
+            throw new Error("This prayers in day exist in collection")
+
+        const prayersInDay = new PrayerTimesModel({
+            islamic_calendar_id: islamicDay.getId(),
+            prayer_times: {
+                fajr: prayerTimes.fajr,
+                shurooq: prayerTimes.shurooq,
+                dhuhr: prayerTimes.dhuhr,
+                asr: prayerTimes.asr,
+                maghrib: prayerTimes.maghrib,
+                isha: prayerTimes.isha
+            }
+        })
+
+        await prayersInDay.save()
+
+        return this.toEntity(prayersInDay)
+    }
+
+    public async deleteAll(): Promise<void> {
+        await PrayerTimesModel.deleteMany({})
+
+        return
+    }
+
+    private async hasPrayerTimes(islamicDay: IslamicCalendar): Promise<boolean> {
+        let prayerTimes = await PrayerTimesModel.findOne({islamic_calendar_id: new Types.ObjectId(islamicDay.getId())})
+
+        return !!prayerTimes
+    }
+
+    public async hasPrayerTimesPerMonth(dateMonth: Date): Promise<boolean> {
+        const idDaysPerMonth = await this.islamicCalendarRepository.getDaysIdPerMonthByDate(dateMonth)
+
+        if(!idDaysPerMonth.length)
+            return false
+
+        const countDaysPerMonth = await PrayerTimesModel.count({islamic_calendar_id: {$in: idDaysPerMonth}})
+
+        return countDaysPerMonth >= idDaysPerMonth.length
+    }
+
 
     private async toEntity(prayerModel: IPrayerTimesModel): Promise<PrayersInDay> {
         let prayerTimes = this.prayerTimesFactory.create(prayerModel.prayer_times)
@@ -44,5 +103,4 @@ export class PrayersInDayRepositoryImpl implements PrayersInDayRepository {
             createAt: prayerModel.create_at
         })
     }
-
 }

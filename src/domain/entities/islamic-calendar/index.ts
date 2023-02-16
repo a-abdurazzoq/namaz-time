@@ -41,7 +41,7 @@ export class IslamicCalendar {
     }
 
     public getIslamicDateAsText(): string {
-        return `${this.getDayNumber()} ${this.getMonth().getName()}, ${this.getYear()}`
+        return `${this.getDayNumber()} ${this.getMonth().getName()}‚ ${this.getYear()}`
     }
 
     public getGregorianDateAsText(): string {

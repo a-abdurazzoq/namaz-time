@@ -40,17 +40,17 @@ export class TemplatePhotoRepositoryImpl implements TemplatePhotoRepository {
             htmlFileName: params.chatForSendingPrayerTimes.getTemplatePhoto().getFileName(),
             fajr: prayerInDay.getPrayerTimes().getFajr(),
             shurooq: prayerInDay.getPrayerTimes().getShurooq(),
-            dhuhr: prayerInDay.getPrayerTimes().getIsha(),
-            asr: prayerInDay.getPrayerTimes().getIsha(),
-            maghrib: prayerInDay.getPrayerTimes().getIsha(),
+            dhuhr: prayerInDay.getPrayerTimes().getDhuhr(),
+            asr: prayerInDay.getPrayerTimes().getAsr(),
+            maghrib: prayerInDay.getPrayerTimes().getMaghrib(),
             isha: prayerInDay.getPrayerTimes().getIsha(),
-            gregorianFullDate: prayerInDay.getPrayerTimes().getIsha(),
-            islamicFullDate: prayerInDay.getPrayerTimes().getIsha(),
+            gregorianFullDate: prayerInDay.getIslamicCalendar().getGregorianDateAsText(),
+            islamicFullDate: prayerInDay.getIslamicCalendar().getIslamicDateAsText(),
         })
     }
 
     private async toEntity(templatePhotoModel: ITemplatePhotoModel): Promise<TemplatePhoto> {
-        let user = await this.userRepository.getById(templatePhotoModel._id.toHexString())
+        let user = await this.userRepository.getById(templatePhotoModel.user_id.toHexString())
 
         return this.templatePhotoFactory.create({
             id: templatePhotoModel._id.toHexString(),

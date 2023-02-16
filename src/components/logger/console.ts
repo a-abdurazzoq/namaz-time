@@ -1,5 +1,6 @@
 import {LoggerDto, Logger} from "../abstractions/logger";
 import {injectable} from "inversify";
+import * as util from "util";
 
 interface LoggerData extends Omit<LoggerDto, "date"> {
     date: string
@@ -26,11 +27,15 @@ export class ConsoleLogger implements Logger {
     }
 
     private printResult(loggerData: LoggerResultData) {
-        console.log(loggerData.date, "-", "RESULT", "-", loggerData.result)
+        console.log(loggerData.date, "-", "RESULT", "-", this.inspect(loggerData.result))
     }
 
     private printError(loggerData: LoggerErrorData) {
-        console.error(loggerData.date, "-", "ERROR", "-", loggerData.error)
+        console.error(loggerData.date, "-", "ERROR", "-", this.inspect(loggerData.error))
+    }
+
+    private inspect(data: object) {
+        return util.inspect(data, {showHidden: false, depth: null, colors: true})
     }
 
     private printTime(date: Date = new Date()): string {

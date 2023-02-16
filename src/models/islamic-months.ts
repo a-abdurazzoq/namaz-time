@@ -5,15 +5,20 @@ export interface IIslamicMonthModel extends Document {
     name: string,
 }
 
-const IslamicMonthSchema = new Schema({
-    number: {
-        type: Number,
-        required: true
+const IslamicMonthSchema = new Schema(
+    {
+        number: {
+            type: Number,
+            required: true
+        },
+        name: {
+            type: String,
+            required: true
+        }
     },
-    name: {
-        type: String,
-        required: true
+    {
+        versionKey: false
     }
-})
+)
 
-export const IslamicMonthModel = model<IIslamicMonthModel>("IslamicMonths", IslamicMonthSchema)
+export const IslamicMonthModel = model<IIslamicMonthModel>("islamic-months", IslamicMonthSchema)
