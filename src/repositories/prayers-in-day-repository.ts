@@ -33,6 +33,12 @@ export class PrayersInDayRepositoryImpl implements PrayersInDayRepository {
         return this.toEntity(getPrayer)
     }
 
+    public async getPrayerTimesByDate(date: Date): Promise<PrayersInDay> {
+        let getIslamicCalendarByDate = await this.islamicCalendarRepository.getDayByGregorianTime(date)
+
+        return this.getIslamicCalendarId(getIslamicCalendarByDate.getId())
+    }
+
     public async insertPrayersPerMonth(prayersPerMonth: InsertPrayerTimesParams[]): Promise<PrayersInDay[]> {
         let insertPrayersPerMonth: PrayersInDay[] = []
 
