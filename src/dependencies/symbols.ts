@@ -1,5 +1,3 @@
-import {NamozVaqtiClientImpl} from "../clients/namoz-vaqti-client";
-
 export namespace Symbols {
 
     export const Factories = {
