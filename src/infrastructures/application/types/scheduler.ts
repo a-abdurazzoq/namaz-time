@@ -2,7 +2,7 @@ import {Application} from "../../abstractions/application";
 import {inject, injectable} from "inversify";
 import {Symbols} from "../../../dependencies/symbols";
 import {SchedulerConfig, SchedulerFactory} from "../../../components/abstractions/schduler";
-import {Controller} from "../../../controllers/abstractions";
+import {SchedulerController} from "../../../controllers/abstractions";
 import {Storage} from "../../abstractions";
 import {Scheduler} from "../../../components/schduler";
 import {Logger} from "../../../components/abstractions/logger";
@@ -12,11 +12,11 @@ export class SchedulerApplicationImpl implements Application {
     private scheduler: Scheduler
 
     constructor(
-        @inject<Logger>(Symbols.Infrastructures.Logger) private logger: Logger,
-        @inject<Storage>(Symbols.Infrastructures.Storage) private storage: Storage,
-        @inject<SchedulerFactory>(Symbols.Factories.Scheduler) private schedulerFactory: SchedulerFactory,
-        @inject<SchedulerConfig>(Symbols.Configs.Scheduler) private config: SchedulerConfig,
-        @inject<Controller>(Symbols.Controllers.Scheduler) private controller: Controller,
+        @inject(Symbols.Infrastructures.Logger) private logger: Logger,
+        @inject(Symbols.Infrastructures.Storage) private storage: Storage,
+        @inject(Symbols.Factories.Scheduler) private schedulerFactory: SchedulerFactory,
+        @inject(Symbols.Configs.Scheduler) private config: SchedulerConfig,
+        @inject(Symbols.Controllers.Scheduler) private controller: SchedulerController
     ) {}
 
     public async start(): Promise<void> {
