@@ -9,7 +9,7 @@ import {SchedulerApplicationImpl} from "../../../infrastructures/application";
 import {Logger} from "../../../components/abstractions/logger";
 import {ConsoleLogger} from "../../../components/logger";
 import {RegularSendingPrayerTimesSchedulerConfig} from "../../../components/schduler/config";
-import {Controller} from "../../../controllers/abstractions";
+import {SchedulerController} from "../../../controllers/abstractions";
 import {SendingPrayerTimesController} from "../../../controllers";
 import {
     ChatForSendingPrayerTimesFactory,
@@ -60,13 +60,9 @@ import {
     GetAllExecuteTimeChatsForSendingUseCaseImpl,
     MassSendPrayerTimesToTelegramChannelsUseCaseImpl, SendPrayerTimesToTelegramChannelUseCaseImpl
 } from "../../../use-cases";
-import {HtmlTableToJsonService} from "../../../services/abstractions/html-table-to-json-service";
-import {HtmlTableToJsonServiceImpl} from "../../../services/html-table-to-json-service";
 import {TemplatePhotoService} from "../../../services/abstractions/template-photo-service";
 import {TemplatePhotoServiceImpl} from "../../../services/template-photo-service";
 import {PrayerTimesFactoryImpl} from "../../../domain/factories/prayers-in-day/prayer-times";
-import {AladhanClient} from "../../../clients/abstractions/aladhan-client";
-import {AladhanClientImpl} from "../../../clients/aladhan-client";
 import {TelegramBotClient} from "../../../clients/abstractions/telegram-bot-client";
 import {TelegramBotClientImpl} from "../../../clients/telegram-bot-client";
 
@@ -87,7 +83,7 @@ export const regularSendingPrayerTimesModule = new ContainerModule(bind => {
     bind<TemplatePhotoService>(Symbols.Services.TemplatePhoto).to(TemplatePhotoServiceImpl)
 
     // Controllers
-    bind<Controller>(Symbols.Controllers.Scheduler).to(SendingPrayerTimesController).inSingletonScope()
+    bind<SchedulerController>(Symbols.Controllers.Scheduler).to(SendingPrayerTimesController).inSingletonScope()
 
     // Factories
     bind<ChatForSendingPrayerTimesFactory>(Symbols.Factories.ChatForSendingPrayerTimes).to(ChatForSendingPrayerTimesFactoryImpl).inSingletonScope()

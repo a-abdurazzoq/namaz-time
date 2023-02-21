@@ -6,7 +6,7 @@ import {Application} from "../../../infrastructures/abstractions/application";
 import {SchedulerApplicationImpl} from "../../../infrastructures/application";
 import {Logger} from "../../../components/abstractions/logger";
 import {ConsoleLogger} from "../../../components/logger";
-import {Controller} from "../../../controllers/abstractions";
+import {SchedulerController} from "../../../controllers/abstractions";
 import {UpdatePrayersPerMonthController} from "../../../controllers";
 import {
     IslamicCalendarFactory,
@@ -55,7 +55,7 @@ export const updatePrayersPerMonthModule = new ContainerModule(bind => {
     bind<HtmlTableToJsonService>(Symbols.Services.HtmlTableToJson).to(HtmlTableToJsonServiceImpl)
 
     // Controllers
-    bind<Controller>(Symbols.Controllers.Scheduler).to(UpdatePrayersPerMonthController).inSingletonScope()
+    bind<SchedulerController>(Symbols.Controllers.Scheduler).to(UpdatePrayersPerMonthController).inSingletonScope()
 
     // Factories
     bind<SchedulerFactory>(Symbols.Factories.Scheduler).to(SchedulerFactoryImpl).inSingletonScope()
