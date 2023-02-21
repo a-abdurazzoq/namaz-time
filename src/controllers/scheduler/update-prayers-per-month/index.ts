@@ -1,10 +1,10 @@
-import {Controller} from "../../abstractions";
+import {SchedulerController} from "../../abstractions";
 import {inject, injectable} from "inversify";
 import {Symbols} from "../../../dependencies/symbols";
 import {UpdateIslamicCalendarUseCase, UpdatePrayersPerMonthUseCase} from "../../../use-cases/abstractions";
 
 @injectable()
-export class UpdatePrayersPerMonthController implements Controller {
+export class UpdatePrayersPerMonthController implements SchedulerController {
     private readonly necessaryDayNumber: number
 
     constructor(
