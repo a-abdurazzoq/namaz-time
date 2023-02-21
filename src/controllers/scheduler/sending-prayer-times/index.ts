@@ -1,4 +1,4 @@
-import {Controller} from "../../abstractions";
+import {SchedulerController} from "../../abstractions";
 import {inject, injectable} from "inversify";
 import {Symbols} from "../../../dependencies/symbols";
 import {
@@ -7,7 +7,7 @@ import {
 } from "../../../use-cases/abstractions";
 
 @injectable()
-export class SendingPrayerTimesController implements Controller {
+export class SendingPrayerTimesController implements SchedulerController {
     constructor(
         @inject(Symbols.UseCases.GetAllExecuteTimeChatsForSending) private getAllExecuteTimeChatsForSendingUseCase: GetAllExecuteTimeChatsForSendingUseCase,
         @inject(Symbols.UseCases.MassSendPrayerTimesToTelegramChannels) private massSendPrayerTimesToTelegramChannels: MassSendPrayerTimesToTelegramChannelsUseCase
