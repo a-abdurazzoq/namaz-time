@@ -38,11 +38,20 @@ export namespace Symbols {
     }
 
     export const UseCases = {
+        PrayerTimes: {
+            GetToday: Symbol.for("GetTodayPrayerTimesUseCase")
+        },
         GetAllExecuteTimeChatsForSending: Symbol.for("GetAllExecuteTimeChatsForSendingUseCase"),
         MassSendPrayerTimesToTelegramChannels: Symbol.for("MassSendPrayerTimesToTelegramChannelsUseCase"),
         SendPrayerTimesToTelegramChannel: Symbol.for("SendPrayerTimesToTelegramChannelUseCase"),
         UpdateIslamicCalendar: Symbol.for("UpdateIslamicCalendarUseCase"),
         UpdatePrayersPerMonth: Symbol.for("UpdatePrayersPerMonthUseCase")
+    }
+
+    export const Presenters = {
+        PrayerTimes: {
+            GetToday: Symbol.for("GetPrayerTimesByNowDatePresenter")
+        },
     }
 
     export const Services = {
