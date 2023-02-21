@@ -1,5 +1,5 @@
 import {SchedulerConfig} from "../abstractions/schduler";
-import {Controller} from "../../controllers/abstractions";
+import {SchedulerController} from "../../controllers/abstractions";
 import {Logger} from "../abstractions/logger";
 
 export class Scheduler {
@@ -7,7 +7,7 @@ export class Scheduler {
 
     constructor(
         private config: SchedulerConfig,
-        private controller: Controller,
+        private controller: SchedulerController,
         private logger: Logger
     ) {}
 
