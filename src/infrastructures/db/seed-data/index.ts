@@ -1,5 +1,5 @@
-import {SeedData, SeedDataModule} from "../../abstractions/seed-data";
-import {inject, injectable, multiInject} from "inversify";
+import {SeedData, SeedDataModule} from "../../abstractions/db/seed-data";
+import {injectable, multiInject} from "inversify";
 import {Symbols} from "../../../dependencies/symbols";
 
 @injectable()

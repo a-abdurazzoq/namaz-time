@@ -4,7 +4,7 @@ import {Application} from "../../../infrastructures/abstractions/application";
 import {Symbols} from "../../symbols";
 import {DistrictsSeedDataModule} from "../../../infrastructures/db/seed-data/module/districts";
 import {CitiesSeedDataModule} from "../../../infrastructures/db/seed-data/module/cities";
-import {SeedData, SeedDataModule} from "../../../infrastructures/abstractions/seed-data";
+import {SeedData, SeedDataModule} from "../../../infrastructures/abstractions/db/seed-data";
 import {SeedDataImpl} from "../../../infrastructures/db/seed-data";
 import {IslamicMonthsSeedDataModule} from "../../../infrastructures/db/seed-data/module/islamic-months";
 import {Storage} from "../../../infrastructures/abstractions";

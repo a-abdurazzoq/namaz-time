@@ -1,5 +1,4 @@
-import {SeedDataModule} from "../../../abstractions/seed-data";
-import {IslamicMonthRepository} from "../../../../repositories/abstractions/islamic-months";
+import {SeedDataModule} from "../../../abstractions/db/seed-data";
 import {inject, injectable} from "inversify";
 import {Symbols} from "../../../../dependencies/symbols";
 import {Logger} from "../../../../components/abstractions/logger";

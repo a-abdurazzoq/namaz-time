@@ -1,5 +1,5 @@
 import {Application} from "../../abstractions/application";
-import {SeedData} from "../../abstractions/seed-data";
+import {SeedData} from "../../abstractions/db/seed-data";
 import {inject, injectable} from "inversify";
 import {Symbols} from "../../../dependencies/symbols";
 import {Storage} from "../../abstractions";

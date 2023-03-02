@@ -2,7 +2,7 @@ import {inject, injectable} from "inversify";
 import {Symbols} from "../../../../dependencies/symbols";
 import {Logger} from "../../../../components/abstractions/logger";
 import {DistrictRepository} from "../../../../repositories/abstractions";
-import {SeedDataModule} from "../../../abstractions/seed-data";
+import {SeedDataModule} from "../../../abstractions/db/seed-data";
 import path from "path";
 import fs from "fs";
 
