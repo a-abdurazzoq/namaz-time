@@ -1,31 +1,31 @@
 import {
-    MassSendPrayerTimesToTelegramChannels,
-    MassSendPrayerTimesToTelegramChannelsUseCase, SendPrayerTimesToTelegramChannel,
-    SendPrayerTimesToTelegramChannelUseCase
+    MassSendPrayerTimesToTelegramChats,
+    MassSendPrayerTimesToTelegramChatsUseCase, SendPrayerTimesToTelegramChat,
+    SendPrayerTimesToTelegramChatUseCase
 } from "../../abstractions";
 import {inject, injectable} from "inversify";
 import {Symbols} from "../../../dependencies/symbols";
-import Chat = MassSendPrayerTimesToTelegramChannels.Chat;
-import ChatWithError = MassSendPrayerTimesToTelegramChannels.ChatWithError;
+import Chat = MassSendPrayerTimesToTelegramChats.Chat;
+import ChatWithError = MassSendPrayerTimesToTelegramChats.ChatWithError;
 
 @injectable()
-export class MassSendPrayerTimesToTelegramChannelsUseCaseImpl implements MassSendPrayerTimesToTelegramChannelsUseCase {
+export class MassSendPrayerTimesToTelegramChatsUseCaseImpl implements MassSendPrayerTimesToTelegramChatsUseCase {
     constructor(
-       @inject(Symbols.UseCases.SendPrayerTimesToTelegramChannel) private sendPrayerTimesToTelegramChannelUseCase: SendPrayerTimesToTelegramChannelUseCase
+       @inject(Symbols.UseCases.SendPrayerTimesToTelegramChat) private sendPrayerTimesToTelegramChatUseCase: SendPrayerTimesToTelegramChatUseCase
     ) {}
 
-    async execute(params: MassSendPrayerTimesToTelegramChannels.Params): Promise<MassSendPrayerTimesToTelegramChannels.Response> {
-        let success: MassSendPrayerTimesToTelegramChannels.Results<Chat> = {count: 0, chats: []}
-        let failed: MassSendPrayerTimesToTelegramChannels.Results<ChatWithError> = {count: 0, chats: []}
+    async execute(params: MassSendPrayerTimesToTelegramChats.Params): Promise<MassSendPrayerTimesToTelegramChats.Response> {
+        let success: MassSendPrayerTimesToTelegramChats.Results<Chat> = {count: 0, chats: []}
+        let failed: MassSendPrayerTimesToTelegramChats.Results<ChatWithError> = {count: 0, chats: []}
         let necessaryDate = new Date();
         necessaryDate.setDate(necessaryDate.getDate()+1)
         necessaryDate.setHours(0, 0, 0, 0,)
 
         for (let i = 0; i < params.length; i++) {
-            let chatForSendingPrayerTimes = params[i]
-            let response = await this.sendPrayerTimesToTelegramChannelUseCase.execute({
+            let PostForTelegram = params[i]
+            let response = await this.sendPrayerTimesToTelegramChatUseCase.execute({
                 necessaryDate: necessaryDate,
-                chatForSendingPrayerTimes: chatForSendingPrayerTimes
+                PostForTelegram: PostForTelegram
             })
 
             if(this.isError(response)) {
@@ -52,7 +52,7 @@ export class MassSendPrayerTimesToTelegramChannelsUseCaseImpl implements MassSen
         }
     }
 
-    private isError(result: SendPrayerTimesToTelegramChannel.Response): result is SendPrayerTimesToTelegramChannel.Error {
+    private isError(result: SendPrayerTimesToTelegramChat.Response): result is SendPrayerTimesToTelegramChat.Error {
         return !result.success
     }
 }

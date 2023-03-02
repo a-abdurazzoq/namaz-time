@@ -12,53 +12,49 @@ import {RegularSendingPrayerTimesSchedulerConfig} from "../../../components/schd
 import {SchedulerController} from "../../../controllers/abstractions";
 import {SendingPrayerTimesController} from "../../../controllers";
 import {
-    ChatForSendingPrayerTimesFactory,
-    TelegramChannelFactory,
+    PostForTelegramFactory,
+    TelegramChatFactory,
     TemplatePhotoFactory,
     DistrictFactory,
     AddressFactory,
-    MosqueFactory,
     PrayersInDayFactory,
     CityFactory,
     UserFactory, IslamicMonthFactory, IslamicCalendarFactory, PrayerTimesFactory
 } from "../../../domain/abstractions/factories";
 import {
-    ChatForSendingPrayerTimesFactoryImpl,
-    TelegramChannelFactoryImpl,
+    PostForTelegramFactoryImpl,
+    TelegramChatFactoryImpl,
     TemplatePhotoFactoryImpl,
     DistrictFactoryImpl,
     AddressFactoryImpl,
-    MosqueFactoryImpl,
     PrayersInDayFactoryImpl,
     CityFactoryImpl,
     UserFactoryImpl, IslamicCalendarFactoryImpl, IslamicMonthFactoryImpl
 } from "../../../domain/factories";
 import {
-    ChatForSendingPrayerTimesRepository,
+    PostForTelegramRepository,
     CityRepository,
     DistrictRepository, IslamicCalendarRepository, IslamicMonthRepository,
-    MosqueRepository,
-    PrayersInDayRepository, TelegramChannelRepository, TemplatePhotoRepository,
+    PrayersInDayRepository, TelegramChatRepository, TemplatePhotoRepository,
     UserRepository
 } from "../../../repositories/abstractions";
 import {
-    ChatForSendingPrayerTimesRepositoryImpl,
+    PostForTelegramRepositoryImpl,
     CityRepositoryImpl, DistrictRepositoryImpl,
     IslamicCalendarRepositoryImpl,
     IslamicMonthRepositoryImpl,
-    MosqueRepositoryImpl,
     PrayersInDayRepositoryImpl,
-    TelegramChannelRepositoryImpl,
+    TelegramChatRepositoryImpl,
     TemplatePhotoRepositoryImpl,
     UserRepositoryImpl
 } from "../../../repositories";
 import {
-    GetAllExecuteTimeChatsForSendingUseCase, MassSendPrayerTimesToTelegramChannelsUseCase,
-    SendPrayerTimesToTelegramChannelUseCase
+    GetAllExecuteTimeChatsForSendingUseCase, MassSendPrayerTimesToTelegramChatsUseCase,
+    SendPrayerTimesToTelegramChatUseCase
 } from "../../../use-cases/abstractions";
 import {
     GetAllExecuteTimeChatsForSendingUseCaseImpl,
-    MassSendPrayerTimesToTelegramChannelsUseCaseImpl, SendPrayerTimesToTelegramChannelUseCaseImpl
+    MassSendPrayerTimesToTelegramChatsUseCaseImpl, SendPrayerTimesToTelegramChatUseCaseImpl
 } from "../../../use-cases";
 import {TemplatePhotoService} from "../../../services/abstractions/template-photo-service";
 import {TemplatePhotoServiceImpl} from "../../../services/template-photo-service";
@@ -86,27 +82,25 @@ export const regularSendingPrayerTimesModule = new ContainerModule(bind => {
     bind<SchedulerController>(Symbols.Controllers.Scheduler).to(SendingPrayerTimesController).inSingletonScope()
 
     // Factories
-    bind<ChatForSendingPrayerTimesFactory>(Symbols.Factories.ChatForSendingPrayerTimes).to(ChatForSendingPrayerTimesFactoryImpl).inSingletonScope()
-    bind<TelegramChannelFactory>(Symbols.Factories.TelegramChannel).to(TelegramChannelFactoryImpl).inSingletonScope()
+    bind<PostForTelegramFactory>(Symbols.Factories.PostForTelegram).to(PostForTelegramFactoryImpl).inSingletonScope()
+    bind<TelegramChatFactory>(Symbols.Factories.TelegramChat).to(TelegramChatFactoryImpl).inSingletonScope()
     bind<TemplatePhotoFactory>(Symbols.Factories.TemplatePhoto).to(TemplatePhotoFactoryImpl).inSingletonScope()
     bind<SchedulerFactory>(Symbols.Factories.Scheduler).to(SchedulerFactoryImpl).inSingletonScope()
     bind<DistrictFactory>(Symbols.Factories.District).to(DistrictFactoryImpl).inSingletonScope()
     bind<AddressFactory>(Symbols.Factories.Address).to(AddressFactoryImpl).inSingletonScope()
     bind<PrayerTimesFactory>(Symbols.Factories.PrayerTimes).to(PrayerTimesFactoryImpl).inSingletonScope()
     bind<PrayersInDayFactory>(Symbols.Factories.PrayersInDay).to(PrayersInDayFactoryImpl).inSingletonScope()
-    bind<MosqueFactory>(Symbols.Factories.Mosque).to(MosqueFactoryImpl).inSingletonScope()
     bind<UserFactory>(Symbols.Factories.User).to(UserFactoryImpl).inSingletonScope()
     bind<CityFactory>(Symbols.Factories.City).to(CityFactoryImpl).inSingletonScope()
     bind<IslamicCalendarFactory>(Symbols.Factories.IslamicCalendar).to(IslamicCalendarFactoryImpl).inSingletonScope()
     bind<IslamicMonthFactory>(Symbols.Factories.IslamicMonth).to(IslamicMonthFactoryImpl).inSingletonScope()
 
     // Repositories
-    bind<ChatForSendingPrayerTimesRepository>(Symbols.Repositories.ChatForSendingPrayerTimes).to(ChatForSendingPrayerTimesRepositoryImpl).inSingletonScope()
-    bind<TelegramChannelRepository>(Symbols.Repositories.TelegramChannel).to(TelegramChannelRepositoryImpl).inSingletonScope()
+    bind<PostForTelegramRepository>(Symbols.Repositories.PostForTelegram).to(PostForTelegramRepositoryImpl).inSingletonScope()
+    bind<TelegramChatRepository>(Symbols.Repositories.TelegramChat).to(TelegramChatRepositoryImpl).inSingletonScope()
     bind<TemplatePhotoRepository>(Symbols.Repositories.TemplatePhoto).to(TemplatePhotoRepositoryImpl).inSingletonScope()
     bind<DistrictRepository>(Symbols.Repositories.District).to(DistrictRepositoryImpl).inSingletonScope()
     bind<PrayersInDayRepository>(Symbols.Repositories.PrayersInDay).to(PrayersInDayRepositoryImpl).inSingletonScope()
-    bind<MosqueRepository>(Symbols.Repositories.Mosque).to(MosqueRepositoryImpl).inSingletonScope()
     bind<UserRepository>(Symbols.Repositories.User).to(UserRepositoryImpl).inSingletonScope()
     bind<CityRepository>(Symbols.Repositories.City).to(CityRepositoryImpl).inSingletonScope()
     bind<IslamicCalendarRepository>(Symbols.Repositories.IslamicCalendar).to(IslamicCalendarRepositoryImpl).inSingletonScope()
@@ -116,7 +110,7 @@ export const regularSendingPrayerTimesModule = new ContainerModule(bind => {
     bind<TelegramBotClient>(Symbols.Clients.TelegramBot).to(TelegramBotClientImpl).inSingletonScope()
 
     // Use cases
-    bind<MassSendPrayerTimesToTelegramChannelsUseCase>(Symbols.UseCases.MassSendPrayerTimesToTelegramChannels).to(MassSendPrayerTimesToTelegramChannelsUseCaseImpl).inSingletonScope()
+    bind<MassSendPrayerTimesToTelegramChatsUseCase>(Symbols.UseCases.MassSendPrayerTimesToTelegramChats).to(MassSendPrayerTimesToTelegramChatsUseCaseImpl).inSingletonScope()
     bind<GetAllExecuteTimeChatsForSendingUseCase>(Symbols.UseCases.GetAllExecuteTimeChatsForSending).to(GetAllExecuteTimeChatsForSendingUseCaseImpl).inSingletonScope()
-    bind<SendPrayerTimesToTelegramChannelUseCase>(Symbols.UseCases.SendPrayerTimesToTelegramChannel).to(SendPrayerTimesToTelegramChannelUseCaseImpl).inSingletonScope()
+    bind<SendPrayerTimesToTelegramChatUseCase>(Symbols.UseCases.SendPrayerTimesToTelegramChat).to(SendPrayerTimesToTelegramChatUseCaseImpl).inSingletonScope()
 })

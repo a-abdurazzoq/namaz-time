@@ -1,6 +1,6 @@
 import {Schema, model, Types, Document} from "mongoose"
 
-export interface IChatForSendingPrayerTimesModel extends Document {
+export interface IPostForTelegramModel extends Document {
     telegram_channel_id: Types.ObjectId;
     template_photo_id: Types.ObjectId;
     chat_id: number;
@@ -10,7 +10,7 @@ export interface IChatForSendingPrayerTimesModel extends Document {
     update_at: Date;
 }
 
-const ChatForSendingPrayerTimesSchema = new Schema({
+const PostForTelegramSchema = new Schema({
     telegram_channel_id: {
         type: Types.ObjectId,
         required: true
@@ -45,4 +45,4 @@ const ChatForSendingPrayerTimesSchema = new Schema({
     },
 })
 
-export const ChatForSendingPrayerTimesModel = model<IChatForSendingPrayerTimesModel>("chats-for-sending-prayer-times", ChatForSendingPrayerTimesSchema)
+export const PostForTelegramModel = model<IPostForTelegramModel>("post-for-telegram", PostForTelegramSchema)

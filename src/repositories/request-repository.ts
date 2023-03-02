@@ -1,0 +1,48 @@
+import {createRequestParams, RequestRepository} from "./abstractions/request-repository";
+import {inject, injectable} from "inversify";
+import {Symbols} from "../dependencies/symbols";
+import {IRequestModel, RequestModel} from "../models/request";
+import {RequestFactory} from "../domain/abstractions/factories/request";
+import {CityRepository, DistrictRepository} from "./abstractions";
+import {Request} from "../domain/entities/request";
+
+@injectable()
+export class RequestRepositoryImpl implements RequestRepository {
+    constructor(
+       @inject(Symbols.Factories.Request) private readonly requestFactory: RequestFactory,
+       @inject(Symbols.Factories.Request) private readonly cityRepository: CityRepository,
+       @inject(Symbols.Factories.Request) private readonly districtRepository: DistrictRepository
+    ) {}
+
+    public async getById(requestId: string): Promise<Request> {
+        throw new Error("Method not implemented.");
+    }
+
+    public async create(params: createRequestParams): Promise<Request> {
+        let requestModel = new RequestModel({
+            telegram_channel_link: params.TelegramChatLink,
+            telegram_username: params.telegramUsername,
+            district_id: params.districtId,
+            city_id: params.cityId
+        })
+
+        await requestModel.save()
+
+        return this.toEntity(requestModel)
+    }
+
+    private async toEntity(requestModel: IRequestModel): Promise<Request> {
+        const city = await this.cityRepository.getById(requestModel.city_id)
+        const district = await this.districtRepository.getById(requestModel.district_id)
+
+        return this.requestFactory.create({
+            id: requestModel._id.toHexString(),
+            telegramUsername: requestModel.telegram_username,
+            TelegramChatLink: requestModel.telegram_channel_link,
+            district: district,
+            city: city,
+            createAt: requestModel.create_at,
+            updateAt: requestModel.update_at
+        })
+    }
+}

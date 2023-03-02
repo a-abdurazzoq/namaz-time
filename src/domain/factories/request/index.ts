@@ -7,10 +7,10 @@ export class RequestFactoryImpl implements RequestFactory {
     public create(dto: RequestDto): Request {
         return new Request(
             dto.id,
-            dto.telegramChannelLink,
+            dto.TelegramChatLink,
             dto.telegramUsername,
-            dto.cityId,
-            dto.districtId,
+            dto.city,
+            dto.district,
             dto.createAt,
             dto.updateAt
         )

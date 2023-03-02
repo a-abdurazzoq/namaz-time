@@ -2,7 +2,7 @@ import {Schema, model, Types, Document} from "mongoose"
 
 export interface ITemplatePhotoModel extends Document {
     file_name: string;
-    user_id: Types.ObjectId;
+    telegram_chat_id: Types.ObjectId;
     create_at: Date;
     update_at: Date;
 }
@@ -12,7 +12,7 @@ const TemplatePhotoSchema = new Schema({
         type: String,
         required: true
     },
-    user_id: {
+    telegram_chat_id: {
         type: Types.ObjectId,
         required: true
     },

@@ -1,11 +1,25 @@
 import {injectable} from "inversify";
 import puppeteer from "puppeteer";
-
-import {PhotoGenerationParams, TemplatePhotoService} from "../abstractions/template-photo-service";
 import path from "path";
+import fs from "fs/promises"
+
+import {
+    CreatePhotoTemplateUsingBase64Params,
+    PhotoGenerationParams,
+    TemplatePhotoService
+} from "../abstractions/template-photo-service";
 
 @injectable()
 export class TemplatePhotoServiceImpl implements TemplatePhotoService {
+    public async createPhotoTemplateUsingBase64(params: CreatePhotoTemplateUsingBase64Params): Promise<string> {
+        let fileName = this.generateHtmlFileNameForTemplatePhoto(params.additionalFileName)
+        let pathToTemplatePhotoDirectory = path.join(String(`${process.env.PATH_TO_DIR_TEMPLATE_PHOTO}/${fileName}`))
+
+        await fs.writeFile(pathToTemplatePhotoDirectory, params.base64)
+
+        return fileName
+    }
+
     public async photoGeneration(params: PhotoGenerationParams): Promise<Buffer> {
         const browser = await puppeteer.launch();
         const page = await browser.newPage();
@@ -41,4 +55,13 @@ export class TemplatePhotoServiceImpl implements TemplatePhotoService {
         return photoBuffer
     }
 
+    private generateHtmlFileNameForTemplatePhoto(name: string) {
+        let filename = name
+            .trim()
+            .replace(/[\s_]{2,}/ig, " ")
+            .replace(/\s/ig, "-")
+            .replace(/[^(a-zA-Z0-9_\-)]/gmi, "")
+
+        return `${filename}-${Date.now()}.html`
+    }
 }

@@ -1,10 +1,10 @@
-import {User} from "../user";
+import {TelegramChat} from "../telegram-channel";
 
 export class TemplatePhoto {
     constructor(
         private id: string,
         private fileName: string,
-        private user: User,
+        private telegramChat: TelegramChat,
         private createAt: Date,
         private updateAt: Date
     ) {
@@ -21,8 +21,8 @@ export class TemplatePhoto {
         return this.fileName
     }
 
-    public getUser(): User {
-        return this.user
+    public getTelegramChat(): TelegramChat {
+        return this.telegramChat
     }
 
     public getCreateAt(): Date {

@@ -1,5 +1,7 @@
 export interface TemplatePhotoService {
     photoGeneration(params: PhotoGenerationParams): Promise<Buffer>;
+
+    createPhotoTemplateUsingBase64(params: CreatePhotoTemplateUsingBase64Params): Promise<string>; //Вернёт назваения файла
 }
 
 export interface PhotoGenerationParams {
@@ -12,4 +14,9 @@ export interface PhotoGenerationParams {
     asr: string;
     maghrib: string;
     isha: string;
+}
+
+export interface CreatePhotoTemplateUsingBase64Params {
+    base64: string;
+    additionalFileName: string;
 }

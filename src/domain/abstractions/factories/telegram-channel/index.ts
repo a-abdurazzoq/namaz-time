@@ -1,14 +1,13 @@
 import {Factory} from "../factory";
-import {TelegramChannel} from "../../../entities";
-import {Mosque} from "../../../entities";
-
-export interface TelegramChannelDto {
+import {Address, TelegramChat, TelegramChatType} from "../../../entities";
+export interface TelegramChatDto {
     id: string;
     name: string;
-    mosque: Mosque | null;
+    address: Address;
+    chatType: TelegramChatType;
     chatId: number;
     createAt: Date;
     updateAt: Date;
 }
 
-export interface TelegramChannelFactory extends Factory<TelegramChannelDto, TelegramChannel> {}
+export interface TelegramChatFactory extends Factory<TelegramChatDto, TelegramChat> {}

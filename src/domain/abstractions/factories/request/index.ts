@@ -1,14 +1,15 @@
 import {Factory} from "../factory";
 import {Request} from "../../../entities/request";
+import {City, District} from "../../../entities";
 
 export interface RequestDto {
-    id: string
-    telegramChannelLink: string
-    telegramUsername: string
-    cityId: number
-    districtId: number
-    createAt: Date
-    updateAt: Date
+    id: string;
+    TelegramChatLink: string;
+    telegramUsername: string;
+    city: City;
+    district: District;
+    createAt: Date;
+    updateAt: Date;
 }
 
 export interface RequestFactory extends Factory<RequestDto, Request> {}

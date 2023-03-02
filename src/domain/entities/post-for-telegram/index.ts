@@ -1,10 +1,10 @@
-import {TelegramChannel} from "../telegram-channel";
+import {TelegramChat} from "../telegram-channel";
 import {TemplatePhoto} from "../template-photo";
 
-export class ChatForSendingPrayerTimes {
+export class PostForTelegram {
     constructor(
         private id: string,
-        private telegramChannel: TelegramChannel,
+        private TelegramChat: TelegramChat,
         private templatePhoto: TemplatePhoto,
         private chatId: number,
         private timePerDay: number,
@@ -17,8 +17,8 @@ export class ChatForSendingPrayerTimes {
         return this.id
     }
 
-    public getTelegramChannel(): TelegramChannel {
-        return this.telegramChannel
+    public getTelegramChat(): TelegramChat {
+        return this.TelegramChat
     }
 
     public getTemplatePhoto(): TemplatePhoto {

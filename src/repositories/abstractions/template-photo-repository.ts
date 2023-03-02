@@ -1,11 +1,17 @@
-import {ChatForSendingPrayerTimes, TemplatePhoto} from "../../domain/entities";
+import {PostForTelegram, TelegramChat, TemplatePhoto} from "../../domain/entities";
 
-export interface GeneratePhotoByChatForSendingPrayerTimesParams {
-    chatForSendingPrayerTimes: ChatForSendingPrayerTimes;
+export interface GeneratePhotoByPostForTelegramParams {
+    PostForTelegram: PostForTelegram;
     necessaryDate: Date;
 }
 
 export interface TemplatePhotoRepository {
     getById(id: string): Promise<TemplatePhoto>;
-    generatePhotoByChatForSendingPrayerTimes(params: GeneratePhotoByChatForSendingPrayerTimesParams): Promise<Buffer>;
+    create(params: CreateTemplatePhotoRepositoryParams): Promise<TemplatePhoto>;
+    generatePhotoByPostForTelegram(params: GeneratePhotoByPostForTelegramParams): Promise<Buffer>;
+}
+
+export interface CreateTemplatePhotoRepositoryParams {
+    telegramChat: TelegramChat;
+    htmlTemplateFileBase64: string;
 }

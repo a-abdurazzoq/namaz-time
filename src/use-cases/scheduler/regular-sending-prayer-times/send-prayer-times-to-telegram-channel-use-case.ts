@@ -1,42 +1,42 @@
-import {SendPrayerTimesToTelegramChannel, SendPrayerTimesToTelegramChannelUseCase} from "../../abstractions";
+import {SendPrayerTimesToTelegramChat, SendPrayerTimesToTelegramChatUseCase} from "../../abstractions";
 import {inject, injectable} from "inversify";
 import {Symbols} from "../../../dependencies/symbols";
 import {TelegramBotClient} from "../../../clients/abstractions/telegram-bot-client";
-import {ChatForSendingPrayerTimesRepository, TemplatePhotoRepository} from "../../../repositories/abstractions";
+import {PostForTelegramRepository, TemplatePhotoRepository} from "../../../repositories/abstractions";
 
 @injectable()
-export class SendPrayerTimesToTelegramChannelUseCaseImpl implements SendPrayerTimesToTelegramChannelUseCase {
+export class SendPrayerTimesToTelegramChatUseCaseImpl implements SendPrayerTimesToTelegramChatUseCase {
     constructor(
         @inject(Symbols.Clients.TelegramBot) private telegramBotClient: TelegramBotClient,
-        @inject(Symbols.Repositories.ChatForSendingPrayerTimes) private chatForSendingPrayerTimesRepository: ChatForSendingPrayerTimesRepository,
+        @inject(Symbols.Repositories.PostForTelegram) private PostForTelegramRepository: PostForTelegramRepository,
         @inject(Symbols.Repositories.TemplatePhoto) private templatePhotoRepository: TemplatePhotoRepository
     ) {}
 
-    async execute(params: SendPrayerTimesToTelegramChannel.Params): Promise<SendPrayerTimesToTelegramChannel.Response> {
-        let photoBuffer = await this.templatePhotoRepository.generatePhotoByChatForSendingPrayerTimes(params)
+    async execute(params: SendPrayerTimesToTelegramChat.Params): Promise<SendPrayerTimesToTelegramChat.Response> {
+        let photoBuffer = await this.templatePhotoRepository.generatePhotoByPostForTelegram(params)
 
         let response = await this.telegramBotClient.sendPhoto({
-            chat_id: params.chatForSendingPrayerTimes.getChatId(),
+            chat_id: params.PostForTelegram.getChatId(),
             photo: photoBuffer
         })
 
         if(!response.ok)
             return {
                 success: response.ok,
-                id: params.chatForSendingPrayerTimes.getId(),
-                name: params.chatForSendingPrayerTimes.getTelegramChannel().getName(),
+                id: params.PostForTelegram.getId(),
+                name: params.PostForTelegram.getTelegramChat().getName(),
                 error: {
                     error_code: response.error_code,
                     description: response.description
                 },
             }
 
-        await this.chatForSendingPrayerTimesRepository.updateNextTime(params.chatForSendingPrayerTimes)
+        await this.PostForTelegramRepository.updateNextTime(params.PostForTelegram)
 
         return {
             success: response.ok,
-            id: params.chatForSendingPrayerTimes.getId(),
-            name: params.chatForSendingPrayerTimes.getTelegramChannel().getName()
+            id: params.PostForTelegram.getId(),
+            name: params.PostForTelegram.getTelegramChat().getName()
         }
     }
 }

@@ -1,16 +1,26 @@
-import {Mosque} from "../mosque";
+import {Address} from "./address";
 
-export class TelegramChannel {
+export enum TelegramChatType {
+    UNKNOWN = -1,
+    PERSONAL = 0,
+    GROUP = 1,
+    SUPERGROUP = 2,
+    CHANNEL = 3,
+}
+
+export class TelegramChat {
     constructor(
         private id: string,
         private name: string,
-        private mosque: Mosque | null,
+        private address: Address,
         private chatId: number,
+        private chatType: TelegramChatType,
         private createAt: Date,
         private updateAt: Date
     ) {
         this.isName(this.name)
         this.isChatId(this.chatId)
+        this.isChatType(this.chatId)
         this.isCreateAt(this.createAt)
         this.isUpdateAt(this.updateAt)
     }
@@ -24,8 +34,8 @@ export class TelegramChannel {
         return this.name
     }
 
-    public getMosque(): Mosque | null {
-        return this.mosque
+    public getChatType(): number {
+        return this.chatType
     }
 
     public getChatId(): number {
@@ -47,9 +57,9 @@ export class TelegramChannel {
         }
     }
 
-    private isMosque(mosque: Mosque | null): never | void {
-        if(!(mosque instanceof Mosque) && mosque !== null) {
-            throw new Error("mosque is not instanced from Mosque or is not null")
+    private isChatType(chatType: number): void {
+        if(chatType.constructor !== Number) {
+            throw new Error("chatId is not number")
         }
     }
 

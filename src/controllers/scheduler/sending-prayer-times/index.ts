@@ -3,21 +3,21 @@ import {inject, injectable} from "inversify";
 import {Symbols} from "../../../dependencies/symbols";
 import {
     GetAllExecuteTimeChatsForSendingUseCase,
-    MassSendPrayerTimesToTelegramChannelsUseCase
+    MassSendPrayerTimesToTelegramChatsUseCase
 } from "../../../use-cases/abstractions";
 
 @injectable()
 export class SendingPrayerTimesController implements SchedulerController {
     constructor(
         @inject(Symbols.UseCases.GetAllExecuteTimeChatsForSending) private getAllExecuteTimeChatsForSendingUseCase: GetAllExecuteTimeChatsForSendingUseCase,
-        @inject(Symbols.UseCases.MassSendPrayerTimesToTelegramChannels) private massSendPrayerTimesToTelegramChannels: MassSendPrayerTimesToTelegramChannelsUseCase
+        @inject(Symbols.UseCases.MassSendPrayerTimesToTelegramChats) private massSendPrayerTimesToTelegramChats: MassSendPrayerTimesToTelegramChatsUseCase
     ) {}
 
     public async execute(): Promise<any> {
         const chatsForSendingPrayerTimes = await this.getAllExecuteTimeChatsForSendingUseCase.execute({
             date: this.getDate()
         })
-        return this.massSendPrayerTimesToTelegramChannels.execute(chatsForSendingPrayerTimes)
+        return this.massSendPrayerTimesToTelegramChats.execute(chatsForSendingPrayerTimes)
     }
 
     private getDate(): Date {

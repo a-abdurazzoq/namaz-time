@@ -1,11 +1,11 @@
 import {UseCase} from "../../index";
-import {ChatForSendingPrayerTimes} from "../../../../domain/entities";
+import {PostForTelegram} from "../../../../domain/entities";
 
-export interface SendPrayerTimesToTelegramChannelUseCase extends UseCase<SendPrayerTimesToTelegramChannel.Params, SendPrayerTimesToTelegramChannel.Response> {}
+export interface SendPrayerTimesToTelegramChatUseCase extends UseCase<SendPrayerTimesToTelegramChat.Params, SendPrayerTimesToTelegramChat.Response> {}
 
-export namespace SendPrayerTimesToTelegramChannel {
+export namespace SendPrayerTimesToTelegramChat {
     export interface Params {
-        chatForSendingPrayerTimes: ChatForSendingPrayerTimes;
+        PostForTelegram: PostForTelegram;
         necessaryDate: Date
     }
 

@@ -8,6 +8,10 @@ export * from "./scheduler/update-islamic-calenadar/update-islamic-calendar-use-
 
 export * from "./api/namaz-time-api/prayer-times/get-today-prayer-times-use-case"
 
+export * from "./api/namaz-time-api/request/create-request-for-register-use-case"
+
+export * from "./api/namaz-time-api/post-for-telegram/create-post-for-telegram-use-case"
+
 export interface UseCase<T, R> {
     execute(params: T): Promise<R>
 }

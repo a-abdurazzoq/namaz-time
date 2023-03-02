@@ -1,32 +1,36 @@
+import {RequestFactory} from "../domain/abstractions/factories/request";
+
 export namespace Symbols {
 
     export const Factories = {
         User: Symbol.for("UserFactory"),
         City: Symbol.for("CityFactory"),
-        PrayersInDay: Symbol.for("PrayersInDayFactory"),
-        PrayerTimes: Symbol.for("PrayerTimesFactory"),
-        IslamicCalendar: Symbol.for("IslamicCalendarFactory"),
-        IslamicMonth: Symbol.for("IslamicMonthFactory"),
         Mosque: Symbol.for("MosqueFactory"),
         Address: Symbol.for("AddressFactory"),
+        Request: Symbol.for("RequestFactory"),
         District: Symbol.for("DistrictFactory"),
+        PrayerTimes: Symbol.for("PrayerTimesFactory"),
+        PrayersInDay: Symbol.for("PrayersInDayFactory"),
+        IslamicMonth: Symbol.for("IslamicMonthFactory"),
         TemplatePhoto: Symbol.for("TemplatePhotoFactory"),
-        TelegramChannel: Symbol.for("TelegramChannelFactory"),
-        ChatForSendingPrayerTimes: Symbol.for("ChatForSendingPrayerTimesFactory"),
+        IslamicCalendar: Symbol.for("IslamicCalendarFactory"),
+        TelegramChat: Symbol.for("TelegramChatFactory"),
+        PostForTelegram: Symbol.for("PostForTelegramFactory"),
         Scheduler: Symbol.for("SchedulerFactory")
     }
 
     export const Repositories = {
         User: Symbol.for("UserRepositories"),
         City: Symbol.for("CityRepositories"),
-        PrayersInDay: Symbol.for("PrayersInDayRepositories"),
         Mosque: Symbol.for("MosqueRepositories"),
-        IslamicCalendar: Symbol.for("IslamicCalendarRepositories"),
-        IslamicMonth: Symbol.for("IslamicMonthRepositories"),
+        Request: Symbol.for("RequestRepositories"),
         District: Symbol.for("DistrictRepositories"),
+        IslamicMonth: Symbol.for("IslamicMonthRepositories"),
+        PrayersInDay: Symbol.for("PrayersInDayRepositories"),
         TemplatePhoto: Symbol.for("TemplatePhotoRepositories"),
-        TelegramChannel: Symbol.for("TelegramChannelRepositories"),
-        ChatForSendingPrayerTimes: Symbol.for("ChatForSendingPrayerTimesRepositories"),
+        IslamicCalendar: Symbol.for("IslamicCalendarRepositories"),
+        TelegramChat: Symbol.for("TelegramChatRepositories"),
+        PostForTelegram: Symbol.for("PostForTelegramRepositories"),
     }
 
     export const Clients = {
@@ -39,9 +43,15 @@ export namespace Symbols {
         PrayerTimes: {
             GetToday: Symbol.for("GetTodayPrayerTimesUseCase")
         },
+        Request: {
+            CreateForRegister: Symbol.for("CreateRequestForRegisterUseCase")
+        },
+        PostForTelegram: {
+            Create: Symbol.for("CreatePostForTelegramUseCase")
+        },
         GetAllExecuteTimeChatsForSending: Symbol.for("GetAllExecuteTimeChatsForSendingUseCase"),
-        MassSendPrayerTimesToTelegramChannels: Symbol.for("MassSendPrayerTimesToTelegramChannelsUseCase"),
-        SendPrayerTimesToTelegramChannel: Symbol.for("SendPrayerTimesToTelegramChannelUseCase"),
+        MassSendPrayerTimesToTelegramChats: Symbol.for("MassSendPrayerTimesToTelegramChatsUseCase"),
+        SendPrayerTimesToTelegramChat: Symbol.for("SendPrayerTimesToTelegramChatUseCase"),
         UpdateIslamicCalendar: Symbol.for("UpdateIslamicCalendarUseCase"),
         UpdatePrayersPerMonth: Symbol.for("UpdatePrayersPerMonthUseCase")
     }
@@ -49,6 +59,9 @@ export namespace Symbols {
     export const Presenters = {
         PrayerTimes: {
             GetToday: Symbol.for("GetPrayerTimesByNowDatePresenter")
+        },
+        PostForTelegram: {
+            Create: Symbol.for("CreatePostForTelegramPresenter")
         },
     }
 
@@ -58,6 +71,7 @@ export namespace Symbols {
     }
 
     export const Controllers = {
+        Request: Symbol.for("RequestController"),
         Scheduler: Symbol.for("SchedulerController")
     }
 

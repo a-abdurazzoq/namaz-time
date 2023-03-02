@@ -1,11 +1,10 @@
 import {Factory} from "../factory";
-import {TemplatePhoto} from "../../../entities";
-import {User} from "../../../entities";
+import {TelegramChat, TemplatePhoto} from "../../../entities";
 
 export interface TemplatePhotoDto {
     id: string;
     fileName: string;
-    user: User;
+    telegramChat: TelegramChat;
     createAt: Date;
     updateAt: Date;
 }

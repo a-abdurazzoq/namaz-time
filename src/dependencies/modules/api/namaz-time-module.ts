@@ -1,23 +1,21 @@
 import {ContainerModule} from "inversify";
 import {Symbols} from "../../symbols";
 import {
-    ChatForSendingPrayerTimesFactory,
-    TelegramChannelFactory,
+    PostForTelegramFactory,
+    TelegramChatFactory,
     TemplatePhotoFactory,
     DistrictFactory,
     AddressFactory,
-    MosqueFactory,
     PrayersInDayFactory,
     CityFactory,
     UserFactory
 } from "../../../domain/abstractions/factories";
 import {
-    ChatForSendingPrayerTimesFactoryImpl,
-    TelegramChannelFactoryImpl,
+    PostForTelegramFactoryImpl,
+    TelegramChatFactoryImpl,
     TemplatePhotoFactoryImpl,
     DistrictFactoryImpl,
     AddressFactoryImpl,
-    MosqueFactoryImpl,
     PrayersInDayFactoryImpl,
     CityFactoryImpl,
     UserFactoryImpl
@@ -27,24 +25,24 @@ import {APIApplicationImpl} from "../../../infrastructures/application";
 import {Logger} from "../../../components/abstractions/logger";
 import {ConsoleLogger} from "../../../components/logger";
 import {
-    ChatForSendingPrayerTimesRepository,
+    PostForTelegramRepository,
     CityRepository,
     DistrictRepository,
-    MosqueRepository,
-    PrayersInDayRepository, TelegramChannelRepository, TemplatePhotoRepository,
+    PrayersInDayRepository, TelegramChatRepository, TemplatePhotoRepository,
     UserRepository
 } from "../../../repositories/abstractions";
-import {CityRepositoryImpl} from "../../../repositories/city-repository";
 import {
-    ChatForSendingPrayerTimesRepositoryImpl,
-    MosqueRepositoryImpl,
-    PrayersInDayRepositoryImpl, TelegramChannelRepositoryImpl,
+    PostForTelegramRepositoryImpl,
+    PrayersInDayRepositoryImpl, TelegramChatRepositoryImpl,
     TemplatePhotoRepositoryImpl,
-    UserRepositoryImpl
+    UserRepositoryImpl,
+    DistrictRepositoryImpl,
+    CityRepositoryImpl
 } from "../../../repositories";
-import {DistrictRepositoryImpl} from "../../../repositories/district-repository";
 import {Storage} from "../../../infrastructures/abstractions";
 import {BaseMongoStorageImpl} from "../../../infrastructures/db";
+import {RequestFactory} from "../../../domain/abstractions/factories/request";
+import {RequestFactoryImpl} from "../../../domain/factories/request";
 
 export const namazTimeModule = new ContainerModule(bind => {
     // Application
@@ -59,21 +57,20 @@ export const namazTimeModule = new ContainerModule(bind => {
     // Factories
     bind<CityFactory>(Symbols.Factories.City).to(CityFactoryImpl).inSingletonScope()
     bind<UserFactory>(Symbols.Factories.User).to(UserFactoryImpl).inSingletonScope()
-    bind<MosqueFactory>(Symbols.Factories.Mosque).to(MosqueFactoryImpl).inSingletonScope()
-    bind<PrayersInDayFactory>(Symbols.Factories.PrayersInDay).to(PrayersInDayFactoryImpl).inSingletonScope()
     bind<AddressFactory>(Symbols.Factories.Address).to(AddressFactoryImpl).inSingletonScope()
     bind<DistrictFactory>(Symbols.Factories.District).to(DistrictFactoryImpl).inSingletonScope()
+    bind<PrayersInDayFactory>(Symbols.Factories.PrayersInDay).to(PrayersInDayFactoryImpl).inSingletonScope()
     bind<TemplatePhotoFactory>(Symbols.Factories.TemplatePhoto).to(TemplatePhotoFactoryImpl).inSingletonScope()
-    bind<TelegramChannelFactory>(Symbols.Factories.TelegramChannel).to(TelegramChannelFactoryImpl).inSingletonScope()
-    bind<ChatForSendingPrayerTimesFactory>(Symbols.Factories.ChatForSendingPrayerTimes).to(ChatForSendingPrayerTimesFactoryImpl).inSingletonScope()
+    bind<TelegramChatFactory>(Symbols.Factories.TelegramChat).to(TelegramChatFactoryImpl).inSingletonScope()
+    bind<PostForTelegramFactory>(Symbols.Factories.PostForTelegram).to(PostForTelegramFactoryImpl).inSingletonScope()
+    bind<RequestFactory>(Symbols.Factories.PostForTelegram).to(RequestFactoryImpl).inSingletonScope()
 
     // Repositories
     bind<CityRepository>(Symbols.Repositories.City).to(CityRepositoryImpl).inSingletonScope()
     bind<UserRepository>(Symbols.Repositories.User).to(UserRepositoryImpl).inSingletonScope()
-    bind<MosqueRepository>(Symbols.Repositories.Mosque).to(MosqueRepositoryImpl).inSingletonScope()
     bind<PrayersInDayRepository>(Symbols.Repositories.PrayersInDay).to(PrayersInDayRepositoryImpl).inSingletonScope()
     bind<DistrictRepository>(Symbols.Repositories.District).to(DistrictRepositoryImpl).inSingletonScope()
     bind<TemplatePhotoRepository>(Symbols.Repositories.TemplatePhoto).to(TemplatePhotoRepositoryImpl).inSingletonScope()
-    bind<TelegramChannelRepository>(Symbols.Repositories.TelegramChannel).to(TelegramChannelRepositoryImpl).inSingletonScope()
-    bind<ChatForSendingPrayerTimesRepository>(Symbols.Repositories.ChatForSendingPrayerTimes).to(ChatForSendingPrayerTimesRepositoryImpl).inSingletonScope()
+    bind<TelegramChatRepository>(Symbols.Repositories.TelegramChat).to(TelegramChatRepositoryImpl).inSingletonScope()
+    bind<PostForTelegramRepository>(Symbols.Repositories.PostForTelegram).to(PostForTelegramRepositoryImpl).inSingletonScope()
 })

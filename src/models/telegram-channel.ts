@@ -1,21 +1,43 @@
-import {Schema, model, Types, Document} from "mongoose"
+import {Schema, model, Document} from "mongoose"
+import {TelegramChatType} from "../domain/entities";
 
-export interface ITelegramChannelModel extends Document {
+export interface ITelegramChatModel extends Document {
     name: string;
-    mosque_id: Types.ObjectId | null;
+    address: {
+        city_id: number;
+        district_id: number;
+        street: string;
+        home: string;
+    },
+    chat_type: TelegramChatType;
     chat_id: number;
     create_at: Date;
     update_at: Date;
 }
 
-const TelegramChannelSchema = new Schema({
+const TelegramChatSchema = new Schema({
     name: {
         type: String,
         required: true,
     },
-    mosque_id: {
-        type: Types.ObjectId,
-        default: null
+    address: {
+        city_id: {
+            type: Number,
+            required: true
+        },
+        district_id: {
+            type: Number
+        },
+        street: {
+            type: String
+        },
+        home: {
+            type: String
+        }
+    },
+    chat_type: {
+        type: Number,
+        required: true
     },
     chat_id: {
         type: Number,
@@ -31,4 +53,4 @@ const TelegramChannelSchema = new Schema({
     },
 })
 
-export const TelegramChannelModel = model<ITelegramChannelModel>("telegram-channels", TelegramChannelSchema)
+export const TelegramChatModel = model<ITelegramChatModel>("telegram-chats", TelegramChatSchema)
