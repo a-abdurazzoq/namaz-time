@@ -5,7 +5,7 @@ import {inject, injectable} from "inversify";
 import {Symbols} from "../../../../dependencies/symbols";
 
 @injectable()
-export class GetPrayerTimesUseCaseImpl implements GetTodayPrayerTimesUseCase {
+export class GetTodayPrayerTimesUseCaseImpl implements GetTodayPrayerTimesUseCase {
     constructor(
        @inject(Symbols.Repositories.PrayersInDay) private readonly prayersInDayRepository: PrayersInDayRepository
     ) {}

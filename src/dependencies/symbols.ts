@@ -20,17 +20,17 @@ export namespace Symbols {
     }
 
     export const Repositories = {
-        User: Symbol.for("UserRepositories"),
-        City: Symbol.for("CityRepositories"),
-        Mosque: Symbol.for("MosqueRepositories"),
-        Request: Symbol.for("RequestRepositories"),
-        District: Symbol.for("DistrictRepositories"),
-        IslamicMonth: Symbol.for("IslamicMonthRepositories"),
-        PrayersInDay: Symbol.for("PrayersInDayRepositories"),
-        TemplatePhoto: Symbol.for("TemplatePhotoRepositories"),
-        IslamicCalendar: Symbol.for("IslamicCalendarRepositories"),
-        TelegramChat: Symbol.for("TelegramChatRepositories"),
-        PostForTelegram: Symbol.for("PostForTelegramRepositories"),
+        User: Symbol.for("UserRepository"),
+        City: Symbol.for("CityRepository"),
+        Mosque: Symbol.for("MosqueRepository"),
+        Request: Symbol.for("RequestRepository"),
+        District: Symbol.for("DistrictRepository"),
+        IslamicMonth: Symbol.for("IslamicMonthRepository"),
+        PrayersInDay: Symbol.for("PrayersInDayRepository"),
+        TemplatePhoto: Symbol.for("TemplatePhotoRepository"),
+        IslamicCalendar: Symbol.for("IslamicCalendarRepository"),
+        TelegramChat: Symbol.for("TelegramChatRepository"),
+        PostForTelegram: Symbol.for("PostForTelegramRepository"),
     }
 
     export const Clients = {
@@ -58,7 +58,7 @@ export namespace Symbols {
 
     export const Presenters = {
         PrayerTimes: {
-            GetToday: Symbol.for("GetPrayerTimesByNowDatePresenter")
+            GetToday: Symbol.for("GetTodayPrayerTimesPresenter")
         },
         PostForTelegram: {
             Create: Symbol.for("CreatePostForTelegramPresenter")
@@ -72,6 +72,8 @@ export namespace Symbols {
 
     export const Controllers = {
         Request: Symbol.for("RequestController"),
+        PrayerTimes: Symbol.for("PrayerTimesController"),
+        PostForTelegram: Symbol.for("PostForTelegramController"),
         Scheduler: Symbol.for("SchedulerController")
     }
 
@@ -84,6 +86,9 @@ export namespace Symbols {
         SeedData: Symbol.for("SeedData"),
         SeedDataModules: Symbol.for("SeedDataModules"),
         Logger: Symbol.for("Logger"),
+        Transport: Symbol.for("Transport"),
+        HttpDecorator: Symbol.for("HttpDecorator"),
+        Routers: Symbol.for("HttpRouters"),
         Storage: Symbol.for("Storage")
     }
 }

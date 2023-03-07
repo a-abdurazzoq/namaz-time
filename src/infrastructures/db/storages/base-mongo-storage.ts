@@ -23,13 +23,13 @@ export class BaseMongoStorageImpl implements Storage {
 
     public async close(): Promise<void> {
         await mongoose.disconnect()
-        await this.logger.print({result: "Приложение успешно отсоединение к базе данных"})
+        await this.logger.print({alert: "Приложение успешно отсоединение к базе данных"})
         return
     }
 
     private async connect() {
         await mongoose.connect(this.mongodbURI)
-        await this.logger.print({result: "Приложение успешно подключено к базе данных"})
+        await this.logger.print({info: "Приложение успешно подключено к базе данных"})
         return
     }
 

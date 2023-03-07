@@ -23,7 +23,7 @@ export class Scheduler {
 
     private async executeTime(): Promise<void> {
         try {
-            await this.logger.print({result: "Время выполнения задача"})
+            await this.logger.print({info: "Время выполнения задача"})
 
             let result = await this.controller.execute()
 
@@ -35,7 +35,7 @@ export class Scheduler {
         finally {
             this.setTimer()
         }
-        await this.logger.print({result: "Задача завершена"})
+        await this.logger.print({info: "Задача завершена"})
         return
     }
 
@@ -45,7 +45,7 @@ export class Scheduler {
 
         let nextTimeInTextFormat = Intl.DateTimeFormat("mn-MN", {dateStyle: "short", timeStyle: "medium"}).format(currentDate)
 
-        this.logger.print({result: `Следующее время выполнения в ${nextTimeInTextFormat}`})
+        this.logger.print({alert: `Следующее время выполнения в ${nextTimeInTextFormat}`})
     }
 
     private setTimer(): void {

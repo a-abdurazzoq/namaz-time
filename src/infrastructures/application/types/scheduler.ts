@@ -30,7 +30,7 @@ export class SchedulerApplicationImpl implements Application {
             await this.storage.open()
             await this.scheduler.start()
 
-            await this.logger.print({result: "Планировщик успешно запущен"})
+            await this.logger.print({info: "Планировщик успешно запущен"})
         }
         catch (error) {
             await this.logger.print({error: "Произошла ошибка при запуске планировщик"})

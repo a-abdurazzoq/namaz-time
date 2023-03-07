@@ -15,9 +15,17 @@ export class ConsoleLogger implements Logger {
     public async print(loggerDto: LoggerDto): Promise<void> {
         let loggerData: LoggerData = {
             result: loggerDto.result,
+            alert: loggerDto.alert,
+            info: loggerDto.info,
             error: loggerDto.error,
             date: this.printTime(loggerDto.date)
         }
+
+        if(loggerData.alert)
+            this.printAlert(loggerData)
+
+        if(loggerData.info)
+            this.printInfo(loggerData)
 
         if(loggerData.error)
             this.printError(loggerData)
@@ -28,6 +36,14 @@ export class ConsoleLogger implements Logger {
 
     private printResult(loggerData: LoggerResultData) {
         console.log(loggerData.date, "-", "RESULT", "-", this.inspect(loggerData.result))
+    }
+
+    private printAlert(loggerData: LoggerResultData) {
+        console.log(loggerData.date, "-", "ALERT", "-", this.inspect(loggerData.alert))
+    }
+
+    private printInfo(loggerData: LoggerResultData) {
+        console.log(loggerData.date, "-", "INFO", "-", this.inspect(loggerData.info))
     }
 
     private printError(loggerData: LoggerErrorData) {

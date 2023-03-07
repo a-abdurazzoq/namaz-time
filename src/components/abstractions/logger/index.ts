@@ -1,6 +1,8 @@
 export interface LoggerDto {
     result?: any;
     error?: any;
+    alert?: any;
+    info?: any;
     date?: Date;
 }
 
