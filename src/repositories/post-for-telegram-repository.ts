@@ -22,7 +22,7 @@ export class PostForTelegramRepositoryImpl implements PostForTelegramRepository 
     public async create(params: CreatePostForTelegramRepositoryParams): Promise<PostForTelegram> {
         let createdPostForTelegram = new PostForTelegramModel({
             telegram_channel_id: new Types.ObjectId(params.telegramChat.getId()),
-            chat_id: new Types.ObjectId(params.telegramChat.getChatId()),
+            chat_id: params.telegramChat.getChatId(),
             template_photo_id: new Types.ObjectId(params.templatePhoto.getId()),
             time_per_day: params.timePerDay,
             next_time: this.getGeneratedNextTime(params.timePerDay)

@@ -9,8 +9,8 @@ export class TelegramChatFactoryImpl implements TelegramChatFactory {
             dto.id,
             dto.name,
             dto.address,
-            dto.chatType,
             dto.chatId,
+            dto.chatType,
             dto.createAt,
             dto.updateAt
         )

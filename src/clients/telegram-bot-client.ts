@@ -19,7 +19,7 @@ interface SendParams {
 export class TelegramBotClientImpl implements TelegramBotClient {
     private url = "https://api.telegram.org/bot"
     private token = "5810395844:AAGQd8iW7uIPfR33LX_zMq5uQo0MS2XbBZ8"
-    private bot_id = 234234
+    private bot_id = 5810395844
 
 
 

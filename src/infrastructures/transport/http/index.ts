@@ -38,7 +38,7 @@ export class TransportHttpImpl implements Transport {
     }
 
     private setConfig(): void {
-
+        this.app.use(express.json())
     }
 
     private setRoutes(): void {
@@ -52,7 +52,7 @@ export class TransportHttpImpl implements Transport {
                         break;
 
                     case RouterMethodTypes.POST:
-                        this.app.get(router.path, (req, res) => router.method(req, res))
+                        this.app.post(router.path, (req, res) => router.method(req, res))
                         break;
                 }
 

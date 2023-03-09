@@ -1,5 +1,5 @@
 export * from "./post-for-telegram-repository"
-export * from "./telegram-channel-repository"
+export * from "./telegram-chat-repository"
 export * from "./template-photo-repository"
 export * from "./prayers-in-day-repository"
 export * from "./user-repository"

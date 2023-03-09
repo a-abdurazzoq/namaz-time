@@ -23,8 +23,8 @@ export class CreateRequestForRegisterUseCaseImpl implements CreateRequestForRegi
         })
 
         const sendRequest = await this.telegramBotClient.sendMessage({
-            text: `Ссылка на канал: ${insertRequest.getTelegramChatLink()}` +
-                  `Контакт: ${insertRequest.getTelegramUsername()}` +
+            text: `Ссылка на канал: ${insertRequest.getTelegramChatLink()}\n` +
+                  `Контакт: ${insertRequest.getTelegramUsername()}\n` +
                   `Адрес: ${insertRequest.getCity().getName()}, ${insertRequest.getDistrict().getName()}`,
             parse_mode: "HTML",
             chat_id: Number(process.env.CHAT_ID_THAT_SENDS_REQUEST)

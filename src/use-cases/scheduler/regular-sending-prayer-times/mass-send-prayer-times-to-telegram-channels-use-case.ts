@@ -17,6 +17,7 @@ export class MassSendPrayerTimesToTelegramChatsUseCaseImpl implements MassSendPr
     async execute(params: MassSendPrayerTimesToTelegramChats.Params): Promise<MassSendPrayerTimesToTelegramChats.Response> {
         let success: MassSendPrayerTimesToTelegramChats.Results<Chat> = {count: 0, chats: []}
         let failed: MassSendPrayerTimesToTelegramChats.Results<ChatWithError> = {count: 0, chats: []}
+
         let necessaryDate = new Date();
         necessaryDate.setDate(necessaryDate.getDate()+1)
         necessaryDate.setHours(0, 0, 0, 0,)
@@ -31,8 +32,8 @@ export class MassSendPrayerTimesToTelegramChatsUseCaseImpl implements MassSendPr
             if(this.isError(response)) {
                 failed.count++
                 failed.chats.push({
-                    id: response.id,
-                    name: response.name,
+                    post_for_telegrams_id: response.id,
+                    telegram_chat_name: response.name,
                     error: response.error
                 })
 
@@ -41,8 +42,8 @@ export class MassSendPrayerTimesToTelegramChatsUseCaseImpl implements MassSendPr
 
             success.count++
             success.chats.push({
-                id: response.id,
-                name: response.name
+                post_for_telegrams_id: response.id,
+                telegram_chat_name: response.name
             })
         }
 

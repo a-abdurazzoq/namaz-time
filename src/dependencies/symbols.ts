@@ -57,6 +57,9 @@ export namespace Symbols {
     }
 
     export const Presenters = {
+        Request: {
+            CreateForRegister: Symbol.for("CreateRequestForRegisterPresenter")
+        },
         PrayerTimes: {
             GetToday: Symbol.for("GetTodayPrayerTimesPresenter")
         },

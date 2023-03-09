@@ -27,7 +27,7 @@ export class TelegramChatRepositoryImpl implements TelegramChatRepository {
 
         if(!dataOfTelegramChat.ok)
             throw new Error(JSON.stringify(dataOfTelegramChat))
-
+        
         const telegramChat = new TelegramChatModel({
             name: dataOfTelegramChat.result.title,
             chat_id: dataOfTelegramChat.result.id,

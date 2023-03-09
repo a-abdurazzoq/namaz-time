@@ -85,6 +85,10 @@ import {
     CreateRequestForRegisterUseCaseImpl
 } from "../../../use-cases/api/namaz-time-api/request/create-request-for-register-use-case";
 import {Http} from "../../../infrastructures/transport/http/decorators";
+import {
+    CreateRequestForRegisterPresenter
+} from "../../../presenters/abstractions/request/create-request-for-register-presenter";
+import {CreateRequestForRegisterPresenterImpl} from "../../../presenters/request/create-request-for-register-presenter";
 
 export const namazTimeModule = new ContainerModule(bind => {
     // Application
@@ -152,5 +156,6 @@ export const namazTimeModule = new ContainerModule(bind => {
 
     // Presenters
     bind<CreatePostForTelegramPresenter>(Symbols.Presenters.PostForTelegram.Create).to(CreatePostForTelegramPresenterImpl).inSingletonScope()
+    bind<CreateRequestForRegisterPresenter>(Symbols.Presenters.Request.CreateForRegister).to(CreateRequestForRegisterPresenterImpl).inSingletonScope()
     bind<GetTodayPrayerTimesPresenter>(Symbols.Presenters.PrayerTimes.GetToday).to(GetTodayPrayerTimesPresenterImpl).inSingletonScope()
 })

@@ -12,8 +12,8 @@ export namespace MassSendPrayerTimesToTelegramChats {
     }
 
     export interface Chat {
-        id: string;
-        name: string;
+        post_for_telegrams_id: string;
+        telegram_chat_name: string;
     }
 
     export interface ChatWithError extends Chat {

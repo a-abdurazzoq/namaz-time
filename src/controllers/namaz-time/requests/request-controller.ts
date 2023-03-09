@@ -13,7 +13,7 @@ import {
 export class RequestControllerImpl implements RequestController {
     constructor(
         @inject(Symbols.UseCases.Request.CreateForRegister) private readonly createRequestForRegisterUseCase: CreateRequestForRegisterUseCase,
-        @inject(Symbols.UseCases.Request.CreateForRegister) private readonly createRequestForRegisterPresenter: CreateRequestForRegisterPresenter,
+        @inject(Symbols.Presenters.Request.CreateForRegister) private readonly createRequestForRegisterPresenter: CreateRequestForRegisterPresenter,
         @inject(Symbols.Infrastructures.Logger) private readonly logger: Logger
     ) {}
     public async createForRegister(params: CreateRequestForRegister.Params): Promise<CreateRequestForRegister.Response> {

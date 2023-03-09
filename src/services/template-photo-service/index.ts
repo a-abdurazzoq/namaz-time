@@ -13,9 +13,9 @@ import {
 export class TemplatePhotoServiceImpl implements TemplatePhotoService {
     public async createPhotoTemplateUsingBase64(params: CreatePhotoTemplateUsingBase64Params): Promise<string> {
         let fileName = this.generateHtmlFileNameForTemplatePhoto(params.additionalFileName)
-        let pathToTemplatePhotoDirectory = path.join(String(`${process.env.PATH_TO_DIR_TEMPLATE_PHOTO}/${fileName}`))
+        let pathToTemplatePhotoDirectory = path.join(String(process.env.PATH_TO_DIR_TEMPLATE_PHOTO))
 
-        await fs.writeFile(pathToTemplatePhotoDirectory, params.base64)
+        await fs.writeFile(`${pathToTemplatePhotoDirectory}/${fileName}`, params.base64, "base64")
 
         return fileName
     }

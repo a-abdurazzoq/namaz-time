@@ -10,12 +10,17 @@ import {Request} from "../domain/entities/request";
 export class RequestRepositoryImpl implements RequestRepository {
     constructor(
        @inject(Symbols.Factories.Request) private readonly requestFactory: RequestFactory,
-       @inject(Symbols.Factories.Request) private readonly cityRepository: CityRepository,
-       @inject(Symbols.Factories.Request) private readonly districtRepository: DistrictRepository
+       @inject(Symbols.Repositories.City) private readonly cityRepository: CityRepository,
+       @inject(Symbols.Repositories.District) private readonly districtRepository: DistrictRepository
     ) {}
 
     public async getById(requestId: string): Promise<Request> {
-        throw new Error("Method not implemented.");
+        let getRequest = await RequestModel.findById(requestId)
+
+        if(!getRequest)
+            throw new Error("Request not found by id")
+
+        return this.toEntity(getRequest)
     }
 
     public async create(params: createRequestParams): Promise<Request> {

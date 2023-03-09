@@ -32,7 +32,7 @@ export class TemplatePhotoRepositoryImpl implements TemplatePhotoRepository {
 
         const createdTemplatePhoto = new TemplatePhotoModel({
             file_name: fileName,
-            telegram_chat_id: params.telegramChat
+            telegram_chat_id: params.telegramChat.getId()
         })
 
         await createdTemplatePhoto.save()
