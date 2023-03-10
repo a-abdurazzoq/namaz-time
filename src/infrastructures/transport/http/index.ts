@@ -1,11 +1,11 @@
 import {Transport} from "../../abstractions";
 import {inject, injectable, multiInject} from "inversify";
-import express, {Express} from "express";
+import express, {Express, Request, Response} from "express";
 import {Logger} from "../../../components/abstractions/logger";
 import {Symbols} from "../../../dependencies/symbols";
 import http from "http";
 import {RouterBase} from "./routers";
-import {RouterConfig, RouterMethodTypes} from "./decorators";
+import {RouterConfig, RouterMethodTypes} from "../abstractions/http/decorators";
 
 @injectable()
 export class TransportHttpImpl implements Transport {
@@ -33,30 +33,37 @@ export class TransportHttpImpl implements Transport {
         this.app = express()
 
         this.setConfig()
+        this.setRouters()
         this.setListen()
-        this.setRoutes()
     }
 
     private setConfig(): void {
         this.app.use(express.json())
     }
 
-    private setRoutes(): void {
+    private setRouters(): void {
         let routers = this.getRoutes()
 
         for (const router of routers) {
-            if(router.path)
-                switch (router.type) {
-                    case RouterMethodTypes.GET:
-                        this.app.get(router.path, (req, res) => router.method(req, res))
-                        break;
-
-                    case RouterMethodTypes.POST:
-                        this.app.post(router.path, (req, res) => router.method(req, res))
-                        break;
-                }
-
+            this.setRouter(router)
         }
+    }
+
+    setRouter(router: RouterConfig): void {
+        if(!router?.path)
+            return
+
+        switch (router.type) {
+            case RouterMethodTypes.GET:
+                this.app.get(router.path, (req: Request, res: Response) => router.method(req, res))
+                break;
+
+            case RouterMethodTypes.POST:
+                this.app.post(router.path, (req: Request, res: Response) => router.method(req, res))
+                break;
+        }
+
+        return
     }
 
     private getRoutes(): RouterConfig[] {
