@@ -13,7 +13,7 @@ dotenv.config({path: path.join(__dirname, "../../../.env")})
 const container = new ContainerImpl([
     namazTimeModule
 ])
-container.get(Symbols.Infrastructures.HttpDecorator)
+container.get(Symbols.Infrastructures.Http.Decorator)
 const application = new ApplicationRunnerImpl(container)
 
 
