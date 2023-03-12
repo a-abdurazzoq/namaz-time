@@ -1,4 +1,4 @@
-import {UserRepository} from "./abstractions";
+import {CreateUserRepositoryParams, UserRepository} from "./abstractions";
 import {inject, injectable} from "inversify";
 import {UserFactory} from "../domain/abstractions/factories";
 import {Symbols} from "../dependencies/symbols";
@@ -11,6 +11,19 @@ export class UserRepositoryImpl implements UserRepository {
         @inject(Symbols.Factories.User) private userFactory: UserFactory
     ) {}
 
+    public async create(params: CreateUserRepositoryParams): Promise<User> {
+        let createdUser = new UserModel({
+            username: params.username,
+            password: params.password,
+            full_name: params.fullName,
+            phone_number: params.phoneNumber
+        })
+
+        await createdUser.save()
+
+        return this.toEntity(createdUser)
+    }
+
     public async getById(id: string): Promise<User> {
         let getUser = await UserModel.findById(id)
 
@@ -18,6 +31,21 @@ export class UserRepositoryImpl implements UserRepository {
             throw new Error("User not found by id")
 
         return this.toEntity(getUser)
+    }
+
+    public async getByUsername(username: string): Promise<User> {
+        let getUser = await UserModel.findOne({username: username})
+
+        if(!getUser)
+            throw new Error("User not found by username")
+
+        return this.toEntity(getUser)
+    }
+
+    public async hasUsername(username: string): Promise<boolean> {
+        let getUser = await UserModel.findOne({username: username})
+
+        return !!getUser
     }
 
     private toEntity(userModel: IUserModel): User {
