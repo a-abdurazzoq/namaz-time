@@ -1,7 +1,7 @@
 import {ContainerModule} from "inversify";
 import {Symbols} from "../../symbols";
 import {Storage} from "../../../infrastructures/abstractions";
-import {BaseMongoStorageImpl} from "../../../infrastructures/db";
+import {BaseMongoStorageImpl} from "../../../infrastructures/database";
 import {SchedulerConfig, SchedulerFactory} from "../../../components/abstractions/schduler";
 import {SchedulerFactoryImpl} from "../../../components/schduler";
 import {Application} from "../../../infrastructures/abstractions/application";
@@ -56,8 +56,8 @@ import {
     GetAllExecuteTimeChatsForSendingUseCaseImpl,
     MassSendPrayerTimesToTelegramChatsUseCaseImpl, SendPrayerTimesToTelegramChatUseCaseImpl
 } from "../../../use-cases";
-import {TemplatePhotoService} from "../../../services/abstractions/template-photo-service";
-import {TemplatePhotoServiceImpl} from "../../../services/template-photo-service";
+import {TemplatePhotoService} from "../../../services/abstractions";
+import {TemplatePhotoServiceImpl} from "../../../services";
 import {PrayerTimesFactoryImpl} from "../../../domain/factories/prayers-in-day/prayer-times";
 import {TelegramBotClient} from "../../../clients/abstractions/telegram-bot-client";
 import {TelegramBotClientImpl} from "../../../clients/telegram-bot-client";
