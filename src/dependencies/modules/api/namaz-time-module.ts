@@ -8,7 +8,7 @@ import {
     AddressFactory,
     PrayersInDayFactory,
     CityFactory,
-    UserFactory, IslamicCalendarFactory, IslamicMonthFactory, PrayerTimesFactory
+    UserFactory, IslamicCalendarFactory, IslamicMonthFactory, PrayerTimesFactory, TokenFactory
 } from "../../../domain/abstractions/factories";
 import {
     PostForTelegramFactoryImpl,
@@ -40,7 +40,7 @@ import {
     CityRepositoryImpl, IslamicCalendarRepositoryImpl, IslamicMonthRepositoryImpl
 } from "../../../repositories";
 import {Storage, Transport} from "../../../infrastructures/abstractions";
-import {BaseMongoStorageImpl} from "../../../infrastructures/db";
+import {BaseMongoStorageImpl} from "../../../infrastructures/database";
 import {RequestFactory} from "../../../domain/abstractions/factories/request";
 import {RequestFactoryImpl} from "../../../domain/factories/request";
 import {TransportHttpImpl} from "../../../infrastructures/transport/http";
@@ -65,8 +65,8 @@ import {
 } from "../../../use-cases/api/namaz-time-api/post-for-telegram/create-post-for-telegram-use-case";
 import {TelegramBotClient} from "../../../clients/abstractions/telegram-bot-client";
 import {TelegramBotClientImpl} from "../../../clients/telegram-bot-client";
-import {TemplatePhotoService} from "../../../services/abstractions/template-photo-service";
-import {TemplatePhotoServiceImpl} from "../../../services/template-photo-service";
+import {TemplatePhotoService} from "../../../services/abstractions";
+import {TemplatePhotoServiceImpl} from "../../../services";
 import {PrayerTimesFactoryImpl} from "../../../domain/factories/prayers-in-day/prayer-times";
 import {RequestRepository} from "../../../repositories/abstractions/request-repository";
 import {RequestRepositoryImpl} from "../../../repositories/request-repository";
@@ -91,6 +91,7 @@ import {
 import {CreateRequestForRegisterPresenterImpl} from "../../../presenters/request/create-request-for-register-presenter";
 import {Middleware} from "../../../infrastructures/transport/abstractions/http/middleware";
 import {CookieParserMiddleware} from "../../../infrastructures/transport/http/middleware/cookie-parser";
+import {TokenFactoryImpl} from "../../../domain/factories/token";
 
 export const namazTimeModule = new ContainerModule(bind => {
     // Application
@@ -122,16 +123,17 @@ export const namazTimeModule = new ContainerModule(bind => {
     // Factories
     bind<CityFactory>(Symbols.Factories.City).to(CityFactoryImpl).inSingletonScope()
     bind<UserFactory>(Symbols.Factories.User).to(UserFactoryImpl).inSingletonScope()
+    bind<TokenFactory>(Symbols.Factories.Token).to(TokenFactoryImpl).inSingletonScope()
     bind<AddressFactory>(Symbols.Factories.Address).to(AddressFactoryImpl).inSingletonScope()
-    bind<DistrictFactory>(Symbols.Factories.District).to(DistrictFactoryImpl).inSingletonScope()
-    bind<PrayersInDayFactory>(Symbols.Factories.PrayersInDay).to(PrayersInDayFactoryImpl).inSingletonScope()
-    bind<TemplatePhotoFactory>(Symbols.Factories.TemplatePhoto).to(TemplatePhotoFactoryImpl).inSingletonScope()
-    bind<TelegramChatFactory>(Symbols.Factories.TelegramChat).to(TelegramChatFactoryImpl).inSingletonScope()
-    bind<PostForTelegramFactory>(Symbols.Factories.PostForTelegram).to(PostForTelegramFactoryImpl).inSingletonScope()
     bind<RequestFactory>(Symbols.Factories.Request).to(RequestFactoryImpl).inSingletonScope()
-    bind<IslamicCalendarFactory>(Symbols.Factories.IslamicCalendar).to(IslamicCalendarFactoryImpl).inSingletonScope()
-    bind<IslamicMonthFactory>(Symbols.Factories.IslamicMonth).to(IslamicMonthFactoryImpl).inSingletonScope()
+    bind<DistrictFactory>(Symbols.Factories.District).to(DistrictFactoryImpl).inSingletonScope()
     bind<PrayerTimesFactory>(Symbols.Factories.PrayerTimes).to(PrayerTimesFactoryImpl).inSingletonScope()
+    bind<PrayersInDayFactory>(Symbols.Factories.PrayersInDay).to(PrayersInDayFactoryImpl).inSingletonScope()
+    bind<IslamicMonthFactory>(Symbols.Factories.IslamicMonth).to(IslamicMonthFactoryImpl).inSingletonScope()
+    bind<TelegramChatFactory>(Symbols.Factories.TelegramChat).to(TelegramChatFactoryImpl).inSingletonScope()
+    bind<TemplatePhotoFactory>(Symbols.Factories.TemplatePhoto).to(TemplatePhotoFactoryImpl).inSingletonScope()
+    bind<PostForTelegramFactory>(Symbols.Factories.PostForTelegram).to(PostForTelegramFactoryImpl).inSingletonScope()
+    bind<IslamicCalendarFactory>(Symbols.Factories.IslamicCalendar).to(IslamicCalendarFactoryImpl).inSingletonScope()
 
     // Client
     bind<TelegramBotClient>(Symbols.Clients.TelegramBot).to(TelegramBotClientImpl).inSingletonScope()
