@@ -2,13 +2,13 @@ import {ContainerModule} from "inversify";
 import {SeedDataApplication} from "../../../infrastructures/application/types/seed-data";
 import {Application} from "../../../infrastructures/abstractions/application";
 import {Symbols} from "../../symbols";
-import {DistrictsSeedDataModule} from "../../../infrastructures/db/seed-data/module/districts";
-import {CitiesSeedDataModule} from "../../../infrastructures/db/seed-data/module/cities";
-import {SeedData, SeedDataModule} from "../../../infrastructures/abstractions/db/seed-data";
-import {SeedDataImpl} from "../../../infrastructures/db/seed-data";
-import {IslamicMonthsSeedDataModule} from "../../../infrastructures/db/seed-data/module/islamic-months";
+import {DistrictsSeedDataModule} from "../../../infrastructures/database/seed-data/module/districts";
+import {CitiesSeedDataModule} from "../../../infrastructures/database/seed-data/module/cities";
+import {SeedData, SeedDataModule} from "../../../infrastructures/abstractions";
+import {SeedDataImpl} from "../../../infrastructures/database/seed-data";
+import {IslamicMonthsSeedDataModule} from "../../../infrastructures/database/seed-data/module/islamic-months";
 import {Storage} from "../../../infrastructures/abstractions";
-import {BaseMongoStorageImpl} from "../../../infrastructures/db";
+import {BaseMongoStorageImpl} from "../../../infrastructures/database";
 import {
     IslamicMonthFactory,
     CityFactory,
@@ -35,8 +35,8 @@ import {
 } from "../../../repositories";
 import {Logger} from "../../../components/abstractions/logger";
 import {ConsoleLogger} from "../../../components/logger";
-import {IslamicCalendarSeedDataModule} from "../../../infrastructures/db/seed-data/module/islamic-calendar";
-import {PrayerTimesSeedDataModule} from "../../../infrastructures/db/seed-data/module/prayer-times";
+import {IslamicCalendarSeedDataModule} from "../../../infrastructures/database/seed-data/module/islamic-calendar";
+import {PrayerTimesSeedDataModule} from "../../../infrastructures/database/seed-data/module/prayer-times";
 import {PrayerTimesFactoryImpl} from "../../../domain/factories/prayers-in-day/prayer-times";
 import {NamozVaqtiClient} from "../../../clients/abstractions/namoz-vaqti-client";
 import {NamozVaqtiClientImpl} from "../../../clients/namoz-vaqti-client";
@@ -46,8 +46,8 @@ import {SchedulerFactory} from "../../../components/abstractions/schduler";
 import {SchedulerFactoryImpl} from "../../../components/schduler";
 import {AladhanClientImpl} from "../../../clients/aladhan-client";
 import {AladhanClient} from "../../../clients/abstractions/aladhan-client";
-import {HtmlTableToJsonService} from "../../../services/abstractions/html-table-to-json-service";
-import {HtmlTableToJsonServiceImpl} from "../../../services/html-table-to-json-service";
+import {HtmlTableToJsonService} from "../../../services/abstractions";
+import {HtmlTableToJsonServiceImpl} from "../../../services";
 
 export const seedDataModule = new ContainerModule((bind) => {
     // Applications
