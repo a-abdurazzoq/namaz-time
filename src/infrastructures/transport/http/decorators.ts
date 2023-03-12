@@ -40,7 +40,7 @@ export class Http {
     }
 
     static Get(path: string = "") {
-        return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
+        return function (target: Object, propertyKey: string, descriptor: PropertyDescriptor) {
             let originalMethod = descriptor.value
 
             let method = HttpInternal.handler(originalMethod)
@@ -55,7 +55,7 @@ export class Http {
     }
 
     static Post(path: string = "") {
-        return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
+        return function (target: Object, propertyKey: string, descriptor: PropertyDescriptor) {
             let originalMethod = descriptor.value
 
             let method = HttpInternal.handler(originalMethod)
