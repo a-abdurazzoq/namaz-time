@@ -98,7 +98,7 @@ export const namazTimeModule = new ContainerModule(bind => {
     bind<Transport>(Symbols.Infrastructures.Transport).to(TransportHttpImpl).inSingletonScope()
 
     // Http decorators
-    bind<Http>(Symbols.Infrastructures.HttpDecorator).to(Http).inSingletonScope()
+    bind<Http>(Symbols.Infrastructures.Http.Decorator).to(Http).inSingletonScope()
 
     // Storages
     bind<Storage>(Symbols.Infrastructures.Storage).to(BaseMongoStorageImpl).inSingletonScope()
@@ -109,10 +109,10 @@ export const namazTimeModule = new ContainerModule(bind => {
     // Services
     bind<TemplatePhotoService>(Symbols.Services.TemplatePhoto).to(TemplatePhotoServiceImpl)
 
-    //Routers
-    bind<RouterBase>(Symbols.Infrastructures.Routers).to(PostForTelegramRouterImpl).inSingletonScope()
-    bind<RouterBase>(Symbols.Infrastructures.Routers).to(PrayerTimesRouterImpl).inSingletonScope()
-    bind<RouterBase>(Symbols.Infrastructures.Routers).to(RequestRouterImpl).inSingletonScope()
+    // Routers
+    bind<RouterBase>(Symbols.Infrastructures.Http.Routers).to(PostForTelegramRouterImpl).inSingletonScope()
+    bind<RouterBase>(Symbols.Infrastructures.Http.Routers).to(PrayerTimesRouterImpl).inSingletonScope()
+    bind<RouterBase>(Symbols.Infrastructures.Http.Routers).to(RequestRouterImpl).inSingletonScope()
 
 
     // Factories
