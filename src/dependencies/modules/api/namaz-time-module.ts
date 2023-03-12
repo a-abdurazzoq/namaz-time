@@ -89,6 +89,8 @@ import {
     CreateRequestForRegisterPresenter
 } from "../../../presenters/abstractions/request/create-request-for-register-presenter";
 import {CreateRequestForRegisterPresenterImpl} from "../../../presenters/request/create-request-for-register-presenter";
+import {Middleware} from "../../../infrastructures/transport/abstractions/http/middleware";
+import {CookieParserMiddleware} from "../../../infrastructures/transport/http/middleware/cookie-parser";
 
 export const namazTimeModule = new ContainerModule(bind => {
     // Application
@@ -114,6 +116,8 @@ export const namazTimeModule = new ContainerModule(bind => {
     bind<RouterBase>(Symbols.Infrastructures.Http.Routers).to(PrayerTimesRouterImpl).inSingletonScope()
     bind<RouterBase>(Symbols.Infrastructures.Http.Routers).to(RequestRouterImpl).inSingletonScope()
 
+    // Middleware
+    bind<Middleware>(Symbols.Infrastructures.Http.Middleware).to(CookieParserMiddleware).inSingletonScope()
 
     // Factories
     bind<CityFactory>(Symbols.Factories.City).to(CityFactoryImpl).inSingletonScope()
