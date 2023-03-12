@@ -3,9 +3,24 @@ import {inject, injectable, postConstruct} from "inversify";
 import {Logger} from "../../../components/abstractions/logger";
 import {Symbols} from "../../../dependencies/symbols";
 import {RouterConfig, RouterMethodTypes} from "../abstractions/http/decorators";
+import {Guard} from "../../abstractions/guards";
 
 @injectable()
 export class Http {
+    static Guard(guard: Guard) {
+        return function (target: Object, propertyKey: string, descriptor: PropertyDescriptor) {
+            let originalMethod = descriptor.value
+
+            descriptor.value = async function(req: Request, res: Response) {
+                let result = await guard.check(req)
+
+                if(!result.access)
+                    throw new Error(result.message)
+
+                originalMethod.call(this, req, res)
+            }
+        }
+    }
     static Router(path: string) {
         return function (target: any) {
             target.prototype.routers = [] as RouterConfig[]

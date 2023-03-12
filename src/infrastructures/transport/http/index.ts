@@ -6,6 +6,7 @@ import {Symbols} from "../../../dependencies/symbols";
 import http from "http";
 import {RouterBase} from "./routers";
 import {RouterConfig, RouterMethodTypes} from "../abstractions/http/decorators";
+import {Middleware} from "../abstractions/http/middleware";
 
 @injectable()
 export class TransportHttpImpl implements Transport {
@@ -14,7 +15,8 @@ export class TransportHttpImpl implements Transport {
 
     constructor(
         @inject(Symbols.Infrastructures.Logger) private readonly logger: Logger,
-        @multiInject(Symbols.Infrastructures.Routers) private readonly routers: RouterBase[]
+        @multiInject(Symbols.Infrastructures.Http.Routers) private readonly routers: RouterBase[],
+        @multiInject(Symbols.Infrastructures.Http.Middleware) private readonly middleware: Middleware[]
     ) {}
 
     public async start(): Promise<void> {
@@ -32,13 +34,14 @@ export class TransportHttpImpl implements Transport {
     private init(): void {
         this.app = express()
 
-        this.setConfig()
+        this.setMiddleware()
         this.setRouters()
         this.setListen()
     }
 
-    private setConfig(): void {
+    private setMiddleware(): void {
         this.app.use(express.json())
+        this.app.use(...this.middleware.map(middleware => middleware.execute))
     }
 
     private setRouters(): void {
@@ -49,7 +52,7 @@ export class TransportHttpImpl implements Transport {
         }
     }
 
-    setRouter(router: RouterConfig): void {
+    private setRouter(router: RouterConfig): void {
         if(!router?.path)
             return
 
