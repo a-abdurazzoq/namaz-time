@@ -82,10 +82,10 @@ class HttpInternal {
         HttpInternal.logger = this.logger
     }
 
-    static handler(originalMethod: (req: Request) => Promise<any>) {
+    static handler(originalMethod: (req: Request, res: Response) => Promise<any>) {
         return async function (this: Object, req: Request, res: Response) {
             try {
-                let result = await originalMethod.call(this, req)
+                let result = await originalMethod.call(this, req, res)
 
                 res.status(200).json({
                     success: true,
