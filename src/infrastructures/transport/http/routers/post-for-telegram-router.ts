@@ -1,5 +1,4 @@
-import {RouterBase} from "./index";
-import {Request} from "express";
+import {RouterBase, RRequest} from "./index";
 import {
     CreatePostForTelegramController,
     PostForTelegramController
@@ -27,7 +26,7 @@ export class PostForTelegramRouterImpl implements RouterBase {
     ) {}
 
     @Http.Post()
-    private async createByRequest(req: Request<RequestRouter.CreateByRequest>): Promise<CreatePostForTelegramController.Response> {
+    private async createByRequest(req: RRequest<RequestRouter.CreateByRequest>): Promise<CreatePostForTelegramController.Response> {
         return await this.postForTelegramController.create({
             requestId: req.body.request_id,
             timePerDay: req.body.time_per_day,
