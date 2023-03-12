@@ -5,16 +5,17 @@ export namespace Symbols {
     export const Factories = {
         User: Symbol.for("UserFactory"),
         City: Symbol.for("CityFactory"),
+        Token: Symbol.for("TokenFactory"),
         Mosque: Symbol.for("MosqueFactory"),
         Address: Symbol.for("AddressFactory"),
         Request: Symbol.for("RequestFactory"),
         District: Symbol.for("DistrictFactory"),
         PrayerTimes: Symbol.for("PrayerTimesFactory"),
+        TelegramChat: Symbol.for("TelegramChatFactory"),
         PrayersInDay: Symbol.for("PrayersInDayFactory"),
         IslamicMonth: Symbol.for("IslamicMonthFactory"),
         TemplatePhoto: Symbol.for("TemplatePhotoFactory"),
         IslamicCalendar: Symbol.for("IslamicCalendarFactory"),
-        TelegramChat: Symbol.for("TelegramChatFactory"),
         PostForTelegram: Symbol.for("PostForTelegramFactory"),
         Scheduler: Symbol.for("SchedulerFactory")
     }
@@ -22,6 +23,7 @@ export namespace Symbols {
     export const Repositories = {
         User: Symbol.for("UserRepository"),
         City: Symbol.for("CityRepository"),
+        Token: Symbol.for("TokenRepository"),
         Mosque: Symbol.for("MosqueRepository"),
         Request: Symbol.for("RequestRepository"),
         District: Symbol.for("DistrictRepository"),
@@ -49,6 +51,10 @@ export namespace Symbols {
         PostForTelegram: {
             Create: Symbol.for("CreatePostForTelegramUseCase")
         },
+        Authorization: {
+            Login: Symbol.for("LoginAuthorizationUseCase"),
+            Registration: Symbol.for("RegistrationAuthorizationUseCase")
+        },
         GetAllExecuteTimeChatsForSending: Symbol.for("GetAllExecuteTimeChatsForSendingUseCase"),
         MassSendPrayerTimesToTelegramChats: Symbol.for("MassSendPrayerTimesToTelegramChatsUseCase"),
         SendPrayerTimesToTelegramChat: Symbol.for("SendPrayerTimesToTelegramChatUseCase"),
@@ -69,6 +75,8 @@ export namespace Symbols {
     }
 
     export const Services = {
+        Crypto: Symbol.for("CryptoService"),
+        Token: Symbol.for("TokenService"),
         TemplatePhoto: Symbol.for("TemplatePhotoService"),
         HtmlTableToJson: Symbol.for("HtmlTableToJsonService")
     }
