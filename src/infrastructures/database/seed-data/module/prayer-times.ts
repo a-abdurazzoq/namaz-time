@@ -1,7 +1,7 @@
 import {inject, injectable} from "inversify";
 
 import {Symbols} from "../../../../dependencies/symbols";
-import {SeedDataModule} from "../../../abstractions/db/seed-data";
+import {SeedDataModule} from "../../../abstractions";
 import {Logger} from "../../../../components/abstractions/logger";
 import {UpdatePrayersPerMonthUseCase} from "../../../../use-cases/abstractions";
 import {PrayersInDayRepository} from "../../../../repositories/abstractions";

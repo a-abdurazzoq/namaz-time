@@ -1,4 +1,4 @@
-import {SeedData, SeedDataModule} from "../../abstractions/db/seed-data";
+import {SeedData, SeedDataModule} from "../../abstractions";
 import {injectable, multiInject} from "inversify";
 import {Symbols} from "../../../dependencies/symbols";
 

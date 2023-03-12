@@ -2,7 +2,7 @@ import path from "path";
 import * as fs from "fs";
 import {inject, injectable} from "inversify";
 
-import {SeedDataModule} from "../../../abstractions/db/seed-data";
+import {SeedDataModule} from "../../../abstractions";
 import {IslamicMonthRepository} from "../../../../repositories/abstractions";
 import {Symbols} from "../../../../dependencies/symbols";
 import {Logger} from "../../../../components/abstractions/logger";
