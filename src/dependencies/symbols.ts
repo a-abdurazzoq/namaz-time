@@ -90,8 +90,11 @@ export namespace Symbols {
         SeedDataModules: Symbol.for("SeedDataModules"),
         Logger: Symbol.for("Logger"),
         Transport: Symbol.for("Transport"),
-        HttpDecorator: Symbol.for("HttpDecorator"),
-        Routers: Symbol.for("HttpRouters"),
+        Http: {
+            Middleware: Symbol.for("HttpMiddleware"),
+            Decorator: Symbol.for("HttpDecorator"),
+            Routers: Symbol.for("HttpRouters"),
+        },
         Storage: Symbol.for("Storage")
     }
 }
