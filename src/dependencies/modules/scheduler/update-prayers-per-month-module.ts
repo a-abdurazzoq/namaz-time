@@ -26,12 +26,12 @@ import {
     PrayersInDayRepositoryImpl
 } from "../../../repositories";
 import {Storage} from "../../../infrastructures/abstractions";
-import {BaseMongoStorageImpl} from "../../../infrastructures/db";
+import {BaseMongoStorageImpl} from "../../../infrastructures/database";
 import {UpdateIslamicCalendarUseCaseImpl, UpdatePrayersPerMonthUseCaseImpl} from "../../../use-cases";
 import {UpdateIslamicCalendarUseCase, UpdatePrayersPerMonthUseCase} from "../../../use-cases/abstractions";
 import {UpdatePrayersPerMonthSchedulerConfig} from "../../../components/schduler/config";
-import {HtmlTableToJsonService} from "../../../services/abstractions/html-table-to-json-service";
-import {HtmlTableToJsonServiceImpl} from "../../../services/html-table-to-json-service";
+import {HtmlTableToJsonService} from "../../../services/abstractions";
+import {HtmlTableToJsonServiceImpl} from "../../../services";
 import {AladhanClient} from "../../../clients/abstractions/aladhan-client";
 import {AladhanClientImpl} from "../../../clients/aladhan-client";
 import {NamozVaqtiClient} from "../../../clients/abstractions/namoz-vaqti-client";
