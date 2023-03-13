@@ -105,7 +105,6 @@ export namespace Symbols {
         Transport: Symbol.for("Transport"),
         Http: {
             Middleware: Symbol.for("HttpMiddleware"),
-            Decorator: Symbol.for("HttpDecorator"),
             Routers: Symbol.for("HttpRouters"),
         },
         Storage: Symbol.for("Storage")
