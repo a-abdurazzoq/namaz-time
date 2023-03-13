@@ -1,4 +1,4 @@
-import {RouterBase, RRequest} from "./index";
+import {RouterBase, RRequest} from "../../abstractions/http/routers";
 import {inject, injectable} from "inversify";
 import {Symbols} from "../../../../dependencies/symbols";
 import {CreateRequestForRegister, RequestController} from "../../../../controllers/abstractions";
