@@ -47,7 +47,7 @@ export class TokenRepositoryImpl implements TokenRepository {
             {user_id: new Types.ObjectId(user.getId())},
             {
                 $set: {
-                    token: generatedToken,
+                    token: generatedToken.token,
                     expire_in: generatedToken.expireIn,
                     expire_on: generatedToken.expireOn,
                     update_at: new Date()
