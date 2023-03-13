@@ -58,11 +58,11 @@ export class TransportHttpImpl implements Transport {
 
         switch (router.type) {
             case RouterMethodTypes.GET:
-                this.app.get(router.path, (req: Request, res: Response) => router.method(req, res))
+                    this.setGetMethod(router)
                 break;
 
             case RouterMethodTypes.POST:
-                this.app.post(router.path, (req: Request, res: Response) => router.method(req, res))
+                    this.setPostMethod(router)
                 break;
         }
 
