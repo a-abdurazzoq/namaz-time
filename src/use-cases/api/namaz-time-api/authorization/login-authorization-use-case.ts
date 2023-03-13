@@ -1,6 +1,6 @@
 import {
     LoginAuthorizationUseCase, LoginAuthorizationUseCaseParams
-} from "../../../abstractions/api/namaz-time-api/authorization/login-authorization-use-case";
+} from "../../../abstractions";
 import {Token} from "../../../../domain/entities";
 import {inject, injectable} from "inversify";
 import {Symbols} from "../../../../dependencies/symbols";
@@ -18,7 +18,7 @@ export class LoginAuthorizationUseCaseImpl implements LoginAuthorizationUseCase 
     public async execute(params: LoginAuthorizationUseCaseParams): Promise<Token> {
         let getUser = await this.userRepository.getByUsername(params.username);
 
-        let checkPassword = await this.cryptoService.compare({text: params.username, hash: getUser.getPassword()});
+        let checkPassword = await this.cryptoService.compare({text: params.password, hash: getUser.getPassword()});
 
         if(!checkPassword)
             throw new Error("Неверны логин или пароль")
