@@ -69,6 +69,28 @@ export class TransportHttpImpl implements Transport {
         return
     }
 
+    private setGetMethod(router: RouterConfig) {
+        this.app.get(router.path, async (req: Request, res: Response) => {
+            try {
+                await router.method(req, res)
+            }
+            catch (error) {
+                await this.logger.print({error: error})
+            }
+        })
+    }
+
+    private setPostMethod(router: RouterConfig) {
+        this.app.post(router.path, async (req: Request, res: Response) =>{
+            try {
+                await router.method(req, res)
+            }
+            catch (error) {
+                await this.logger.print({error: error})
+            }
+        })
+    }
+
     private getRoutes(): RouterConfig[] {
         let routers: RouterConfig[] = []
 
