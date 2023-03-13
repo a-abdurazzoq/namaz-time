@@ -27,6 +27,13 @@ export class Token {
         return this.user
     }
 
+    public getExpireIn(): number {
+        return this.expireIn
+    }
+    public getExpireOn(): Date {
+        return this.expireOn
+    }
+
     public getCreatedAt(): Date  {
         return this.createdAt
     }
