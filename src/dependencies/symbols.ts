@@ -63,6 +63,10 @@ export namespace Symbols {
     }
 
     export const Presenters = {
+        Authorization: {
+            Login: Symbol.for("LoginAuthorizationPresenter"),
+            Registration: Symbol.for("RegistrationAuthorizationPresenter"),
+        },
         Request: {
             CreateForRegister: Symbol.for("CreateRequestForRegisterPresenter")
         },
@@ -82,6 +86,7 @@ export namespace Symbols {
     }
 
     export const Controllers = {
+        Authorization: Symbol.for("AuthorizationController"),
         Request: Symbol.for("RequestController"),
         PrayerTimes: Symbol.for("PrayerTimesController"),
         PostForTelegram: Symbol.for("PostForTelegramController"),
