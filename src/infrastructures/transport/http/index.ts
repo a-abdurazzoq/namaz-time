@@ -4,7 +4,7 @@ import express, {Express, Request, Response} from "express";
 import {Logger} from "../../../components/abstractions/logger";
 import {Symbols} from "../../../dependencies/symbols";
 import http from "http";
-import {RouterBase} from "./routers";
+import {RouterBase} from "../abstractions/http/routers";
 import {RouterConfig, RouterMethodTypes} from "../abstractions/http/decorators";
 import {Middleware} from "../abstractions/http/middleware";
 
