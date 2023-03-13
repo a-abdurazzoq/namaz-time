@@ -1,13 +1,13 @@
-import {RouterBase, RRequest} from "./index";
+import {RouterBase, RRequest} from "../../abstractions/http/routers";
 import {
     CreatePostForTelegramController,
     PostForTelegramController
-} from "../../../../controllers/abstractions/namaz-time/post-for-telegram";
+} from "../../../../controllers/abstractions";
 import {inject, injectable} from "inversify";
 import {Symbols} from "../../../../dependencies/symbols";
 import {Http} from "../decorators";
 
-namespace RequestRouter {
+namespace PostForTelegramRouter {
     export interface CreateByRequest {
         request_id: string;
         chat_id_of_channel: number;
@@ -26,7 +26,7 @@ export class PostForTelegramRouterImpl implements RouterBase {
     ) {}
 
     @Http.Post()
-    private async createByRequest(req: RRequest<RequestRouter.CreateByRequest>): Promise<CreatePostForTelegramController.Response> {
+    private async createByRequest(req: RRequest<PostForTelegramRouter.CreateByRequest>): Promise<CreatePostForTelegramController.Response> {
         return await this.postForTelegramController.create({
             requestId: req.body.request_id,
             timePerDay: req.body.time_per_day,
