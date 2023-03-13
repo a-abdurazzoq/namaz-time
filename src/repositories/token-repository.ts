@@ -21,7 +21,7 @@ export class TokenRepositoryImpl implements TokenRepository {
 
         let tokenModel = new TokenModel({
             user_id: new Types.ObjectId(user.getId()),
-            token: generatedToken,
+            token: generatedToken.token,
             expire_in: generatedToken.expireIn,
             expire_on: generatedToken.expireOn
         })
