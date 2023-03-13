@@ -1,4 +1,4 @@
-import {RouterBase} from "./index";
+import {RouterBase} from "../../abstractions/http/routers";
 import {inject, injectable} from "inversify";
 import {Symbols} from "../../../../dependencies/symbols";
 import {PrayerTimesController} from "../../../../controllers/abstractions";
