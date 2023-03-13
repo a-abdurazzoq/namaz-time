@@ -1,11 +1,7 @@
 import {Request, Response} from "express";
-import {inject, injectable, postConstruct} from "inversify";
-import {Logger} from "../../../components/abstractions/logger";
-import {Symbols} from "../../../dependencies/symbols";
 import {RouterConfig, RouterMethodTypes} from "../abstractions/http/decorators";
 import {Guard} from "../../abstractions/guards";
 
-@injectable()
 export class Http {
     static Guard(guard: Guard) {
         return function (target: Object, propertyKey: string, descriptor: PropertyDescriptor) {
@@ -71,17 +67,6 @@ export class Http {
 }
 
 class HttpInternal {
-    private static logger: Logger;
-
-    constructor(
-        @inject(Symbols.Infrastructures.Logger) private readonly logger: Logger
-    ) {}
-
-    @postConstruct()
-    public init(): void {
-        HttpInternal.logger = this.logger
-    }
-
     static handler(originalMethod: (req: Request, res: Response) => Promise<any>) {
         return async function (this: Object, req: Request, res: Response) {
             try {
@@ -95,8 +80,6 @@ class HttpInternal {
                 return
             }
             catch (error: any) {
-                await HttpInternal.logger.print({error: error})
-
                 res.status(500).json({
                     success: false,
                     data: {
@@ -104,7 +87,7 @@ class HttpInternal {
                     }
                 })
 
-                return
+                throw error
             }
         }
     }
