@@ -1,9 +1,9 @@
 import {Presenter} from "../index";
 import {PostForTelegram} from "../../../domain/entities";
 
-export interface CreatePostForTelegramPresenter extends Presenter<CreatePostForTelegram.Params, CreatePostForTelegram.Response> {}
+export interface CreatePostForTelegramPresenter extends Presenter<CreatePostForTelegramPresenterData.Params, CreatePostForTelegramPresenterData.Response> {}
 
-export namespace CreatePostForTelegram {
+export namespace CreatePostForTelegramPresenterData {
     export type Params = PostForTelegram;
 
     export interface Response {
