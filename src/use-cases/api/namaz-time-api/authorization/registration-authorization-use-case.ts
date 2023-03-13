@@ -1,6 +1,6 @@
 import {
     RegistrationAuthorizationUseCase, RegistrationAuthorizationUseCaseParams
-} from "../../../abstractions/api/namaz-time-api/authorization/registration-authorization-use-case";
+} from "../../../abstractions";
 import {Token} from "../../../../domain/entities";
 import {inject, injectable} from "inversify";
 import {Symbols} from "../../../../dependencies/symbols";
@@ -8,7 +8,7 @@ import {TokenRepository, UserRepository} from "../../../../repositories/abstract
 import {CryptoService} from "../../../../services/abstractions";
 
 @injectable()
-export class RegisterAuthorizationUseCaseImpl implements RegistrationAuthorizationUseCase {
+export class RegistrationAuthorizationUseCaseImpl implements RegistrationAuthorizationUseCase {
     constructor(
         @inject(Symbols.Repositories.Token) private readonly tokenRepository: TokenRepository,
         @inject(Symbols.Repositories.User) private readonly userRepository: UserRepository,
