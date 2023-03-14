@@ -3,12 +3,12 @@ import {TelegramChat} from "../telegram-channel";
 export class TemplatePhoto {
     constructor(
         private id: string,
-        private fileName: string,
+        private dirName: string,
         private telegramChat: TelegramChat,
         private createAt: Date,
         private updateAt: Date
     ) {
-        this.isFileName(this.fileName)
+        this.isDirName(this.dirName)
         this.isCreateAt(this.createAt)
         this.isUpdateAt(this.updateAt)
     }
@@ -17,8 +17,8 @@ export class TemplatePhoto {
         return this.id
     }
 
-    public getFileName(): string {
-        return this.fileName
+    public getDirName(): string {
+        return this.dirName
     }
 
     public getTelegramChat(): TelegramChat {
@@ -34,9 +34,9 @@ export class TemplatePhoto {
     }
 
 
-    private isFileName(fileName: string): void {
-        if(fileName.constructor !== String) {
-            throw new Error("fileName is not string")
+    private isDirName(dirName: string): void {
+        if(dirName.constructor !== String) {
+            throw new Error("dir name is not string")
         }
     }
 

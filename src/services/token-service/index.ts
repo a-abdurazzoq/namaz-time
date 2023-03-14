@@ -13,26 +13,46 @@ export class TokenServiceImpl implements TokenService {
     }
 
     public async verify<R>(text: string): Promise<R> {
-        let result = jwt.verify(text, this.secretKey);
+        return new Promise<R>((resolve, reject) => {
+            jwt.verify(text, this.secretKey, (error, decoded) => {
+                if(error)
+                    reject(error)
 
-        return result as R
+                resolve(decoded as R)
+            });
+        })
+    }
+
+    public async isValid(text: string): Promise<boolean> {
+        return new Promise((resolve, reject) => {
+            jwt.verify(text, this.secretKey, (error) => {
+                if(error)
+                    reject(false)
+
+                resolve(true)
+            });
+        })
     }
 
     public async generate<T extends  string | object | Buffer>(data: T): Promise<GenerateTokenServiceResponse> {
-        let generatedToken = jwt.sign(
-            data,
-            this.secretKey,
-            { expiresIn: this.expireInMillisecond }
-        );
+        return new Promise<GenerateTokenServiceResponse>((resolve, reject) => {
+            jwt.sign(data, this.secretKey, { expiresIn: this.expireInMillisecond }, (error, generatedToken) => {
+                if(error)
+                    return reject(error)
 
-        let expireOn = new Date();
-        expireOn.setMilliseconds(expireOn.getMilliseconds()+this.expireInMillisecond);
+                if(!generatedToken)
+                    return reject(new Error("Произошло ошибка при генерации токена"))
 
-        return {
-            token: generatedToken,
-            expireIn: this.expireInMillisecond,
-            expireOn: expireOn
-        }
+                let expireOn = new Date();
+                expireOn.setMilliseconds(expireOn.getMilliseconds()+this.expireInMillisecond);
+
+                resolve({
+                    token: generatedToken,
+                    expireIn: this.expireInMillisecond,
+                    expireOn: expireOn
+                })
+            });
+        })
     }
 
 }

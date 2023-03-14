@@ -19,7 +19,7 @@ import {
     IslamicMonthFactoryImpl,
     CityFactoryImpl,
     DistrictFactoryImpl,
-    PrayersInDayFactoryImpl, IslamicCalendarFactoryImpl
+    PrayersInDayFactoryImpl, IslamicCalendarFactoryImpl, PrayerTimesFactoryImpl
 } from "../../../domain/factories";
 import {
     IslamicMonthRepository,
@@ -37,15 +37,12 @@ import {Logger} from "../../../components/abstractions/logger";
 import {ConsoleLogger} from "../../../components/logger";
 import {IslamicCalendarSeedDataModule} from "../../../infrastructures/database/seed-data/module/islamic-calendar";
 import {PrayerTimesSeedDataModule} from "../../../infrastructures/database/seed-data/module/prayer-times";
-import {PrayerTimesFactoryImpl} from "../../../domain/factories/prayers-in-day/prayer-times";
-import {NamozVaqtiClient} from "../../../clients/abstractions/namoz-vaqti-client";
-import {NamozVaqtiClientImpl} from "../../../clients/namoz-vaqti-client";
+import {NamozVaqtiClient, AladhanClient} from "../../../clients/abstractions";
+import {NamozVaqtiClientImpl, AladhanClientImpl} from "../../../clients";
 import {UpdateIslamicCalendarUseCase, UpdatePrayersPerMonthUseCase} from "../../../use-cases/abstractions";
 import {UpdateIslamicCalendarUseCaseImpl, UpdatePrayersPerMonthUseCaseImpl} from "../../../use-cases";
 import {SchedulerFactory} from "../../../components/abstractions/schduler";
 import {SchedulerFactoryImpl} from "../../../components/schduler";
-import {AladhanClientImpl} from "../../../clients/aladhan-client";
-import {AladhanClient} from "../../../clients/abstractions/aladhan-client";
 import {HtmlTableToJsonService} from "../../../services/abstractions";
 import {HtmlTableToJsonServiceImpl} from "../../../services";
 

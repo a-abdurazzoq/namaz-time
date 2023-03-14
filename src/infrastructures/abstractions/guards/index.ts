@@ -1,4 +1,4 @@
-import {Request} from "express";
+import {RRequest} from "../../transport/abstractions/http/routers";
 
 export * from "./authorization/is-admin-guard"
 
@@ -6,7 +6,7 @@ export interface Guard{
     check(context: GuardParams): Promise<GuardResponse>
 }
 
-export type GuardParams = Request
+export type GuardParams = RRequest<void>
 
 export type GuardResponse = HasAccess | NoAccess
 

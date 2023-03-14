@@ -6,6 +6,7 @@ export interface TelegramChatDto {
     address: Address;
     chatType: TelegramChatType;
     chatId: number;
+    chatUsername: string;
     createAt: Date;
     updateAt: Date;
 }

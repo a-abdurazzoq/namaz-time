@@ -1,7 +1,7 @@
 import {PostForTelegram, TelegramChat, TemplatePhoto} from "../../domain/entities";
 
 export interface GeneratePhotoByPostForTelegramParams {
-    PostForTelegram: PostForTelegram;
+    postForTelegram: PostForTelegram;
     necessaryDate: Date;
 }
 
@@ -13,5 +13,5 @@ export interface TemplatePhotoRepository {
 
 export interface CreateTemplatePhotoRepositoryParams {
     telegramChat: TelegramChat;
-    htmlTemplateFileBase64: string;
+    zipHtmlTemplateFileBase64: string;
 }

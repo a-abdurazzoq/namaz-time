@@ -1,13 +1,13 @@
 import {CreatePostForTelegramUseCase, CreatePostForTelegramUseCaseParams} from "../../../abstractions";
 import {PostForTelegram} from "../../../../domain/entities";
 import {inject, injectable} from "inversify";
-import {TelegramBotClient} from "../../../../clients/abstractions/telegram-bot-client";
+import {TelegramBotClient} from "../../../../clients/abstractions";
 import {Symbols} from "../../../../dependencies/symbols";
-import {RequestRepository} from "../../../../repositories/abstractions/request-repository";
 import {
     PostForTelegramRepository,
     TelegramChatRepository,
-    TemplatePhotoRepository
+    TemplatePhotoRepository,
+    RequestRepository
 } from "../../../../repositories/abstractions";
 
 
@@ -40,13 +40,15 @@ export class CreatePostForTelegramUseCaseImpl implements CreatePostForTelegramUs
 
         const createdTemplatePhoto = await this.templatePhotoRepository.create({
             telegramChat: createdTelegramChat,
-            htmlTemplateFileBase64: params.htmlTemplateFileBase64
+            zipHtmlTemplateFileBase64: params.zipHtmlTemplateFileBase64
         })
 
         return await this.postForTelegramRepository.create({
             telegramChat: createdTelegramChat,
             templatePhoto: createdTemplatePhoto,
-            timePerDay: params.timePerDay
+            timePerDay: params.timePerDay,
+            captionForPost: params.captionForPost,
+            descriptionInPhoto: params.descriptionInPhoto
         })
     }
 

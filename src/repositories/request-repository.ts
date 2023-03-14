@@ -1,7 +1,7 @@
-import {createRequestParams, RequestRepository} from "./abstractions/request-repository";
+import {createRequestParams, RequestRepository} from "./abstractions";
 import {inject, injectable} from "inversify";
 import {Symbols} from "../dependencies/symbols";
-import {IRequestModel, RequestModel} from "../models/request";
+import {IRequestModel, RequestModel} from "../models";
 import {RequestFactory} from "../domain/abstractions/factories/request";
 import {CityRepository, DistrictRepository} from "./abstractions";
 import {Request} from "../domain/entities/request";
@@ -23,6 +23,12 @@ export class RequestRepositoryImpl implements RequestRepository {
         return this.toEntity(getRequest)
     }
 
+    public async getAll(): Promise<Request[]> {
+        let getRequest = await RequestModel.find()
+
+        return this.toEntities(getRequest)
+    }
+
     public async create(params: createRequestParams): Promise<Request> {
         let requestModel = new RequestModel({
             telegram_channel_link: params.TelegramChatLink,
@@ -34,6 +40,12 @@ export class RequestRepositoryImpl implements RequestRepository {
         await requestModel.save()
 
         return this.toEntity(requestModel)
+    }
+
+    private toEntities(requestModels: IRequestModel[]): Promise<Request[]> {
+        let entities = requestModels.map(requestModel => this.toEntity(requestModel))
+
+        return Promise.all(entities)
     }
 
     private async toEntity(requestModel: IRequestModel): Promise<Request> {

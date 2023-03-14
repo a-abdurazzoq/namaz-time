@@ -1,12 +1,11 @@
 import {TelegramChat} from "../telegram-channel";
-import {TemplatePhoto} from "../template-photo";
+import {PostData} from "./post-data";
 
 export class PostForTelegram {
     constructor(
         private id: string,
-        private TelegramChat: TelegramChat,
-        private templatePhoto: TemplatePhoto,
-        private chatId: number,
+        private telegramChat: TelegramChat,
+        private postData: PostData,
         private timePerDay: number,
         private nextTime: Date,
         private createAt: Date,
@@ -18,15 +17,11 @@ export class PostForTelegram {
     }
 
     public getTelegramChat(): TelegramChat {
-        return this.TelegramChat
+        return this.telegramChat
     }
 
-    public getTemplatePhoto(): TemplatePhoto {
-        return this.templatePhoto
-    }
-
-    public getChatId(): number {
-        return this.chatId
+    public getPostData(): PostData {
+        return this.postData
     }
 
     public getTimePerDay(): number {

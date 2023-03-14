@@ -1,9 +1,13 @@
 import {Schema, model, Types, Document} from "mongoose"
 
 export interface IPostForTelegramModel extends Document {
-    telegram_channel_id: Types.ObjectId;
-    template_photo_id: Types.ObjectId;
-    chat_id: number;
+    telegram_chat_id: Types.ObjectId;
+    post_data: {
+        template_photo_id: Types.ObjectId;
+        chat_id: number;
+        description_in_photo: string;
+        caption_for_post: string;
+    }
     time_per_day: number;
     next_time: Date;
     create_at: Date;
@@ -11,17 +15,27 @@ export interface IPostForTelegramModel extends Document {
 }
 
 const PostForTelegramSchema = new Schema({
-    telegram_channel_id: {
+    telegram_chat_id: {
         type: Types.ObjectId,
         required: true
     },
-    template_photo_id: {
-        type: Types.ObjectId,
-        required: true
-    },
-    chat_id: {
-        type: Number,
-        required: true
+    post_data: {
+        template_photo_id: {
+            type: Types.ObjectId,
+            required: true
+        },
+        chat_id: {
+            type: Number,
+            required: true
+        },
+        description_in_photo: {
+            type: String,
+            default: "",
+        },
+        caption_for_post: {
+            type: String,
+            default: "",
+        }
     },
     time_per_day: {
         type: Number,

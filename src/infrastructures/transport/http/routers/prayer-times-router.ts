@@ -2,7 +2,7 @@ import {RouterBase} from "../../abstractions/http/routers";
 import {inject, injectable} from "inversify";
 import {Symbols} from "../../../../dependencies/symbols";
 import {PrayerTimesController} from "../../../../controllers/abstractions";
-import {GetPrayerTimes} from "../../../../presenters/abstractions/prayer-times/get-today-prayer-times-presenter";
+import {GetPrayerTimes} from "../../../../presenters/abstractions";
 import {Http} from "../decorators";
 
 @injectable()

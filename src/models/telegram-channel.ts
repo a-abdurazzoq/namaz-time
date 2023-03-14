@@ -11,6 +11,7 @@ export interface ITelegramChatModel extends Document {
     },
     chat_type: TelegramChatType;
     chat_id: number;
+    chat_username: string;
     create_at: Date;
     update_at: Date;
 }
@@ -41,6 +42,10 @@ const TelegramChatSchema = new Schema({
     },
     chat_id: {
         type: Number,
+        required: true
+    },
+    chat_username: {
+        type: String,
         required: true
     },
     create_at: {

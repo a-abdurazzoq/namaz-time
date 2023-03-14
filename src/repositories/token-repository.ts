@@ -1,5 +1,5 @@
 import {Token, User} from "../domain/entities";
-import {ITokenModel, TokenModel} from "../models/token";
+import {ITokenModel, TokenModel} from "../models";
 import {inject, injectable} from "inversify";
 import {Symbols} from "../dependencies/symbols";
 import {UserRepository, DataInToken, TokenRepository} from "./abstractions";
@@ -14,6 +14,15 @@ export class TokenRepositoryImpl implements TokenRepository {
         @inject(Symbols.Repositories.User) private readonly userRepository: UserRepository,
         @inject(Symbols.Services.Token) private readonly tokenService: TokenService
     ) {
+    }
+
+    private async getById(tokenId: string) {
+        let getToken = await TokenModel.findById(tokenId)
+
+        if(!getToken)
+            throw new Error("Token not found by id")
+
+        return this.toEntity(getToken)
     }
 
     public async create(user: User): Promise<Token> {
@@ -31,7 +40,7 @@ export class TokenRepositoryImpl implements TokenRepository {
         return this.toEntity(tokenModel)
     }
 
-    public async getByToken(token: string): Promise<Token | null> {
+    public async getByToken(token: string): Promise<Token> {
         let getToken = await TokenModel.findOne({token: token})
 
         if(!getToken)
@@ -58,7 +67,7 @@ export class TokenRepositoryImpl implements TokenRepository {
         if(!updatedTokenModel)
             throw new Error("Token not found by user id")
 
-        return this.toEntity(updatedTokenModel)
+        return this.getById(updatedTokenModel._id.toHexString())
     }
 
     public async hasTokenByUserId(user: User): Promise<boolean> {

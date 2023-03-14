@@ -12,7 +12,7 @@ import {TemplatePhotoFactory} from "../domain/abstractions/factories";
 import {Symbols} from "../dependencies/symbols";
 import {TemplatePhoto} from "../domain/entities";
 import {TemplatePhotoModel, ITemplatePhotoModel} from "../models";
-import {TemplatePhotoService} from "../services/abstractions/template-photo-service";
+import {TemplatePhotoService} from "../services/abstractions";
 
 @injectable()
 export class TemplatePhotoRepositoryImpl implements TemplatePhotoRepository {
@@ -25,13 +25,13 @@ export class TemplatePhotoRepositoryImpl implements TemplatePhotoRepository {
     ) {}
 
     public async create(params: CreateTemplatePhotoRepositoryParams): Promise<TemplatePhoto> {
-        let fileName = await this.templatePhotoService.createPhotoTemplateUsingBase64({
-            base64: params.htmlTemplateFileBase64,
+        let dirName = await this.templatePhotoService.createPhotoTemplateUsingBase64({
+            zipBase64: params.zipHtmlTemplateFileBase64,
             additionalFileName: params.telegramChat.getName()
         })
 
         const createdTemplatePhoto = new TemplatePhotoModel({
-            file_name: fileName,
+            dir_name: dirName,
             telegram_chat_id: params.telegramChat.getId()
         })
 
@@ -54,7 +54,8 @@ export class TemplatePhotoRepositoryImpl implements TemplatePhotoRepository {
         const prayerInDay = await this.prayersInDayRepository.getIslamicCalendarId(islamicCalendar.getId())
 
         return this.templatePhotoService.photoGeneration({
-            htmlFileName: params.PostForTelegram.getTemplatePhoto().getFileName(),
+            htmlDirName: params.postForTelegram.getPostData().getTemplatePhoto().getDirName(),
+            description: params.postForTelegram.getPostData().getDescriptionInPhoto(),
             fajr: prayerInDay.getPrayerTimes().getFajr(),
             shurooq: prayerInDay.getPrayerTimes().getShurooq(),
             dhuhr: prayerInDay.getPrayerTimes().getDhuhr(),
@@ -63,6 +64,8 @@ export class TemplatePhotoRepositoryImpl implements TemplatePhotoRepository {
             isha: prayerInDay.getPrayerTimes().getIsha(),
             gregorianFullDate: prayerInDay.getIslamicCalendar().getGregorianDateAsText(),
             islamicFullDate: prayerInDay.getIslamicCalendar().getIslamicDateAsText(),
+            whichCityTime: params.postForTelegram.getTelegramChat().getAddress().getCity().getName(),
+            username: params.postForTelegram.getTelegramChat().getChatUsername()
         })
     }
 
@@ -71,7 +74,7 @@ export class TemplatePhotoRepositoryImpl implements TemplatePhotoRepository {
 
         return this.templatePhotoFactory.create({
             id: templatePhotoModel._id.toHexString(),
-            fileName: templatePhotoModel.file_name,
+            dirName: templatePhotoModel.dir_name,
             telegramChat: telegramChat,
             createAt: templatePhotoModel.create_at,
             updateAt: templatePhotoModel.update_at

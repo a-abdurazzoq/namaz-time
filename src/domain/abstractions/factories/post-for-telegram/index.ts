@@ -1,11 +1,11 @@
 import {Factory} from "../factory";
-import {PostForTelegram, TelegramChat, TemplatePhoto} from "../../../entities";
+import {PostForTelegram, TelegramChat} from "../../../entities";
+import {PostData} from "../../../entities/post-for-telegram/post-data";
 
 export interface PostForTelegramDto {
     id: string;
     TelegramChat: TelegramChat;
-    templatePhoto: TemplatePhoto;
-    chatId: number;
+    postData: PostData;
     timePerDay: number;
     nextTime: Date;
     createAt: Date;

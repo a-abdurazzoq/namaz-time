@@ -23,10 +23,10 @@ export class MassSendPrayerTimesToTelegramChatsUseCaseImpl implements MassSendPr
         necessaryDate.setHours(0, 0, 0, 0,)
 
         for (let i = 0; i < params.length; i++) {
-            let PostForTelegram = params[i]
+            let postForTelegram = params[i]
             let response = await this.sendPrayerTimesToTelegramChatUseCase.execute({
                 necessaryDate: necessaryDate,
-                PostForTelegram: PostForTelegram
+                postForTelegram: postForTelegram
             })
 
             if(this.isError(response)) {

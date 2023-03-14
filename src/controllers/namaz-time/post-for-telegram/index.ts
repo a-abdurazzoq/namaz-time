@@ -1,13 +1,13 @@
+import {inject, injectable} from "inversify";
 import {
     CreatePostForTelegramController,
     PostForTelegramController
-} from "../../abstractions/namaz-time/post-for-telegram";
-import {inject, injectable} from "inversify";
+} from "../../abstractions";
 import {Symbols} from "../../../dependencies/symbols";
 import {CreatePostForTelegramUseCase} from "../../../use-cases/abstractions";
 import {
     CreatePostForTelegramPresenter
-} from "../../../presenters/abstractions/post-for-telegram/create-post-for-telegram-presenter";
+} from "../../../presenters/abstractions";
 
 
 @injectable()

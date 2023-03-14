@@ -5,9 +5,9 @@ export interface CreatePostForTelegramUseCaseParams {
     requestId: string;
     chatIdOfChannel: number;
     timePerDay: number;
-    htmlTemplateFileBase64: string;
+    zipHtmlTemplateFileBase64: string;
     descriptionInPhoto: string;
-    descriptionForPost: string;
+    captionForPost: string;
 }
 
 export interface CreatePostForTelegramUseCase extends UseCase<CreatePostForTelegramUseCaseParams, PostForTelegram> {}

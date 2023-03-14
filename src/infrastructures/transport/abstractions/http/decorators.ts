@@ -8,5 +8,14 @@ export enum RouterMethodTypes {
 export interface RouterConfig {
     path: string;
     type: RouterMethodTypes;
-    method: (req: Request, res: Response) => Promise<any>
+    method: (req: Request, res: Response) => Promise<any>;
+    guard: {
+        [key: string]: any
+    }
+}
+
+export interface HandlerParams {
+    path: string;
+    routerMethod: RouterMethodTypes;
+    descriptor: PropertyDescriptor;
 }

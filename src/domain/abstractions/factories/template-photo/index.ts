@@ -3,7 +3,7 @@ import {TelegramChat, TemplatePhoto} from "../../../entities";
 
 export interface TemplatePhotoDto {
     id: string;
-    fileName: string;
+    dirName: string;
     telegramChat: TelegramChat;
     createAt: Date;
     updateAt: Date;

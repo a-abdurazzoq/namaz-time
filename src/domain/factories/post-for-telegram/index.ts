@@ -8,8 +8,7 @@ export class PostForTelegramFactoryImpl implements PostForTelegramFactory {
         return new PostForTelegram(
             dto.id,
             dto.TelegramChat,
-            dto.templatePhoto,
-            dto.chatId,
+            dto.postData,
             dto.timePerDay,
             dto.nextTime,
             dto.createAt,

@@ -1,14 +1,14 @@
 import {Schema, model, Types, Document} from "mongoose"
 
 export interface ITemplatePhotoModel extends Document {
-    file_name: string;
+    dir_name: string;
     telegram_chat_id: Types.ObjectId;
     create_at: Date;
     update_at: Date;
 }
 
 const TemplatePhotoSchema = new Schema({
-    file_name: {
+    dir_name: {
         type: String,
         required: true
     },

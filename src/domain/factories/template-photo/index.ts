@@ -7,7 +7,7 @@ export class TemplatePhotoFactoryImpl implements TemplatePhotoFactory {
     create(dto: TemplatePhotoDto): TemplatePhoto {
         return new TemplatePhoto(
             dto.id,
-            dto.fileName,
+            dto.dirName,
             dto.telegramChat,
             dto.createAt,
             dto.updateAt

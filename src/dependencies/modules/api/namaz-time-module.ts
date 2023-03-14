@@ -18,7 +18,12 @@ import {
     AddressFactoryImpl,
     PrayersInDayFactoryImpl,
     CityFactoryImpl,
-    UserFactoryImpl, IslamicCalendarFactoryImpl, IslamicMonthFactoryImpl
+    UserFactoryImpl,
+    IslamicCalendarFactoryImpl,
+    IslamicMonthFactoryImpl,
+    RequestFactoryImpl,
+    TokenFactoryImpl,
+    PrayerTimesFactoryImpl
 } from "../../../domain/factories";
 import {Application} from "../../../infrastructures/abstractions/application";
 import {APIApplicationImpl} from "../../../infrastructures/application";
@@ -29,20 +34,24 @@ import {
     CityRepository,
     DistrictRepository,
     PrayersInDayRepository, TelegramChatRepository, TemplatePhotoRepository,
-    UserRepository, IslamicCalendarRepository, IslamicMonthRepository, TokenRepository
+    UserRepository, IslamicCalendarRepository, IslamicMonthRepository, TokenRepository, RequestRepository
 } from "../../../repositories/abstractions";
 import {
     PostForTelegramRepositoryImpl,
-    PrayersInDayRepositoryImpl, TelegramChatRepositoryImpl,
+    PrayersInDayRepositoryImpl,
+    TelegramChatRepositoryImpl,
     TemplatePhotoRepositoryImpl,
     UserRepositoryImpl,
     DistrictRepositoryImpl,
-    CityRepositoryImpl, IslamicCalendarRepositoryImpl, IslamicMonthRepositoryImpl
+    CityRepositoryImpl,
+    IslamicCalendarRepositoryImpl,
+    IslamicMonthRepositoryImpl,
+    RequestRepositoryImpl,
+    TokenRepositoryImpl
 } from "../../../repositories";
 import {Storage, Transport} from "../../../infrastructures/abstractions";
 import {BaseMongoStorageImpl} from "../../../infrastructures/database";
 import {RequestFactory} from "../../../domain/abstractions/factories/request";
-import {RequestFactoryImpl} from "../../../domain/factories/request";
 import {TransportHttpImpl} from "../../../infrastructures/transport/http";
 import {
     PostForTelegramRouterImpl,
@@ -63,7 +72,7 @@ import {
 } from "../../../controllers";
 import {
     CreatePostForTelegramUseCase,
-    CreateRequestForRegisterUseCase,
+    CreateRequestForRegisterUseCase, GetMeAuthorizationUseCase,
     GetTodayPrayerTimesUseCase, LoginAuthorizationUseCase, RegistrationAuthorizationUseCase
 } from "../../../use-cases/abstractions";
 import {
@@ -71,45 +80,42 @@ import {
     GetTodayPrayerTimesUseCaseImpl,
     CreateRequestForRegisterUseCaseImpl,
     LoginAuthorizationUseCaseImpl,
-    RegistrationAuthorizationUseCaseImpl
+    RegistrationAuthorizationUseCaseImpl,
+    GetMeAuthorizationUseCaseImpl
 } from "../../../use-cases";
-import {TelegramBotClient} from "../../../clients/abstractions/telegram-bot-client";
-import {TelegramBotClientImpl} from "../../../clients/telegram-bot-client";
+import {TelegramBotClient} from "../../../clients/abstractions";
+import {TelegramBotClientImpl} from "../../../clients";
 import {CryptoService, TemplatePhotoService, TokenService} from "../../../services/abstractions";
 import {CryptoServiceImpl, TemplatePhotoServiceImpl, TokenServiceImpl} from "../../../services";
-import {PrayerTimesFactoryImpl} from "../../../domain/factories/prayers-in-day/prayer-times";
-import {RequestRepository} from "../../../repositories/abstractions/request-repository";
-import {RequestRepositoryImpl} from "../../../repositories/request-repository";
 import {
-    CreatePostForTelegramPresenter
-} from "../../../presenters/abstractions/post-for-telegram/create-post-for-telegram-presenter";
+    CreatePostForTelegramPresenter, GetTodayPrayerTimesPresenter,
+    CreateRequestForRegisterPresenter,
+    RegistrationAuthorizationPresenter,
+    LoginAuthorizationPresenter,
+    GetMeAuthorizationPresenter,
+} from "../../../presenters/abstractions";
 import {
-    CreatePostForTelegramPresenterImpl
-} from "../../../presenters/post-for-telegram/create-post-for-telegram-presenter";
-import {
-    GetTodayPrayerTimesPresenter
-} from "../../../presenters/abstractions/prayer-times/get-today-prayer-times-presenter";
-import {GetTodayPrayerTimesPresenterImpl} from "../../../presenters/prayer-times/get-today-prayer-times-presenter";
-import {
-    CreateRequestForRegisterPresenter
-} from "../../../presenters/abstractions/request/create-request-for-register-presenter";
-import {CreateRequestForRegisterPresenterImpl} from "../../../presenters/request/create-request-for-register-presenter";
+    CreatePostForTelegramPresenterImpl,
+    GetTodayPrayerTimesPresenterImpl,
+    RegistrationAuthorizationPresenterImpl,
+    GetMeAuthorizationPresenterImpl,
+    CreateRequestForRegisterPresenterImpl,
+    LoginAuthorizationPresenterImpl
+} from "../../../presenters";
 import {Middleware} from "../../../infrastructures/transport/abstractions/http/middleware";
-import {CookieParserMiddleware} from "../../../infrastructures/transport/http/middleware/cookie-parser";
-import {TokenFactoryImpl} from "../../../domain/factories/token";
-import {
-    RegistrationAuthorizationPresenter
-} from "../../../presenters/abstractions/authorization/registration-authorization-presenter";
-import {
-    LoginAuthorizationPresenter
-} from "../../../presenters/abstractions/authorization/login-authorization-presenter";
-import {
-    RegistrationAuthorizationPresenterImpl
-} from "../../../presenters/authorization/registration-authorization-presenter";
-import {LoginAuthorizationPresenterImpl} from "../../../presenters/authorization/login-authorization-presenter";
+import {CookieParserMiddleware} from "../../../infrastructures/transport/http/middleware";
 import {RouterBase} from "../../../infrastructures/transport/abstractions/http/routers";
 import {AuthorizationRouterImpl} from "../../../infrastructures/transport/http/routers";
-import {TokenRepositoryImpl} from "../../../repositories/token-repository";
+import {IsAdminGuard} from "../../../infrastructures/abstractions/guards";
+import {IsAdminGuardImpl} from "../../../infrastructures/guards";
+import {PostDataFactoryImpl} from "../../../domain/factories/post-for-telegram/post-data";
+import {PostDataFactory} from "../../../domain/abstractions/factories/post-for-telegram/post-data";
+import {GetAllRequestUseCaseImpl} from "../../../use-cases/api/namaz-time-api/request/get-all-request-use-case";
+import {
+    GetAllRequestUseCase
+} from "../../../use-cases/abstractions/api/namaz-time-api/request/get-all-request-use-case";
+import {GetAllRequestPresenter} from "../../../presenters/abstractions/request/get-all-request-presenter";
+import {GetAllRequestPresenterImpl} from "../../../presenters/request/get-all-request-presenter";
 
 export const namazTimeModule = new ContainerModule(bind => {
     // Application
@@ -138,6 +144,9 @@ export const namazTimeModule = new ContainerModule(bind => {
     // Middleware
     bind<Middleware>(Symbols.Infrastructures.Http.Middleware).to(CookieParserMiddleware).inSingletonScope()
 
+    // Guards
+    bind<IsAdminGuard>(Symbols.Infrastructures.Guard.IsAdmin).to(IsAdminGuardImpl).inSingletonScope()
+
     // Factories
     bind<CityFactory>(Symbols.Factories.City).to(CityFactoryImpl).inSingletonScope()
     bind<UserFactory>(Symbols.Factories.User).to(UserFactoryImpl).inSingletonScope()
@@ -150,6 +159,7 @@ export const namazTimeModule = new ContainerModule(bind => {
     bind<IslamicMonthFactory>(Symbols.Factories.IslamicMonth).to(IslamicMonthFactoryImpl).inSingletonScope()
     bind<TelegramChatFactory>(Symbols.Factories.TelegramChat).to(TelegramChatFactoryImpl).inSingletonScope()
     bind<TemplatePhotoFactory>(Symbols.Factories.TemplatePhoto).to(TemplatePhotoFactoryImpl).inSingletonScope()
+    bind<PostDataFactory>(Symbols.Factories.PostData).to(PostDataFactoryImpl).inSingletonScope()
     bind<PostForTelegramFactory>(Symbols.Factories.PostForTelegram).to(PostForTelegramFactoryImpl).inSingletonScope()
     bind<IslamicCalendarFactory>(Symbols.Factories.IslamicCalendar).to(IslamicCalendarFactoryImpl).inSingletonScope()
 
@@ -170,11 +180,13 @@ export const namazTimeModule = new ContainerModule(bind => {
     bind<TokenRepository>(Symbols.Repositories.Token).to(TokenRepositoryImpl).inSingletonScope()
 
     // Use Cases
-    bind<RegistrationAuthorizationUseCase>(Symbols.UseCases.Authorization.Registration).to(RegistrationAuthorizationUseCaseImpl).inSingletonScope()
     bind<CreateRequestForRegisterUseCase>(Symbols.UseCases.Request.CreateForRegister).to(CreateRequestForRegisterUseCaseImpl).inSingletonScope()
+    bind<GetAllRequestUseCase>(Symbols.UseCases.Request.GetAll).to(GetAllRequestUseCaseImpl).inSingletonScope()
     bind<CreatePostForTelegramUseCase>(Symbols.UseCases.PostForTelegram.Create).to(CreatePostForTelegramUseCaseImpl).inSingletonScope()
     bind<GetTodayPrayerTimesUseCase>(Symbols.UseCases.PrayerTimes.GetToday).to(GetTodayPrayerTimesUseCaseImpl).inSingletonScope()
+    bind<RegistrationAuthorizationUseCase>(Symbols.UseCases.Authorization.Registration).to(RegistrationAuthorizationUseCaseImpl).inSingletonScope()
     bind<LoginAuthorizationUseCase>(Symbols.UseCases.Authorization.Login).to(LoginAuthorizationUseCaseImpl).inSingletonScope()
+    bind<GetMeAuthorizationUseCase>(Symbols.UseCases.Authorization.GetMe).to(GetMeAuthorizationUseCaseImpl).inSingletonScope()
 
     // Controllers
     bind<AuthorizationController>(Symbols.Controllers.Authorization).to(AuthorizationControllerImpl).inSingletonScope()
@@ -184,8 +196,10 @@ export const namazTimeModule = new ContainerModule(bind => {
 
     // Presenters
     bind<RegistrationAuthorizationPresenter>(Symbols.Presenters.Authorization.Registration).to(RegistrationAuthorizationPresenterImpl).inSingletonScope()
+    bind<GetAllRequestPresenter>(Symbols.Presenters.Request.GetAll).to(GetAllRequestPresenterImpl).inSingletonScope()
     bind<CreateRequestForRegisterPresenter>(Symbols.Presenters.Request.CreateForRegister).to(CreateRequestForRegisterPresenterImpl).inSingletonScope()
     bind<CreatePostForTelegramPresenter>(Symbols.Presenters.PostForTelegram.Create).to(CreatePostForTelegramPresenterImpl).inSingletonScope()
     bind<GetTodayPrayerTimesPresenter>(Symbols.Presenters.PrayerTimes.GetToday).to(GetTodayPrayerTimesPresenterImpl).inSingletonScope()
     bind<LoginAuthorizationPresenter>(Symbols.Presenters.Authorization.Login).to(LoginAuthorizationPresenterImpl).inSingletonScope()
+    bind<GetMeAuthorizationPresenter>(Symbols.Presenters.Authorization.GetMe).to(GetMeAuthorizationPresenterImpl).inSingletonScope()
 })

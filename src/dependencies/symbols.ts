@@ -17,6 +17,7 @@ export namespace Symbols {
         TemplatePhoto: Symbol.for("TemplatePhotoFactory"),
         IslamicCalendar: Symbol.for("IslamicCalendarFactory"),
         PostForTelegram: Symbol.for("PostForTelegramFactory"),
+        PostData: Symbol.for("PostDataFactory"),
         Scheduler: Symbol.for("SchedulerFactory")
     }
 
@@ -46,12 +47,14 @@ export namespace Symbols {
             GetToday: Symbol.for("GetTodayPrayerTimesUseCase")
         },
         Request: {
-            CreateForRegister: Symbol.for("CreateRequestForRegisterUseCase")
+            CreateForRegister: Symbol.for("CreateRequestForRegisterUseCase"),
+            GetAll: Symbol.for("GetAllUseCase")
         },
         PostForTelegram: {
             Create: Symbol.for("CreatePostForTelegramUseCase")
         },
         Authorization: {
+            GetMe: Symbol.for("GetMeAuthorizationUseCase"),
             Login: Symbol.for("LoginAuthorizationUseCase"),
             Registration: Symbol.for("RegistrationAuthorizationUseCase")
         },
@@ -64,11 +67,13 @@ export namespace Symbols {
 
     export const Presenters = {
         Authorization: {
+            GetMe: Symbol.for("GetMeAuthorizationPresenter"),
             Login: Symbol.for("LoginAuthorizationPresenter"),
             Registration: Symbol.for("RegistrationAuthorizationPresenter"),
         },
         Request: {
-            CreateForRegister: Symbol.for("CreateRequestForRegisterPresenter")
+            CreateForRegister: Symbol.for("CreateRequestForRegisterPresenter"),
+            GetAll: Symbol.for("GetAllPresenter")
         },
         PrayerTimes: {
             GetToday: Symbol.for("GetTodayPrayerTimesPresenter")
@@ -106,6 +111,9 @@ export namespace Symbols {
         Http: {
             Middleware: Symbol.for("HttpMiddleware"),
             Routers: Symbol.for("HttpRouters"),
+        },
+        Guard: {
+            IsAdmin: Symbol.for("IsAdminGuard")
         },
         Storage: Symbol.for("Storage")
     }

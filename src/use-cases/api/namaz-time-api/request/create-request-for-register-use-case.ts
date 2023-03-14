@@ -3,8 +3,8 @@ import {
 } from "../../../abstractions";
 import {inject, injectable} from "inversify";
 import {Symbols} from "../../../../dependencies/symbols";
-import {TelegramBotClient} from "../../../../clients/abstractions/telegram-bot-client";
-import {RequestRepository} from "../../../../repositories/abstractions/request-repository";
+import {TelegramBotClient} from "../../../../clients/abstractions";
+import {RequestRepository} from "../../../../repositories/abstractions";
 import {Request} from "../../../../domain/entities/request";
 
 @injectable()

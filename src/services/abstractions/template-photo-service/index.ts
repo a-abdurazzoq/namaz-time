@@ -5,7 +5,8 @@ export interface TemplatePhotoService {
 }
 
 export interface PhotoGenerationParams {
-    htmlFileName: string;
+    htmlDirName: string;
+    description: string;
     gregorianFullDate: string;
     islamicFullDate: string;
     fajr: string;
@@ -14,9 +15,11 @@ export interface PhotoGenerationParams {
     asr: string;
     maghrib: string;
     isha: string;
+    username: string
+    whichCityTime: string
 }
 
 export interface CreatePhotoTemplateUsingBase64Params {
-    base64: string;
+    zipBase64: string;
     additionalFileName: string;
 }

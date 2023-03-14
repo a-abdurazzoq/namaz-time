@@ -11,4 +11,6 @@ export interface CreatePostForTelegramRepositoryParams {
     telegramChat: TelegramChat;
     templatePhoto: TemplatePhoto;
     timePerDay: number;
+    captionForPost: string;
+    descriptionInPhoto: string;
 }

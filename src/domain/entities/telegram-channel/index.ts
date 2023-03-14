@@ -14,12 +14,14 @@ export class TelegramChat {
         private name: string,
         private address: Address,
         private chatId: number,
+        private chatUsername: string,
         private chatType: TelegramChatType,
         private createAt: Date,
         private updateAt: Date
     ) {
         this.isName(this.name)
         this.isChatId(this.chatId)
+        this.isChatUsername(this.chatUsername)
         this.isChatType(this.chatId)
         this.isCreateAt(this.createAt)
         this.isUpdateAt(this.updateAt)
@@ -34,12 +36,20 @@ export class TelegramChat {
         return this.name
     }
 
+    public getAddress(): Address {
+        return this.address
+    }
+
     public getChatType(): number {
         return this.chatType
     }
 
     public getChatId(): number {
         return this.chatId
+    }
+
+    public getChatUsername(): string {
+        return this.chatUsername
     }
 
     public getCreateAt(): Date {
@@ -54,6 +64,12 @@ export class TelegramChat {
     private isName(name: string): void {
         if(name.constructor !== String) {
             throw new Error("name is not string")
+        }
+    }
+
+    private isChatUsername(name: string): void {
+        if(name.constructor !== String) {
+            throw new Error("chatUsername is not string")
         }
     }
 

@@ -5,7 +5,7 @@ import {
     SendMessage,
     SendPhoto,
     TelegramBotClient
-} from "./abstractions/telegram-bot-client";
+} from "./abstractions";
 import FormData from "form-data";
 import axios, {AxiosError, AxiosResponse} from "axios";
 import {injectable} from "inversify";

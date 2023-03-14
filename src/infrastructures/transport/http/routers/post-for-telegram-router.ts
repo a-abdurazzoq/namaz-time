@@ -12,9 +12,9 @@ namespace PostForTelegramRouter {
         request_id: string;
         chat_id_of_channel: number;
         time_per_day: number;
-        html_template_file_base_64: string;
+        zip_html_template_file_base_64: string;
         description_in_photo: string;
-        description_for_post: string;
+        caption_for_post: string;
     }
 }
 
@@ -26,13 +26,14 @@ export class PostForTelegramRouterImpl implements RouterBase {
     ) {}
 
     @Http.Post()
+    @Http.Guard("isAdmin", true)
     private async createByRequest(req: RRequest<PostForTelegramRouter.CreateByRequest>): Promise<CreatePostForTelegramController.Response> {
         return await this.postForTelegramController.create({
             requestId: req.body.request_id,
             timePerDay: req.body.time_per_day,
             descriptionInPhoto: req.body.description_in_photo,
-            descriptionForPost: req.body.description_for_post,
-            htmlTemplateFileBase64: req.body.html_template_file_base_64,
+            captionForPost: req.body.caption_for_post,
+            zipHtmlTemplateFileBase64: req.body.zip_html_template_file_base_64,
             chatIdOfChannel: req.body.chat_id_of_channel,
         })
     }

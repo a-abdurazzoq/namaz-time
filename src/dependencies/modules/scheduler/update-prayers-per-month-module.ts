@@ -14,7 +14,12 @@ import {
     PrayersInDayFactory,
     PrayerTimesFactory
 } from "../../../domain/abstractions/factories";
-import {IslamicCalendarFactoryImpl, IslamicMonthFactoryImpl, PrayersInDayFactoryImpl} from "../../../domain/factories";
+import {
+    IslamicCalendarFactoryImpl,
+    IslamicMonthFactoryImpl,
+    PrayersInDayFactoryImpl,
+    PrayerTimesFactoryImpl
+} from "../../../domain/factories";
 import {
     IslamicCalendarRepository,
     IslamicMonthRepository,
@@ -32,11 +37,8 @@ import {UpdateIslamicCalendarUseCase, UpdatePrayersPerMonthUseCase} from "../../
 import {UpdatePrayersPerMonthSchedulerConfig} from "../../../components/schduler/config";
 import {HtmlTableToJsonService} from "../../../services/abstractions";
 import {HtmlTableToJsonServiceImpl} from "../../../services";
-import {AladhanClient} from "../../../clients/abstractions/aladhan-client";
-import {AladhanClientImpl} from "../../../clients/aladhan-client";
-import {NamozVaqtiClient} from "../../../clients/abstractions/namoz-vaqti-client";
-import {NamozVaqtiClientImpl} from "../../../clients/namoz-vaqti-client";
-import {PrayerTimesFactoryImpl} from "../../../domain/factories/prayers-in-day/prayer-times";
+import {NamozVaqtiClient, AladhanClient} from "../../../clients/abstractions";
+import {NamozVaqtiClientImpl, AladhanClientImpl} from "../../../clients";
 
 export const updatePrayersPerMonthModule = new ContainerModule(bind => {
     // Application

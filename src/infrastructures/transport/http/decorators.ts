@@ -1,98 +1,73 @@
-import {Request, Response} from "express";
-import {RouterConfig, RouterMethodTypes} from "../abstractions/http/decorators";
-import {Guard} from "../../abstractions/guards";
+import {HandlerParams, RouterConfig, RouterMethodTypes} from "../abstractions/http/decorators";
 
-export class Http {
-    static Guard(guard: Guard) {
+export namespace Http {
+    export function Guard(key: string, value: any) {
         return function (target: Object, propertyKey: string, descriptor: PropertyDescriptor) {
-            let originalMethod = descriptor.value
+            if(!descriptor.value?.guard)
+                descriptor.value.guard = {}
 
-            descriptor.value = async function(req: Request, res: Response) {
-                let result = await guard.check(req)
-
-                if(!result.access)
-                    throw new Error(result.message)
-
-                originalMethod.call(this, req, res)
-            }
+            descriptor.value.guard[key] = value
         }
     }
-    static Router(path: string) {
+
+    export function Router(path: string) {
         return function (target: any) {
             target.prototype.routers = [] as RouterConfig[]
 
             let instance = new target()
-            let methodNames = HttpInternal.getAllMethods(instance)
+            let methodNames = Internal.getAllMethods(instance)
 
             methodNames.forEach((methodName: keyof typeof instance) => {
                 let method = instance[methodName]
-                target.prototype.routers.push({
-                    path: `/${path}`+ (method.prototype.routerConfig.path && `/${method.prototype.routerConfig.path}`),
-                    type: method.prototype.routerConfig.type,
-                    method: method
-                })
+
+                if("routerConfig" in method.prototype)
+                    target.prototype.routers.push({
+                        path: `/${path}`+ (method.prototype.routerConfig.path && `/${method.prototype.routerConfig.path}`),
+                        type: method.prototype.routerConfig.type,
+                        guard: method.prototype.routerConfig.guard,
+                        method: method
+                    } as RouterConfig)
             })
         }
     }
 
-    static Get(path: string = "") {
+    export function Get(path: string = "") {
         return function (target: Object, propertyKey: string, descriptor: PropertyDescriptor) {
-            let originalMethod = descriptor.value
-
-            let method = HttpInternal.handler(originalMethod)
-
-            method.prototype.routerConfig = {
+            descriptor.value = Internal.handler({
                 path: path,
-                type: RouterMethodTypes.GET,
-            } as RouterConfig
-
-            descriptor.value = method
+                descriptor: descriptor,
+                routerMethod: RouterMethodTypes.GET
+            })
         }
     }
 
-    static Post(path: string = "") {
+    export function Post(path: string = "") {
         return function (target: Object, propertyKey: string, descriptor: PropertyDescriptor) {
-            let originalMethod = descriptor.value
-
-            let method = HttpInternal.handler(originalMethod)
-
-            method.prototype.routerConfig = {
+            descriptor.value = Internal.handler({
                 path: path,
-                type: RouterMethodTypes.POST,
-            } as RouterConfig
-
-            descriptor.value = method
+                descriptor: descriptor,
+                routerMethod: RouterMethodTypes.POST
+            })
         }
     }
 }
 
-class HttpInternal {
-    static handler(originalMethod: (req: Request, res: Response) => Promise<any>) {
-        return async function (this: Object, req: Request, res: Response) {
-            try {
-                let result = await originalMethod.call(this, req, res)
 
-                res.status(200).json({
-                    success: true,
-                    data: result
-                })
 
-                return
-            }
-            catch (error: any) {
-                res.status(500).json({
-                    success: false,
-                    data: {
-                        message: error.message
-                    }
-                })
+namespace Internal {
+    export function handler(params: HandlerParams) {
+        let method = params.descriptor.value
 
-                throw error
-            }
-        }
+        method.prototype.routerConfig = {
+            path: params.path,
+            type: params.routerMethod,
+            guard: method.guard || {}
+        } as RouterConfig
+
+        return method
     }
 
-    static getAllMethods(obj: Object) {
+    export function getAllMethods(obj: Object) {
         let props: string[] = []
 
         do {

@@ -1,9 +1,9 @@
-import {CreateIslamicMonthRepositoryParams, IslamicMonthRepository} from "./abstractions/islamic-months";
+import {CreateIslamicMonthRepositoryParams, IslamicMonthRepository} from "./abstractions";
 import {IslamicMonth} from "../domain/entities";
-import {IIslamicMonthModel, IslamicMonthModel} from "../models/islamic-months";
+import {IIslamicMonthModel, IslamicMonthModel} from "../models";
 import {inject, injectable} from "inversify";
 import {Symbols} from "../dependencies/symbols";
-import {IslamicMonthFactory} from "../domain/abstractions/factories/islamic-month";
+import {IslamicMonthFactory} from "../domain/abstractions/factories";
 
 @injectable()
 export class IslamicMonthRepositoryImpl implements IslamicMonthRepository {

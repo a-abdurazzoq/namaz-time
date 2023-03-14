@@ -1,4 +1,4 @@
-import {CreateRequestForRegister, RequestController} from "../../abstractions";
+import {RequestController} from "../../abstractions";
 import {inject, injectable} from "inversify";
 import {Symbols} from "../../../dependencies/symbols";
 import {
@@ -7,16 +7,22 @@ import {
 import {Logger} from "../../../components/abstractions/logger";
 import {
     CreateRequestForRegisterPresenter
-} from "../../../presenters/abstractions/request/create-request-for-register-presenter";
+} from "../../../presenters/abstractions";
+import {
+    GetAllRequestUseCase
+} from "../../../use-cases/abstractions/api/namaz-time-api/request/get-all-request-use-case";
+import {GetAllRequestPresenter} from "../../../presenters/abstractions/request/get-all-request-presenter";
 
 @injectable()
 export class RequestControllerImpl implements RequestController {
     constructor(
         @inject(Symbols.UseCases.Request.CreateForRegister) private readonly createRequestForRegisterUseCase: CreateRequestForRegisterUseCase,
         @inject(Symbols.Presenters.Request.CreateForRegister) private readonly createRequestForRegisterPresenter: CreateRequestForRegisterPresenter,
+        @inject(Symbols.UseCases.Request.GetAll) private readonly getAllRequestUseCase: GetAllRequestUseCase,
+        @inject(Symbols.Presenters.Request.GetAll) private readonly getAllRequestPresenter: GetAllRequestPresenter,
         @inject(Symbols.Infrastructures.Logger) private readonly logger: Logger
     ) {}
-    public async createForRegister(params: CreateRequestForRegister.Params): Promise<CreateRequestForRegister.Response> {
+    public async createForRegister(params: RequestController.CreateForRegister.Params): Promise<RequestController.CreateForRegister.Response> {
         try {
             const request = await this.createRequestForRegisterUseCase.execute(params)
 
@@ -38,5 +44,11 @@ export class RequestControllerImpl implements RequestController {
             await this.logger.print({error: error})
             throw error
         }
+    }
+
+    public async getAll(): Promise<RequestController.GetAll.Response> {
+        let requests = await this.getAllRequestUseCase.execute()
+
+        return this.getAllRequestPresenter.print(requests)
     }
 }

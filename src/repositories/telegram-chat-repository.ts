@@ -9,7 +9,7 @@ import {Symbols} from "../dependencies/symbols";
 import {TelegramChat, TelegramChatType} from "../domain/entities";
 import {ITelegramChatModel, TelegramChatModel} from "../models";
 import {AddressFactory, TelegramChatFactory} from "../domain/abstractions/factories";
-import {GetChat, TelegramBotClient} from "../clients/abstractions/telegram-bot-client";
+import {GetChat, TelegramBotClient} from "../clients/abstractions";
 
 @injectable()
 export class TelegramChatRepositoryImpl implements TelegramChatRepository {
@@ -31,6 +31,7 @@ export class TelegramChatRepositoryImpl implements TelegramChatRepository {
         const telegramChat = new TelegramChatModel({
             name: dataOfTelegramChat.result.title,
             chat_id: dataOfTelegramChat.result.id,
+            chat_username: dataOfTelegramChat.result.username || "nurli_yol",
             address: params.address,
             chat_type: this.telegramTypeConvertOwnType(dataOfTelegramChat.result.type)
         })
@@ -84,6 +85,7 @@ export class TelegramChatRepositoryImpl implements TelegramChatRepository {
             name: TelegramChatModel.name,
             address: address,
             chatId: TelegramChatModel.chat_id,
+            chatUsername: TelegramChatModel.chat_username,
             chatType: TelegramChatModel.chat_type,
             createAt: TelegramChatModel.create_at,
             updateAt: TelegramChatModel.update_at

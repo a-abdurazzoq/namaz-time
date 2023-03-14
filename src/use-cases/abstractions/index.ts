@@ -14,6 +14,7 @@ export * from "./api/namaz-time-api/post-for-telegram/create-post-for-telegram-u
 
 export * from "./api/namaz-time-api/authorization/login-authorization-use-case"
 export * from "./api/namaz-time-api/authorization/registration-authorization-use-case"
+export * from "./api/namaz-time-api/authorization/get-me-authorization-use-case"
 
 export interface UseCase<T, R> {
     execute(params: T): Promise<R>

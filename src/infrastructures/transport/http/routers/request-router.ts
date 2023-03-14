@@ -1,7 +1,7 @@
 import {RouterBase, RRequest} from "../../abstractions/http/routers";
 import {inject, injectable} from "inversify";
 import {Symbols} from "../../../../dependencies/symbols";
-import {CreateRequestForRegister, RequestController} from "../../../../controllers/abstractions";
+import {RequestController} from "../../../../controllers/abstractions";
 import {Http} from "../decorators";
 
 
@@ -22,12 +22,18 @@ export class RequestRouterImpl implements RouterBase {
     ) {}
 
     @Http.Post()
-    public async create(req: RRequest<RequestRouter.CreateBody>): Promise<CreateRequestForRegister.Response> {
+    public async create(req: RRequest<RequestRouter.CreateBody>): Promise<RequestController.CreateForRegister.Response> {
         return await this.requestController.createForRegister({
             TelegramChatLink: req.body.telegram_chat_link,
             telegramUsername: req.body.telegram_username,
             districtId: req.body.district_id,
             cityId: req.body.city_id
         })
+    }
+
+    @Http.Get()
+    @Http.Guard("isAdmin", true)
+    public async getAll(): Promise<RequestController.GetAll.Response> {
+        return this.requestController.getAll()
     }
 }

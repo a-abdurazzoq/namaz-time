@@ -108,6 +108,7 @@ export namespace GetChat {
     export type Response = BasicResponse<{
         id: number;
         title: string;
+        username?: string;
         type: ChatTypes;
     }>
 

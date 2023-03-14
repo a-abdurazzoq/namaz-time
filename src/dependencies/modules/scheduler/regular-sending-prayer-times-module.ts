@@ -29,7 +29,7 @@ import {
     AddressFactoryImpl,
     PrayersInDayFactoryImpl,
     CityFactoryImpl,
-    UserFactoryImpl, IslamicCalendarFactoryImpl, IslamicMonthFactoryImpl
+    UserFactoryImpl, IslamicCalendarFactoryImpl, IslamicMonthFactoryImpl, PrayerTimesFactoryImpl
 } from "../../../domain/factories";
 import {
     PostForTelegramRepository,
@@ -58,9 +58,10 @@ import {
 } from "../../../use-cases";
 import {TemplatePhotoService} from "../../../services/abstractions";
 import {TemplatePhotoServiceImpl} from "../../../services";
-import {PrayerTimesFactoryImpl} from "../../../domain/factories/prayers-in-day/prayer-times";
-import {TelegramBotClient} from "../../../clients/abstractions/telegram-bot-client";
-import {TelegramBotClientImpl} from "../../../clients/telegram-bot-client";
+import {TelegramBotClient} from "../../../clients/abstractions";
+import {TelegramBotClientImpl} from "../../../clients";
+import {PostDataFactory} from "../../../domain/abstractions/factories/post-for-telegram/post-data";
+import {PostDataFactoryImpl} from "../../../domain/factories/post-for-telegram/post-data";
 
 export const regularSendingPrayerTimesModule = new ContainerModule(bind => {
     // Application
@@ -82,6 +83,7 @@ export const regularSendingPrayerTimesModule = new ContainerModule(bind => {
     bind<SchedulerController>(Symbols.Controllers.Scheduler).to(SendingPrayerTimesController).inSingletonScope()
 
     // Factories
+    bind<PostDataFactory>(Symbols.Factories.PostData).to(PostDataFactoryImpl).inSingletonScope()
     bind<PostForTelegramFactory>(Symbols.Factories.PostForTelegram).to(PostForTelegramFactoryImpl).inSingletonScope()
     bind<TelegramChatFactory>(Symbols.Factories.TelegramChat).to(TelegramChatFactoryImpl).inSingletonScope()
     bind<TemplatePhotoFactory>(Symbols.Factories.TemplatePhoto).to(TemplatePhotoFactoryImpl).inSingletonScope()

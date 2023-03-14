@@ -1,4 +1,5 @@
 import {inject, injectable} from "inversify";
+
 import {
     AuthorizationController,
 } from "../../abstractions";
@@ -8,21 +9,29 @@ import {
 } from "../../../use-cases/abstractions";
 import {Symbols} from "../../../dependencies/symbols";
 import {
-    RegistrationAuthorizationPresenter
-} from "../../../presenters/abstractions/authorization/registration-authorization-presenter";
+    RegistrationAuthorizationPresenter, LoginAuthorizationPresenter, GetMeAuthorizationPresenter
+} from "../../../presenters/abstractions";
 import {
-    LoginAuthorizationPresenter
-} from "../../../presenters/abstractions/authorization/login-authorization-presenter";
+    GetMeAuthorizationUseCase
+} from "../../../use-cases/abstractions";
 
 
 @injectable()
 export class AuthorizationControllerImpl implements AuthorizationController {
     constructor(
+        @inject(Symbols.UseCases.Authorization.GetMe) private readonly getMeAuthorizationUseCase: GetMeAuthorizationUseCase,
         @inject(Symbols.UseCases.Authorization.Login) private readonly loginAuthorizationUseCase: LoginAuthorizationUseCase,
         @inject(Symbols.UseCases.Authorization.Registration) private readonly registrationAuthorizationUseCase: RegistrationAuthorizationUseCase,
+        @inject(Symbols.Presenters.Authorization.GetMe) private readonly getMeAuthorizationPresenter: GetMeAuthorizationPresenter,
         @inject(Symbols.Presenters.Authorization.Login) private readonly loginAuthorizationPresenter: LoginAuthorizationPresenter,
         @inject(Symbols.Presenters.Authorization.Registration) private readonly registrationAuthorizationPresenter: RegistrationAuthorizationPresenter
     ) {}
+
+    public async getMe(params: AuthorizationController.GetMe.Params): Promise<AuthorizationController.GetMe.Response> {
+        let user = await this.getMeAuthorizationUseCase.execute(params)
+
+        return this.getMeAuthorizationPresenter.print(user)
+    }
 
     public async login(params: AuthorizationController.Login.Params): Promise<AuthorizationController.Login.Response> {
         let token = await this.loginAuthorizationUseCase.execute({

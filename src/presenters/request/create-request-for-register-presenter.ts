@@ -1,8 +1,9 @@
+import {injectable} from "inversify";
+
 import {
     CreateRequestForRegisterPresenter,
     CreateRequestForRegisterPresenterData
-} from "../abstractions/request/create-request-for-register-presenter";
-import {injectable} from "inversify";
+} from "../abstractions";
 
 @injectable()
 export class CreateRequestForRegisterPresenterImpl implements CreateRequestForRegisterPresenter {

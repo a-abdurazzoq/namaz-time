@@ -1,9 +1,9 @@
 import axios from "axios";
 
-import {GetPrayerTimesByMonth, NamozVaqtiClient} from "./abstractions/namoz-vaqti-client";
+import {GetPrayerTimesByMonth, NamozVaqtiClient} from "./abstractions";
 import {inject, injectable} from "inversify";
 import {Symbols} from "../dependencies/symbols";
-import {HtmlTableToJsonService} from "../services/abstractions/html-table-to-json-service";
+import {HtmlTableToJsonService} from "../services/abstractions";
 
 interface PrayerTimeFromNamozVaqti {
     Kun: string;

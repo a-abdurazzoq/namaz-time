@@ -5,7 +5,7 @@ export interface SendPrayerTimesToTelegramChatUseCase extends UseCase<SendPrayer
 
 export namespace SendPrayerTimesToTelegramChat {
     export interface Params {
-        PostForTelegram: PostForTelegram;
+        postForTelegram: PostForTelegram;
         necessaryDate: Date
     }
 
